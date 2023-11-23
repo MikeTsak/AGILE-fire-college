@@ -1,10 +1,10 @@
 // src/components/Footer.js
 import Image from 'next/image';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'react-i18next';
 import styles from '../../styles/Footer.module.css'; // Update the path as needed
 
 const Footer = () => {
-    const { t } = useTranslation('common');
+    const { t } = useTranslation();
 
     return (
         <footer className={styles.footer}>

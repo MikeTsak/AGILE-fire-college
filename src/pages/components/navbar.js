@@ -1,46 +1,42 @@
 // components/Navbar.js
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { slide as Menu } from 'react-burger-menu';
 import Link from 'next/link';
-import styles from '../../styles/navbar.module.css'; // Make sure to create a corresponding CSS module file
+import styles from '../../styles/Navbar.module.css'; // Make sure to create a corresponding CSS module file
 
-export default function Navbar({ onLanguageToggle }) {
-  const [isOpen, setIsOpen] = useState(false);
+const Navbar = () => {
+    const [isOpen, setIsOpen] = useState(false);
 
-  const toggleMenu = () => setIsOpen(!isOpen);
+    const handleStateChange = (state) => {
+        setIsOpen(state.isOpen);
+    };
 
-  const closeMenu = () => setIsOpen(false);
+    const closeMenu = () => {
+        setIsOpen(false);
+    };
 
-  return (
-    <nav className={styles.nav}>
-      <button className={styles.hamburger} onClick={toggleMenu}>
-        &#9776;
-      </button>
-      <div className={`${styles.menu} ${isOpen ? styles.show : ''}`}>
-        <Link href="/" onClick={closeMenu}>
-          Home
-        </Link>
-        <Link href="/about-us" onClick={closeMenu}>
-          About Us
-        </Link>
-        <Link href="/contact-us" onClick={closeMenu}>
-          Contact Us
-        </Link>
-        <Link href="/news" onClick={closeMenu}>
-          News
-        </Link>
-        <Link href="/courses" onClick={closeMenu}>
-          Courses
-        </Link>
-        <div className={styles.languageToggle}>
-          <button onClick={onLanguageToggle}>GR/EN</button>
+    return (
+      <div>
+      <Menu 
+        right 
+        isOpen={isOpen}
+        onStateChange={(state) => handleStateChange(state)}
+        
+      >
+        <Link href="/" id="home" className="menu-item" onClick={closeMenu}>Home</Link>
+        <Link href="/about" id="about" className="menu-item" onClick={closeMenu}>About Us</Link>
+        <Link href="/training" id="training" className="menu-item" onClick={closeMenu}>Training</Link>
+        <Link href="/what-we-do" id="what-we-do" className="menu-item" onClick={closeMenu}>What We Do</Link>
+        <div className="menu-footer">
+          <p>The Fire Service College</p>
+          <p>London Road, Moreton-in-Marsh</p>
         </div>
-
-        <footer className={styles.footer}>
-      <p className={styles.info}>The Fire Service College</p>
-      <p className={styles.info}>London Road, Moreton-in-Marsh, Gloucestershire, GL56 0RH</p>
-      <p className={styles.info}>+44 (0)1608 650 831</p>
-    </footer>
+      </Menu>
+      <button className={styles.bmBurgerButton} onClick={() => setIsOpen(!isOpen)}>
+          <span className={styles.bmBurgerBars}></span>
+        </button>
       </div>
-    </nav>
   );
-}
+};
+
+export default Navbar;

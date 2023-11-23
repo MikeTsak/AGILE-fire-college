@@ -1,0 +1,63 @@
+/* components/Slideshow.module.css */
+.slideshow {
+    width: 100%;
+    height: 80vh;
+    overflow: hidden;
+    position: relative;
+    z-index: 1000;
+  }
+  
+  .slide {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+  }
+  
+  .active {
+    opacity: 1;
+  }
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+  .text {
+    position: absolute;
+    font-family: 'Bebas Neue', sans-serif;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 5rem; /* Adjust the font size as needed */
+    text-align: center;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 2px black;
+  }
+  
+  .dots {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    z-index: 10; /* Make sure dots are above the slides */
+  }
+  
+  .dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 8px 0; /* Adjust spacing between dots */
+    background-color: transparent; /* Dots are transparent by default */
+    border: 2px solid #fff; /* Dots are outlined */
+    border-radius: 50%;
+    display: block; /* Stack dots vertically */
+    transition: background-color 0.6s ease;
+  }
+  
+  .activeDot {
+    background-color: #fff; /* Active dot is filled */
+  }

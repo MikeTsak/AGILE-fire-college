@@ -1,10 +1,18 @@
 {
+
+
+
+  "imageText1": "Το Πυροσβεστικό Σώμα είναι Καλό",
+  "imageText2": "Προετοιμαστείτε για το μέλλον",
+  "imageText3": "Το ΠΣ είναι το μέρος που πρέπει να είστε",
+
+
     "footerLogoAlt": "Λογότυπο της Ακαδημίας Πυροσβεστικής",
     "capitaLogoAlt": "Λογότυπο της Capita",
     "capitaLogoTitle": "Capita",
     "collegeName": "Η Ακαδημία Πυροσβεστικής",
     "collegeAddress": "London Road, Moreton-in-Marsh, Gloucestershire, GL56 0RH",
-    "collegePhone": "+44 (0)1608 650 831",
+    "collegePhone": "867-5309",
     "contactUs": "Επικοινωνία",
     "legal": "Νομικό",
     "createdWith": "δημιουργήθηκε με την Thinkology®",
