@@ -1,0 +1,74 @@
+/* components/HamburgerMenu.module.css */
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 0.5rem;
+  }
+  
+  .hamburger {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+  
+  .menu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #333;
+    width: 100%;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .show {
+    transform: translateY(0);
+  }
+  
+  .menu a {
+    color: white;
+    padding: 1rem;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+  
+  .languageToggle {
+    padding: 1rem;
+  }
+  
+  .languageToggle button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
+  
+  /* Add responsive styling */
+  @media (min-width: 600px) {
+    .menu {
+      display: none;
+    }
+  }
+  
+  /* components/Footer.module.css */
+.footer {
+    background-color: #333;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  .info {
+    margin: 0.5rem 0;
+  }
+  

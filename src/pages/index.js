@@ -1,4 +1,4 @@
-// import Navbar from './components/Navbar';
+import Navbar from './components/navbar';
 // import Hero from '../components/Hero';
 // import InfoSection from '../components/InfoSection';
 import Footer from './components/footer';
@@ -7,9 +7,9 @@ import Footer from './components/footer';
 const Home = () => {
   return (
       <div>
-          {/* <Navbar />
-          <Hero />
-          <InfoSection /> */}
+          <Navbar />
+          {/* <Hero />
+          <InfoSection />  */}
           hello there
           <Footer />
       </div>
