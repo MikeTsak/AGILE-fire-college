@@ -1,23 +1,76 @@
+/* Footer.module.css */
 .footer {
-    background-color: #333;
-    color: white;
-    padding: 20px;
-    text-align: center;
+    background-color: white;
+    color: black;
+    padding: 40px 150px 20px 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1150;
 }
 
-.footerSection {
-    margin-bottom: 15px;
+.footerContent {
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
 }
 
-.footerSection h4 {
-    font-weight: bold;
+.logoSection {
+    display: flex;
+    padding-bottom: 20px;
 }
 
-.footerSection a {
-    color: white;
-    text-decoration: none;
+.addressSocials {
+    justify-content: space-between;
+    display: flex;
 }
 
-.footerSection a:hover {
-    text-decoration: underline;
+.address {
+    padding-bottom: 20px;
+}
+
+.socials {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 100px;
+    padding-bottom: 20px;
+}
+
+
+.navLinks {
+    display: flex; 
+    gap: 20px; 
+    padding-left: 0; 
+  }
+  
+  .navLinks .link {
+    margin: 0 8px; 
+    white-space: nowrap; 
+  }
+  
+
+.footerBottom {
+    border-top: 1px solid #ddd; /* Light grey border */
+    padding-top: 10px;
+    width: 100%;
+    text-align: left;
+}
+
+.copyright {
+    margin: 5px 0; /* Spacing for better readability */
+    color: rgb(180, 180, 180);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .footerContent {
+        flex-direction: column;
+    }
+
+    .logoSection, .address, .socials, .navLinks {
+        margin-bottom: 20px;
+    }
 }

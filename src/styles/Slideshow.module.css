@@ -1,7 +1,7 @@
 /* components/Slideshow.module.css */
 .slideshow {
     width: 100%;
-    height: 80vh;
+    height: 100vh;
     overflow: hidden;
     position: relative;
     z-index: 1000;
@@ -20,10 +20,8 @@
   .active {
     opacity: 1;
   }
-  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
   .text {
     position: absolute;
-    font-family: 'Bebas Neue', sans-serif;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);

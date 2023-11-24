@@ -3,16 +3,21 @@
     "imageText2": "Prepare for the future",
     "imageText3": "The FD is the place to be",
 
+    "NavHome": "Home",
+    "NavAbout": "About",
+    "NavCourses": "Courses",
+    "NavNews": "News",
+    "NavContact": "Contact",
+
 
     "footerLogoAlt": "Fire Service College Logo",
-    "capitaLogoAlt": "Capita Logo",
-    "capitaLogoTitle": "Capita",
     "collegeName": "The Fire Service College",
     "collegeAddress": "London Road, Moreton-in-Marsh, Gloucestershire, GL56 0RH",
     "collegePhone": "867-5309",
+    "PhoneSort": "Tel",
     "contactUs": "Contact Us",
     "legal": "Legal",
-    "createdWith": "created with Thinkology®",
-    "copyrightText": "Fire Service College Limited. All rights reserved"
+    "copyrightText": "Fire Service College Limited. All rights reserved",
+    "termsAndConditions": "Terms and Conditions"
   }
   

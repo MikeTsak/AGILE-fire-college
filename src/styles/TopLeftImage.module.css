@@ -2,13 +2,19 @@
 .logo {
     position: fixed;
     top: 0;
-    left: 0;
+    left: 7%;
     background-color: white;
-    padding: 10px; /* Adjust the padding as needed */
+    padding: 10px; 
     z-index: 1100; /* Higher z-index to ensure it's above other elements */
   }
   
   .logo img {
-    height: 50px; /* Adjust based on the size of your logo */
+    height: 120px; /* Adjust based on the size of your logo */
   }
   
+/* Media query for mobile devices */
+@media (max-width: 1000px) { /* Adjust the max-width as needed for your breakpoint */
+  .logo {
+    left: 0; /* Align to the left edge on mobile */
+  }
+}

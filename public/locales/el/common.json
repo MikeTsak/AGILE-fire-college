@@ -1,21 +1,23 @@
 {
-
-
-
   "imageText1": "Το Πυροσβεστικό Σώμα είναι Καλό",
   "imageText2": "Προετοιμαστείτε για το μέλλον",
   "imageText3": "Το ΠΣ είναι το μέρος που πρέπει να είστε",
 
+  "NavHome": "Αρχική σελίδα",
+  "NavAbout": "Σχετικά με εμάς",
+  "NavCourses": "Μαθήματα",
+  "NavNews": "Νέα",
+  "NavContact": "Επικοινωνία",
+
 
     "footerLogoAlt": "Λογότυπο της Ακαδημίας Πυροσβεστικής",
-    "capitaLogoAlt": "Λογότυπο της Capita",
-    "capitaLogoTitle": "Capita",
     "collegeName": "Η Ακαδημία Πυροσβεστικής",
-    "collegeAddress": "London Road, Moreton-in-Marsh, Gloucestershire, GL56 0RH",
+    "collegeAddress": "Πειραιώς 31 105 53 Αθήνα",
     "collegePhone": "867-5309",
+    "PhoneSort": "Τηλ",
     "contactUs": "Επικοινωνία",
     "legal": "Νομικό",
-    "createdWith": "δημιουργήθηκε με την Thinkology®",
-    "copyrightText": "Fire Service College Limited. Όλα τα δικαιώματα είναι επιφυλαγμένα"
+    "copyrightText": "Fire Service College Limited. Όλα τα δικαιώματα είναι επιφυλαγμένα",
+    "termsAndConditions": "Όροι και Προϋποθέσεις"
   }
   
