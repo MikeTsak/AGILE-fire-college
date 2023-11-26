@@ -9,6 +9,8 @@ const Footer = () => {
     const { t } = useTranslation();
 
     return (
+        <>
+        <div className={styles.separatorStyle}>{t("collegePhone")}</div>
         <footer className={styles.footer}>
             <div className={styles.footerContent}>
                 <div className={styles.logoSection}>
@@ -51,6 +53,7 @@ const Footer = () => {
                 </p>
             </div>
         </footer>
+        </>
     );
 };
 

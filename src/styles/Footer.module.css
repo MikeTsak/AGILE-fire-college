@@ -64,6 +64,16 @@
     color: rgb(180, 180, 180);
 }
 
+.separatorStyle {
+    height: 2.1em;
+    background-color: #b0191e;
+    text-align: Right;
+    color: white;
+    font-size: 40px;
+    padding: 1rem 2.5em 0px 0px;
+    border-top: 1px solid white;
+  };
+
 /* Responsive styles */
 @media (max-width: 768px) {
     .footerContent {

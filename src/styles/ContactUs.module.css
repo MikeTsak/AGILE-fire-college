@@ -3,97 +3,168 @@
     position: fixed;
     bottom: 0;
     right: 0;
-    z-index: 1300; /* High z-index to keep it above other elements */
-  }
-  
-  .contactTab {
+    height: 450px;
+    z-index: 1300;
+    transform: translateY(100%);
+    transition: transform 0.5s ease-in-out;
+    box-sizing: border-box;
+    /* border: 1px solid red; */
+
+}
+.contactContainerOpen {
+    transform: translateY(0);
+}
+.contactTabOpen {
+    /* background-color: #be1200; */
     background-color: cyan;
     color: white;
     padding: 10px;
     cursor: pointer;
     font-size: 25px;
     font-weight: 700;
-  }
-  
-  .contactFormContainer {
+    position: fixed;
+    width: 35%;
+    z-index: 1301;
+    bottom: 450px;
+    right: 0;
+    transition: bottom 0.5s ease-in-out;
+}
+
+
+.contactTab {
+    background-color: cyan;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 25px;
+    font-weight: 700;
+    position: fixed;
+    width: 35%;
+    z-index: 1301;
+    bottom: 0;
+    right: 0;
+    transition: bottom 0.5s ease-in-out;
+}
+
+
+.contactFormContainer {
     background-color: white;
     padding: 20px;
     position: relative;
-  }
-  
-  .contactFormHeader {
+}
+
+.contactFormHeader {
     margin-bottom: 20px;
     font-size: 20px;
-    width: 300px; /*!!! IN CASE YOU CHANGE IT CHANGE THE IMAGE WIDTH TOO!!*/
-  }
-  
-  .closeButton {
-    background: none;
+    width: 300px; /* Match this with the image width */
+}
+
+.closeButton {
+    background-color: #FFFFFF; 
+    color: cyan; 
     border: none;
     cursor: pointer;
-  }
-  
-  .contactForm {
+    font-size: 25px;
+    font-weight: 700;
+    padding: 10px;
+    font-size: 1em; 
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.submitButtonContainer {
+    text-align: right; /* Aligns the button to the right */
+}
+
+.submitButton {
+    background-color: transparent; 
+    color: black;
+    border: none; 
+    padding: 10px 20px 10px 10px; 
+    cursor: pointer;
+    position: relative; 
+    font-size: 25px;
+    font-weight: bold; 
+    text-align: left; 
+    padding-right: 2.5rem;
+}
+
+.submitButton svg {
+    color: #be1200;
+    position: absolute; 
+    right: 10px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    font-size: 25px; 
+    transition: right 0.3s ease;
+}
+
+.submitButton:hover svg {
+    right: 5px; /* Move the arrow to the right on hover */
+}
+
+
+.contactForm {
     display: flex;
     flex-direction: column;
-  }
-  
-  .formGroup {
+}
+
+.formRow {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
-  }
-  
-  .formGroup input {
-    margin-right: 10px;
+}
+
+.formGroup {
     flex: 1;
-  }
-  
-  .textarea {
-    margin-bottom: 10px;
-  }
-  
-  .submitButton {
-    background-color: red;
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-  }
-  
-  .formRow {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .formGroup {
-    flex: 1;
-    margin: 0 10px; /* Adjust spacing between form groups */
-  }
-  
-  .formGroup label {
+    margin: 0 10px;
+}
+
+.formGroup label {
     display: block;
     margin-bottom: 5px;
-  }
-  
-  .formGroup input,
-  .formGroup textarea {
-    width: 100%; /* Ensure inputs and textareas take up the full width of the form group */
+}
+
+.formGroup input, .formGroup textarea {
+    width: 100%;
     padding: 8px;
-    margin-bottom: 15px; /* Space between inputs and the next element */
-  }
-  
-  .submitButton {
-    width: 100%; /* Full width */
-    padding: 10px;
-    background-color: #007bff; /* Example color */
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .phone {
+    margin-bottom: 15px;
+}
+
+.phone {
     font-size: 30px;
     font-weight: 500;
     color: #be1200;
-  }
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1200;
+}
+
+.formGroupContainer{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+
+.input {
+   background-color: lightgray;
+   font-size: larger; 
+   color: black;
+}
+
+.privacyPolicy, .required {
+    font-size: 12px;
+    color: gray;
+    padding: 10px;
+}
+.privacyPolicyLink {
+    color: #007bff;
+    text-decoration: none;
+}
