@@ -26,10 +26,12 @@
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
-    font-size: 5rem; /* Adjust the font size as needed */
+    font-size: 5rem;
     text-align: center;
     text-transform: uppercase;
     text-shadow: 1px 1px 2px black;
+    font-weight: 600;
+    font-style: normal;
   }
   
   .dots {

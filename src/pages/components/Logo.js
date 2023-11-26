@@ -1,4 +1,4 @@
-// components/Logo.js
+//components/Logo.js
 import React from 'react';
 import styles from '../../styles/TopLeftImage.module.css'; // Path to your CSS module
 

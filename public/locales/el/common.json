@@ -9,15 +9,17 @@
   "NavNews": "Νέα",
   "NavContact": "Επικοινωνία",
 
+  "ContactUsQ": "Έχετε ερωτήσεις;",
 
-    "footerLogoAlt": "Λογότυπο της Ακαδημίας Πυροσβεστικής",
-    "collegeName": "Η Ακαδημία Πυροσβεστικής",
-    "collegeAddress": "Πειραιώς 31 105 53 Αθήνα",
-    "collegePhone": "867-5309",
-    "PhoneSort": "Τηλ",
-    "contactUs": "Επικοινωνία",
-    "legal": "Νομικό",
-    "copyrightText": "Fire Service College Limited. Όλα τα δικαιώματα είναι επιφυλαγμένα",
-    "termsAndConditions": "Όροι και Προϋποθέσεις"
+
+  "footerLogoAlt": "Λογότυπο της Ακαδημίας Πυροσβεστικής",
+  "collegeName": "Η Ακαδημία Πυροσβεστικής",
+  "collegeAddress": "Πειραιώς 31 105 53 Αθήνα",
+  "collegePhone": "867-5309",
+  "PhoneSort": "Τηλ",
+  "contactUs": "Επικοινωνία",
+  "legal": "Νομικό",
+  "copyrightText": "Fire Service College Limited. Όλα τα δικαιώματα είναι επιφυλαγμένα",
+  "termsAndConditions": "Όροι και Προϋποθέσεις"
   }
   
