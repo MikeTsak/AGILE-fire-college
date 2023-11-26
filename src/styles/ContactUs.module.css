@@ -15,12 +15,85 @@
     font-weight: 700;
   }
   
+  .contactFormContainer {
+    background-color: white;
+    padding: 20px;
+    position: relative;
+  }
+  
+  .contactFormHeader {
+    margin-bottom: 20px;
+    font-size: 20px;
+    width: 300px; /*!!! IN CASE YOU CHANGE IT CHANGE THE IMAGE WIDTH TOO!!*/
+  }
+  
+  .closeButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
   .contactForm {
     display: flex;
     flex-direction: column;
-    background-color: white;
-    padding: 20px;
-
   }
   
+  .formGroup {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
   
+  .formGroup input {
+    margin-right: 10px;
+    flex: 1;
+  }
+  
+  .textarea {
+    margin-bottom: 10px;
+  }
+  
+  .submitButton {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .formRow {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .formGroup {
+    flex: 1;
+    margin: 0 10px; /* Adjust spacing between form groups */
+  }
+  
+  .formGroup label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .formGroup input,
+  .formGroup textarea {
+    width: 100%; /* Ensure inputs and textareas take up the full width of the form group */
+    padding: 8px;
+    margin-bottom: 15px; /* Space between inputs and the next element */
+  }
+  
+  .submitButton {
+    width: 100%; /* Full width */
+    padding: 10px;
+    background-color: #007bff; /* Example color */
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .phone {
+    font-size: 30px;
+    font-weight: 500;
+    color: #be1200;
+  }

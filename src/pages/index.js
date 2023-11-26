@@ -5,14 +5,17 @@ import Logo from './components/Logo';
 import ContactUs from './components/ContactUs';
 import styles from '../styles/Home.module.css'
 
+import { useTranslation } from 'react-i18next';
+
 
 const Home = () => {
+  const { t } = useTranslation();
   return (
       <div>
           <Navbar />
           <Logo />
           <Slideshow />
-          <div className={styles.separatorStyle}>PhoneNumber</div>
+        <div className={styles.separatorStyle}>{t("collegePhone")}</div>
           <ContactUs />
           <Footer />
       </div>
