@@ -21,16 +21,22 @@
     "DataInForm": "We’ll always treat your personal details with the utmost care and will never share or sell them to third parties. For more information, visit our",
     "PrivacyPolicy": "Privacy Policy",
     "Required": "Required",
+    "ContactDetails": "Contact Details",
+    "Address": "Address",
 
 
     "footerLogoAlt": "Fire Service College Logo",
     "collegeName": "The Fire Service College",
     "collegeAddress": "London Road, Moreton-in-Marsh, Gloucestershire, GL56 0RH",
     "collegePhone": "867-5309",
+    "collegeEmail": "info@agileadvisors.gr",
+    "Phone": "Phone",
     "PhoneSort": "Tel",
     "contactUs": "Contact Us",
     "legal": "Legal",
     "copyrightText": "Fire Service College Limited. All rights reserved",
-    "termsAndConditions": "Terms and Conditions"
+    "termsAndConditions": "Terms and Conditions",
+    "OpeningHours": "Opening Hours",
+    "collegeOpeningHours": "Monday - Friday 9am - 5pm"
   }
   

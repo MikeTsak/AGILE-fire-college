@@ -54,7 +54,7 @@ const Navbar = () => {
         <Link href="/about" id="about" className={styles.menuItem} onClick={closeMenu}>{t('NavAbout')}</Link>
         <Link href="/courses" id="courses" className={styles.menuItem} onClick={closeMenu}>{t('NavCourses')}</Link>
         <Link href="/news" id="news" className={styles.menuItem} onClick={closeMenu}>{t('NavNews')}</Link>
-        <Link href="/contact" id="contact" className={styles.menuItem} onClick={closeMenu}>{t('NavContact')}</Link>
+        <Link href="/contact-us" id="contact" className={styles.menuItem} onClick={closeMenu}>{t('NavContact')}</Link>
         <button onClick={toggleLanguage} className={styles.languageToggle}>
           <img 
             src={currentLanguage  === 'en' ? '/images/greece.png' : '/images/united-kingdom.png'} 

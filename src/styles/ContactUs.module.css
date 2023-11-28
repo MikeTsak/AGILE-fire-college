@@ -1,4 +1,21 @@
 /* ContactUs.module.css */
+
+@font-face {
+    font-family: 'Roboto Condensed';
+    src: url('/fonts/RobotoCondensed-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap; /* Use font-display for better performance */
+  }
+
+  @font-face {
+    font-family: 'Sofia Sans Semi Condensed';
+    src: url('/fonts/SofiaSansSemiCondensed-ExtraBold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap; /* Use font-display for better performance */
+  }
+
 .contactContainer {
     position: fixed;
     bottom: 0;
@@ -24,7 +41,7 @@
     font-weight: 700;
     position: fixed;
     width: 35%;
-    z-index: 1301;
+    z-index: 1049;
     bottom: 450px;
     right: 0;
     transition: bottom 0.5s ease-in-out;
@@ -40,7 +57,7 @@
     font-weight: 700;
     position: fixed;
     width: 35%;
-    z-index: 1301;
+    z-index: 1049;
     bottom: 0;
     right: 0;
     transition: bottom 0.5s ease-in-out;
@@ -80,6 +97,7 @@
 .submitButton {
     background-color: transparent; 
     color: black;
+    font-family: "Sofia Sans Semi Condensed", "sans-serif";
     border: none; 
     padding: 10px 20px 10px 10px; 
     cursor: pointer;
@@ -168,3 +186,55 @@
     color: #007bff;
     text-decoration: none;
 }
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ContactPage~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+
+.collegenameForPage {
+    font-family: 'Sofia Sans Semi Condensed', sans-serif;
+    font-size: 30px;
+    color: black;
+    margin: 0 0 0px 0px;
+    font-weight: 600;
+    font-style: normal;
+  }
+
+.detailsForPage {
+    font-family: 'Sofia Sans Semi Condensed', sans-serif;
+    font-size: 25px;
+    color: var(--red01);
+    margin: 0 0 0px 0px;
+    font-weight: 400;
+    font-style: normal;
+  }
+.detailsCildrenForPage {
+    font-family: 'Sofia Sans Semi Condensed', sans-serif;
+    font-size: 20px;
+    color: black;
+    margin: 0 0 0px 0px;
+    padding: 10px 0 0 0px;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.headerForPage {
+    color: var(--red01);
+    font-family: 'Roboto Condensed', sans-serif;
+    margin: 0 0 30px -6px;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-style: normal;
+    line-height: 1.15;
+    font-size: 150px;
+  }
+  
+  .contactContainerForPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 0 20px;
+    max-width: 1100px;
+    height: 100vh;
+  }

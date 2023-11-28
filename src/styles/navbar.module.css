@@ -14,7 +14,7 @@
 }
 
 .bmItem :hover {
-  color: #ffffff;
+  cursor: pointer;
 }
 
 .menuItem {
@@ -23,20 +23,11 @@
   transition: color 0.3s ease; /* Smooth transition for color change */
 }
 
-/* When any menu item is hovered, all items change color */
-.menuItem:hover ~ .menu-item {
-  color: gray; /* Color for non-hovered items */
-}
-
-/* Ensure the item being hovered keeps its original color */
-.menuItem:hover {
-  color: black; /* Maintain original color on hover */
-}
 .bm-overlay {
   top: 0;
   bottom: 0;
   right: 0;
-  width: calc(100% - 80px); /* Replace 800 with the actual width of your menu */
+  width: calc(100% - 80px); 
   position: fixed;
   z-index: 1050; /* Ensure this is less than the z-index of the footer */
 
