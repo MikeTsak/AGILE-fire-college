@@ -12,6 +12,7 @@
 
   --red01: #b0191e;
   --myred: #be1200;
+  --yellow01: #fecc02;
   --primary-glow: conic-gradient(
     from 180deg at 50% 50%,
     #16abff33 0deg,
@@ -103,7 +104,7 @@ body {
   overflow-x: hidden;
   font-family: var(--font-custom);
   color: black;
-  background: whitesmoke;
+  background: white;
 }
 a {
   color: inherit;
@@ -116,3 +117,5 @@ a {
     color-scheme: dark;
   }
 }
+
+

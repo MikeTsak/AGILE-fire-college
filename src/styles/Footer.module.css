@@ -66,11 +66,11 @@
 
 .separatorStyle {
     height: 1.8em;
-    background-color: #b0191e;
+    background-color: var(--red01);
     text-align: Right;
     color: white;
     font-size: 40px;
-    padding: 1rem 2.5em 0px 0px;
+    padding: .9rem;
     border-top: 1px solid white;
   };
 

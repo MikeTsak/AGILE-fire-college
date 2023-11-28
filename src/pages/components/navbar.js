@@ -51,7 +51,7 @@ const Navbar = () => {
       >
         <div className={styles.menuHeader}></div>
         <Link href="/" id="home" className={styles.menuItem} onClick={closeMenu}>{t('NavHome')}</Link>
-        <Link href="/about" id="about" className={styles.menuItem} onClick={closeMenu}>{t('NavAbout')}</Link>
+        <Link href="/about-us" id="about" className={styles.menuItem} onClick={closeMenu}>{t('NavAbout')}</Link>
         <Link href="/courses" id="courses" className={styles.menuItem} onClick={closeMenu}>{t('NavCourses')}</Link>
         <Link href="/news" id="news" className={styles.menuItem} onClick={closeMenu}>{t('NavNews')}</Link>
         <Link href="/contact-us" id="contact" className={styles.menuItem} onClick={closeMenu}>{t('NavContact')}</Link>
