@@ -49,6 +49,10 @@
     "AnotherTitle3": "Another Title 3",
     "AnotherText3": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Aenean pharetra magna ac placerat vestibulum lectus mauris ultrices. Duis ut diam quam nulla. Molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Integer quis auctor elit sed. Est lorem ipsum dolor sit amet consectetur adipiscing.",
 
+    "LatestNews": "Latest News",
+    "NewsSubtile": "All the latest goings on from around the Academy",
+
+
     "footerLogoAlt": "Fire Service College Logo",
     "collegeName": "The Fire Service College",
     "collegeAddress": "London Road, Moreton-in-Marsh, Gloucestershire, GL56 0RH",
@@ -61,6 +65,22 @@
     "copyrightText": "Fire Service College Limited. All rights reserved",
     "termsAndConditions": "Terms and Conditions",
     "OpeningHours": "Opening Hours",
-    "collegeOpeningHours": "Monday - Friday 9am - 5pm"
+    "collegeOpeningHours": "Monday - Friday 9am - 5pm",
+    
+      "months": {
+        "0": "Jan",
+        "1": "Feb",
+        "2": "Mar",
+        "3": "Apr",
+        "4": "May",
+        "5": "Jun",
+        "6": "Jul",
+        "7": "Aug",
+        "8": "Sep",
+        "9": "Oct",
+        "10": "Nov",
+        "11": "Dec"
+      }
+    
   }
   

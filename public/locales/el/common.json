@@ -49,6 +49,10 @@
   "AnotherTitle3": "Τίτλος 3",
   "AnotherText3": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Aenean pharetra magna ac placerat vestibulum lectus mauris ultrices. Duis ut diam quam nulla. Molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Integer quis auctor elit sed. Est lorem ipsum dolor sit amet consectetur adipiscing. Risus quis varius quam quisque id diam vel quam. Aliquam ultrices sagittis orci a scelerisque purus semper eget. Rutrum quisque non tellus orci. Vulputate enim nulla aliquet porttitor. Montes nascetur ridiculus mus mauris. Nunc congue nisi vitae suscipit tellus mauris a diam maecenas. Cursus risus at ultrices mi tempus imperdiet nulla malesuada.",
 
+  "LatestNews": "Τελευταια νεα",
+  "NewsSubtile": "Όλα τα τελευταία γεγονότα από την Ακαδημία",
+
+
   "footerLogoAlt": "Λογότυπο της Ακαδημίας Πυροσβεστικής",
   "collegeName": "Ακαδημία Πυροσβεστικής",
   "collegeAddress": "Πειραιώς 31 105 53 Αθήνα",
@@ -61,6 +65,21 @@
   "copyrightText": "Fire Service College Limited. Όλα τα δικαιώματα είναι επιφυλαγμένα",
   "termsAndConditions": "Όροι και Προϋποθέσεις",
   "OpeningHours": "Ωράριο λειτουργίας",
-  "collegeOpeningHours": "Δευτέρα - Παρασκευή: 9:00 π.μ. - 5:00 μ.μ."
+  "collegeOpeningHours": "Δευτέρα - Παρασκευή: 9:00 π.μ. - 5:00 μ.μ.",
+
+  "months": {
+    "0": "Ιαν",
+    "1": "Φεβ",
+    "2": "Μάρ",
+    "3": "Απρ",
+    "4": "Μάι",
+    "5": "Ιούν",
+    "6": "Ιούλ",
+    "7": "Αύγ",
+    "8": "Σεπ",
+    "9": "Οκτ",
+    "10": "Νοέ",
+    "11": "Δεκ"
   }
+}
   
