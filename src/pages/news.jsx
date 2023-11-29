@@ -6,6 +6,8 @@ import styles from '../styles/News.module.css';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 const months = [
   "Jan", "Feb", "Mar", "Apr",
@@ -50,18 +52,23 @@ const News = () => {
           <br />
           <h3 className={styles.aboutSubHeader}>{t('NewsSubtitle')}</h3>
         </div>
+
+        {/* NEWS CARDS */}
         <div className={styles.newsCards}>
-          {newsItems.map((item) => (
+        {newsItems.map((item) => (
             <Link href={`/news/${item.newsId}`} passHref
-              key={item.newsId}
-              className={styles.newsCard}
-              style={{ backgroundImage: `url(data:image/jpeg;base64,${item.image})` }}
+                key={item.newsId}
+                className={styles.newsCard}
+                style={{ backgroundImage: `url(data:image/jpeg;base64,${item.image})` }}
             >
-              <h4>{item.createdAt && formatDate(item.createdAt)}</h4>
-              <h2>{item.title}</h2>
-              <h3>{item.subTitle}</h3>
+                <h4>{item.createdAt && formatDate(item.createdAt)}</h4>
+                <div className={styles.cardContent}>
+                    <h3 className={styles.subTitle}>{item.subTitle}</h3>
+                    <h2>{item.title}</h2>
+                </div>
+                <FontAwesomeIcon icon={faArrowRight} className={styles.arrowIcon} />
             </Link>
-          ))}
+            ))}
         </div>
       </div>
       <ContactUs />
