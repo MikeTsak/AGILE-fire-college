@@ -25,7 +25,7 @@ export default function Login() {
 
       if (response.ok) {
         // Store the token in local storage or session storage
-        localStorage.setItem('token', data.token);
+        sessionStorage.setItem('token', data.token);
         // Redirect to admin page upon successful login
         router.push('/admin');
       } else {

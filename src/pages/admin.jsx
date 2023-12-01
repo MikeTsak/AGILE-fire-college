@@ -1,22 +1,164 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import styles from '../styles/Admin.module.css';
+import NewsDrawer from './components/NewsDrawer';
+import Link from 'next/link';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight, faChevronLeft, faChevronRight, faTrashAlt  } from '@fortawesome/free-solid-svg-icons';
 
 export default function Admin() {
+  const [news, setNews] = useState([]);
+  const [courses, setCourses] = useState([]);
   const router = useRouter();
+  const [newsItems, setNewsItems] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const openDrawer = () => setIsDrawerOpen(true);
+  const closeDrawer = () => setIsDrawerOpen(false);
+
+  const apiBaseURL = 'http://localhost:8080/firedep';
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    
-    // Check if there is no token and redirect to login
+    const token = sessionStorage.getItem('token');
     if (!token) {
       router.push('/login');
+    } else {
+      fetchNews();
+      fetchCourses();
     }
   }, [router]);
 
+  const logout = () => {
+    sessionStorage.removeItem('token'); // Remove the token from session storage
+    router.push('/login'); // Redirect to login page
+  };
+  const confirmDeleteNews = (id) => {
+    if (window.confirm("Are you sure you want to delete this news article?")) {
+      deleteNews(id);
+    }
+  };
+
+  const fetchNews = async () => {
+    const queryPage = router.query.page || 0;
+    const response = await fetch(`http://localhost:8080/firedep/news?page=${queryPage}&items=8`);
+    const data = await response.json();
+    setNewsItems(data.content);
+    setTotalPages(data.totalPages);
+    setCurrentPage(data.number);
+  };
+
+  const fetchCourses = async () => {
+    try {
+      const response = await fetch(`${apiBaseURL}/courses?page=0&size=10`);
+      const data = await response.json();
+      setCourses(data.content); // Adjust this based on your API response structure
+    } catch (error) {
+      console.error('Failed to fetch courses:', error);
+    }
+  };
+
+  const addCourse = async (courseData) => {
+    // Similar implementation to addNews
+  };
+
+  const deleteNews = async (id) => {
+    const token = sessionStorage.getItem('token');
+    try {
+      const response = await fetch(`${apiBaseURL}/news/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },  
+      });
+      if (response.ok) {
+        setNewsItems(prevNewsItems => prevNewsItems.filter(item => item.newsId !== id));
+      }
+    } catch (error) {
+      console.error('Failed to delete news:', error);
+    }
+  };
+
   return (
-    <div>
-      <h1>Admin Page</h1>
-      {/* Admin page content goes here */}
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <h1 className={styles.aboutMainHeader}>Admin Page</h1>
+        <button onClick={logout} className={styles.logoutButton}>Logout</button>
+      </div>
+  
+      <div className={styles.formSection}>  
+      <button onClick={openDrawer} className={styles.button}>Add News Article</button>
+      <NewsDrawer
+        isOpen={isDrawerOpen}
+        onClose={closeDrawer}
+      />
+        <button onClick={() => addCourse(sampleCourseData)} className={styles.button}>Add Course</button>
+        <button onClick={fetchCourses} className={styles.button}>Show Courses</button>
+      </div>
+  
+      <div>
+        {/* NEWS ARTICLES FROM THIS POINT DOWNWARD */}
+        <h2 className={styles.collegenameForPage}>News Articles:</h2>
+        <div className={styles.newsCards}>
+          {newsItems.map((item) => (
+            <div key={item.newsId} className={styles.newsCardDel}>
+              <div className={styles.newsCard}>
+                  <div className={styles.cardContent}>
+                    <img src={`data:image/jpeg;base64,${item.image}`} className={styles.imagenews}/>
+                    <div className={styles.category}>{item.category}
+                    <h4>{item.createdAt}</h4>
+                    <h2 className={styles.collegenameForPage}>{item.title}</h2>
+                    <h3 className={styles.subTitle}>{item.subTitle}</h3>
+                    <Link href={`/news/${item.newsId}`} key={item.newsId} className={styles.clickable}><b>View Article</b> <FontAwesomeIcon icon={faArrowRight} className={styles.arrowIcon} /></Link>
+                    </div>
+                  </div>
+              </div>
+              <button onClick={() => confirmDeleteNews(item.newsId)} className={styles.deleteButton}>
+              <FontAwesomeIcon icon={faTrashAlt} />
+            </button>
+            </div>
+          ))}
+        </div>
+        {/* Pagination */}
+        <div className={styles.pagination}>
+        <button 
+          onClick={() => goToPage(currentPage - 1)} 
+          disabled={currentPage <= 0}
+          className={currentPage <= 0 ? styles.disabled : ''}
+        >
+          <FontAwesomeIcon icon={faChevronLeft} />
+        </button>
+        <span>{`${currentPage + 1} of ${totalPages}`}</span>
+        <button 
+          onClick={() => goToPage(currentPage + 1)} 
+          disabled={currentPage >= totalPages - 1}
+          className={currentPage >= totalPages - 1 ? styles.disabled : ''}
+        >
+          <FontAwesomeIcon icon={faChevronRight} />
+        </button>
+      </div>
+      </div>
+  
+      {/* Render courses here */}
     </div>
   );
 }
+
+// Sample data for testing - replace with real data
+const sampleNewsData = {
+  image: "sample_image_url",
+  news: {
+    title: "Sample News Title",
+    subTitle: "Sample Subtitle",
+    content: "Sample content",
+    category: "General",
+    videoURL: "sample_video_url"
+  }
+};
+
+const sampleCourseData = {
+  // Similar structure as sampleNewsData
+};
