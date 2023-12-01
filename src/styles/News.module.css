@@ -143,3 +143,104 @@
       grid-template-columns: 1fr; /* Stacks cards on smaller screens */
     }
   }
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .pagination button {
+    background: none;
+    border: 2px solid var(--red01); /* Use your theme color */
+    color: var(--red01);
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    margin: 0 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .pagination button:hover:not(.disabled) {
+    background: var(--red01);
+    color: white;
+  }
+  
+  .pagination button.disabled {
+    border-color: #ccc;
+    color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .pagination span {
+    font-size: 1.2rem;
+  }
+  
+  
+
+  /* ~~~~~~~~~~~~~~~~~~~~SINGLE NEWS WEBSITE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+  .newsItemDetailContainer {
+    max-width: 1100px;
+    margin: auto;
+    padding: 10% 20px 20px 20px;
+  }
+  
+  .newsHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .newsDate {
+    color: #999;
+    margin-bottom: 5px;
+  }
+  
+  .newsTitle {
+    color: var(--red01);
+    font-family: 'Sofia Sans Semi Condensed', sans-serif;
+    font-weight: bold;
+    font-size: 60px;
+    margin-bottom: 20px;
+  }
+  
+  .newsContent {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  
+  .newsImageContainer {
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .newsImage {
+    width: 100%;
+    height: auto;
+  }
+  .videoContainer {
+    margin-top: 20px; /* Adjust as needed */
+  }
+  
+  /* Responsive video embedding */
+  .videoContainer iframe {
+    width: 100%;
+    height: 500px; /* Adjust as needed */
+  }
+  
+  /* Responsiveness for smaller screens */
+  @media (max-width: 768px) {
+    .videoContainer iframe {
+      height: 300px; /* Adjust as needed */
+    }
+    .newsItemDetailContainer {
+      padding: 20% 20px 20px 20px;
+    }
+    .newsHeader {
+      align-items: center;
+    }
+  }
