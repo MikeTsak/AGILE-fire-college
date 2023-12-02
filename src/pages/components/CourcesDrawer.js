@@ -28,13 +28,13 @@ export default function CourcesDrawer({ isOpen, onClose }) {
         image3: null,
         sectors: '',
         videoURL: '',
-        id: ''
+        courseId: ''
     });
 
     const handleChange = (e) => {
       let value = e.target.value;
   
-      if (e.target.name === 'id') {
+      if (e.target.name === 'courseId') {
           // Replace Greek letters with corresponding Latin letters
           value = value.split('').map(char => greekToLatinMap[char] || char).join('');
   
@@ -65,11 +65,12 @@ export default function CourcesDrawer({ isOpen, onClose }) {
 
         // Prepare the non-file data as JSON
         const { image, image2, image3, ...courseInfo } = courseData;
-                // Convert to JSON string and then to Blob
-                const courseInfoJson = JSON.stringify(courseInfo);
-                const courseInfoBlob = new Blob([courseInfoJson], {
-                    type: 'application/json'
-                });
+        // Convert to JSON string and then to Blob
+        courseInfo.templateType = selectedTemplate.toString();
+        const courseInfoJson = JSON.stringify(courseInfo);
+        const courseInfoBlob = new Blob([courseInfoJson], {
+            type: 'application/json'
+        });
         formData.append('coursesCreateDto', courseInfoBlob);
         console.log(courseInfoJson);
 
@@ -136,7 +137,7 @@ export default function CourcesDrawer({ isOpen, onClose }) {
                     <input type="file" name="image" onChange={handleChange} className={styles.input} />
                     <input name="sectors" value={courseData.sectors} onChange={handleChange} placeholder="Sectors" className={styles.input} />
                     <input name="videoURL" value={courseData.videoURL} onChange={handleChange} placeholder="Video URL (optional)" className={styles.input} />
-                    <input name="id" value={courseData.id} onChange={handleChange} placeholder="ID" className={styles.input} />
+                    <input name="courseId" value={courseData.courseId} onChange={handleChange} placeholder="courseId" className={styles.input} />
                     <button type="submit" className={styles.submitButton}>Submit</button>
                 </form>
                 <button onClick={onClose} className={styles.closeButton}>Close</button>
