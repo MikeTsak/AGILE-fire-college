@@ -8,7 +8,8 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight, faChevronLeft, faChevronRight  } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
 
 const months = [
   "Jan", "Feb", "Mar", "Apr",
@@ -23,18 +24,19 @@ const News = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
 
-  // Get the page number from URL query
-  const page = parseInt(router.query.page, 10) || 0;
-  const itemsPerPage = parseInt(router.query.items, 10) || 10;
-
   useEffect(() => {
     const fetchData = async () => {
       const queryPage = router.query.page || 0;
-      const response = await fetch(`http://localhost:8080/firedep/news?page=${queryPage}&items=8`);
-      const data = await response.json();
-      setNewsItems(data.content);
-      setTotalPages(data.totalPages);
-      setCurrentPage(data.number);
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL; // Get the API URL from environment variable
+      try {
+        const response = await axios.get(`${apiUrl}/firedep/news?page=${queryPage}&items=8`);
+        const data = response.data;
+        setNewsItems(data.content);
+        setTotalPages(data.totalPages);
+        setCurrentPage(data.number);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     };
 
     fetchData();

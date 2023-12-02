@@ -1,5 +1,6 @@
 // CourcesDrawer.js
 import { useState } from 'react';
+import axios from 'axios';
 import styles from '../../styles/Drawer.module.css'; // Ensure to create this CSS module
 
 const greekToLatinMap = {
@@ -56,34 +57,39 @@ export default function CourcesDrawer({ isOpen, onClose }) {
         e.preventDefault();
 
         const formData = new FormData();
-        Object.keys(courseData).forEach(key => {
-            if (key.startsWith('image') && courseData[key]) {
-                formData.append(key, courseData[key]);
-            } else {
+        ['image', 'image2', 'image3'].forEach(key => {
+            if (courseData[key]) {
                 formData.append(key, courseData[key]);
             }
         });
 
+        // Prepare the non-file data as JSON
+        const { image, image2, image3, ...courseInfo } = courseData;
+                // Convert to JSON string and then to Blob
+                const courseInfoJson = JSON.stringify(courseInfo);
+                const courseInfoBlob = new Blob([courseInfoJson], {
+                    type: 'application/json'
+                });
+        formData.append('coursesCreateDto', courseInfoBlob);
+        console.log(courseInfoJson);
+
         try {
             const token = sessionStorage.getItem('token');
-            const response = await fetch('http://localhost:8080/firedep/courses', {
-                method: 'POST',
+            const response = await axios.post('http://localhost:8080/firedep/courses', formData, {
                 headers: {
                     'Authorization': `Bearer ${token}`
-                    // 'content-type': 'multipart/form-data' is not necessary, as it's set automatically when using FormData
-                },
-                body: formData
+                }
             });
 
-            if (response.ok) {
+            if (response.status === 200) {
                 onClose(); // Close the drawer after successful submission
-                // Optionally, you might want to refresh the course list in the parent component
             } else {
                 // Handle errors
             }
         } catch (error) {
             console.error('Failed to submit course:', error);
         }
+
     };
 
     if (!isOpen) return null;

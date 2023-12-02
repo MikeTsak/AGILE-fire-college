@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import axios from 'axios'; // CORS policy
 import styles from '../styles/Admin.module.css';
 import NewsDrawer from './components/NewsDrawer';
 import CourcesDrawer from './components/CourcesDrawer';
+import Logo from './components/Logo';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faChevronLeft, faChevronRight, faTrashAlt  } from '@fortawesome/free-solid-svg-icons';
@@ -23,7 +25,7 @@ export default function Admin() {
   const openDrawerForCourses = () => setIsDrawerOpenForCourses(true);
   const closeDrawerForCourses = () => setIsDrawerOpenForCourses(false);
 
-  const apiBaseURL = 'http://localhost:8080/firedep';
+  const apiBaseURL = process.env.NEXT_PUBLIC_API_URL;
 
   useEffect(() => {
     const token = sessionStorage.getItem('token');
@@ -31,7 +33,6 @@ export default function Admin() {
       router.push('/login');
     } else {
       fetchNews();
-      fetchCourses();
     }
   }, [router]);
 
@@ -47,38 +48,27 @@ export default function Admin() {
 
   const fetchNews = async () => {
     const queryPage = router.query.page || 0;
-    const response = await fetch(`http://localhost:8080/firedep/news?page=${queryPage}&items=8`);
-    const data = await response.json();
-    setNewsItems(data.content);
-    setTotalPages(data.totalPages);
-    setCurrentPage(data.number);
-  };
-
-  const fetchCourses = async () => {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL; // Get the API URL from environment variable
     try {
-      const response = await fetch(`${apiBaseURL}/courses?page=0&size=10`);
-      const data = await response.json();
-      setCourses(data.content); // Adjust this based on your API response structure
+      const response = await axios.get(`${apiUrl}/firedep/news?page=${queryPage}&items=8`);
+      const data = response.data;
+      setNewsItems(data.content);
+      setTotalPages(data.totalPages);
+      setCurrentPage(data.number);
     } catch (error) {
-      console.error('Failed to fetch courses:', error);
+      console.error('Error fetching data:', error);
     }
-  };
-
-  const addCourse = async (courseData) => {
-    // Similar implementation to addNews
   };
 
   const deleteNews = async (id) => {
     const token = sessionStorage.getItem('token');
     try {
-      const response = await fetch(`${apiBaseURL}/news/${id}`, {
-        method: 'DELETE',
+      const response = await axios.delete(`${apiBaseURL}/news/${id}`, {
         headers: {
-          'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
-        },  
+        },
       });
-      if (response.ok) {
+      if (response.status === 200) {
         setNewsItems(prevNewsItems => prevNewsItems.filter(item => item.newsId !== id));
       }
     } catch (error) {
@@ -88,6 +78,7 @@ export default function Admin() {
 
   return (
     <div className={styles.container}>
+      <Logo />
       <div className={styles.header}>
         <h1 className={styles.aboutMainHeader}>Admin Page</h1>
         <button onClick={logout} className={styles.logoutButton}>Logout</button>
@@ -105,7 +96,7 @@ export default function Admin() {
         onClose={closeDrawerForCourses}
       />
 
-      <button onClick={fetchCourses} className={styles.button}>Show Courses</button>
+      <button className={styles.button}>Show Courses</button>
       </div>
   
       <div>
@@ -155,19 +146,3 @@ export default function Admin() {
     </div>
   );
 }
-
-// Sample data for testing - replace with real data
-const sampleNewsData = {
-  image: "sample_image_url",
-  news: {
-    title: "Sample News Title",
-    subTitle: "Sample Subtitle",
-    content: "Sample content",
-    category: "General",
-    videoURL: "sample_video_url"
-  }
-};
-
-const sampleCourseData = {
-  // Similar structure as sampleNewsData
-};
