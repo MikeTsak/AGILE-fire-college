@@ -1,5 +1,7 @@
+// NewsDrawer.js
 import { useState } from 'react';
-import styles from '../../styles/NewsDrawer.module.css'; // Ensure to create this CSS module
+import axios from 'axios';
+import styles from '../../styles/Drawer.module.css'; // Ensure to create this CSS module
 
 export default function NewsDrawer({ isOpen, onClose, onSubmit }) {
     const [newsData, setNewsData] = useState({
@@ -24,29 +26,40 @@ export default function NewsDrawer({ isOpen, onClose, onSubmit }) {
         
         const formData = new FormData();
         formData.append('image', newsData.image);
-        formData.append('news', JSON.stringify({
+      
+        const news = {
           title: newsData.title,
           subTitle: newsData.subTitle,
           content: newsData.content,
           category: newsData.category,
           videoURL: newsData.videoURL
-        }));
-    
+        };
+      
+        // Convert the news object to a JSON string
+        const newsJson = JSON.stringify(news);
+      
+        // Create a blob from the JSON string
+        const newsBlob = new Blob([newsJson], {
+          type: 'application/json'
+        });
+      
+        // Append the blob to the formData
+        formData.append('news', newsBlob);
+      
         try {
           const token = sessionStorage.getItem('token');
-          const response = await fetch('http://localhost:8080/firedep/news', {
-            method: 'POST',
+          const response = await axios({
+            method: 'post',
+            url: 'http://localhost:8080/firedep/news',
+            data: formData,
             headers: {
               'Authorization': `Bearer ${token}`,
-              'content-type': 'multipart/form-data'
-            },
-            body: formData
+              // No need to set 'Content-Type', Axios will set it for multipart/form-data
+            }
           });
-          console.log(token)
-          console.log(response);
-          if (response.ok) {
+      
+          if (response.status === 200) {
             onClose(); // Close the drawer after successful submission
-            // Optionally, you might want to refresh the news list in the parent component
           } else {
             // Handle errors
           }
@@ -54,6 +67,7 @@ export default function NewsDrawer({ isOpen, onClose, onSubmit }) {
           console.error('Failed to submit news:', error);
         }
       };
+      
     
       if (!isOpen) return null;
 

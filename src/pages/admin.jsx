@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import styles from '../styles/Admin.module.css';
 import NewsDrawer from './components/NewsDrawer';
+import CourcesDrawer from './components/CourcesDrawer';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faChevronLeft, faChevronRight, faTrashAlt  } from '@fortawesome/free-solid-svg-icons';
@@ -14,10 +15,13 @@ export default function Admin() {
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
 
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isDrawerOpenForNews, setIsDrawerOpenForNews] = useState(false);
+  const [isDrawerOpenForCourses, setIsDrawerOpenForCourses] = useState(false);
 
-  const openDrawer = () => setIsDrawerOpen(true);
-  const closeDrawer = () => setIsDrawerOpen(false);
+  const openDrawerForNews = () => setIsDrawerOpenForNews(true);
+  const closeDrawerForNews = () => setIsDrawerOpenForNews(false);
+  const openDrawerForCourses = () => setIsDrawerOpenForCourses(true);
+  const closeDrawerForCourses = () => setIsDrawerOpenForCourses(false);
 
   const apiBaseURL = 'http://localhost:8080/firedep';
 
@@ -90,13 +94,18 @@ export default function Admin() {
       </div>
   
       <div className={styles.formSection}>  
-      <button onClick={openDrawer} className={styles.button}>Add News Article</button>
+      <button onClick={openDrawerForNews} className={styles.button}>Add News Article</button>
       <NewsDrawer
-        isOpen={isDrawerOpen}
-        onClose={closeDrawer}
+        isOpen={isDrawerOpenForNews}
+        onClose={closeDrawerForNews}
       />
-        <button onClick={() => addCourse(sampleCourseData)} className={styles.button}>Add Course</button>
-        <button onClick={fetchCourses} className={styles.button}>Show Courses</button>
+      <button onClick={openDrawerForCourses} className={styles.button}>Add Course</button>
+      <CourcesDrawer
+        isOpen={isDrawerOpenForCourses}
+        onClose={closeDrawerForCourses}
+      />
+
+      <button onClick={fetchCourses} className={styles.button}>Show Courses</button>
       </div>
   
       <div>
