@@ -16,16 +16,16 @@ const months = [
   "Sep", "Oct", "Nov", "Dec"
 ];
 
-const News = () => {
+const Courses = () => {
   const { t } = useTranslation();
-  const [newsItems, setNewsItems] = useState([]);
+  const [CoursesItems, setCoursesItems] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch('http://localhost:8080/firedep/courses');
       const data = await response.json();
-      console.log(data.content);
-      setNewsItems(data.content);
+      // console.log(data.content);
+      setCoursesItems(data.content);
     };
 
     fetchData();
@@ -46,13 +46,13 @@ const News = () => {
 
         {/* NEWS CARDS */}
         <div className={styles.newsCards}>
-        {newsItems.map((item) => (
-            <Link href={`/news/${item.newsId}`} passHref
+        {CoursesItems.map((item) => (
+            <Link href={`/courses/${item.courseId}`} passHref
                 key={item.newsId}
                 className={styles.newsCard}
                 style={{ backgroundImage: `url(data:image/jpeg;base64,${item.image})` }}
             >
-                <h4>{item.sectors && item.sector}</h4>
+                <h4>{item.sectors}</h4>
                 <div className={styles.cardContent}>
                     <h3 className={styles.subTitle}>{item.subTitle}</h3>
                     <h2>{item.title}</h2>
@@ -68,4 +68,4 @@ const News = () => {
   );
 };
 
-export default News;
+export default Courses;

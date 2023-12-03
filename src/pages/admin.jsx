@@ -61,20 +61,28 @@ export default function Admin() {
   };
 
   const deleteNews = async (id) => {
-    const token = sessionStorage.getItem('token');
     try {
-      const response = await axios.delete(`${apiBaseURL}/news/${id}`, {
+      const token = sessionStorage.getItem('token');
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  
+      const response = await axios({
+        method: 'delete',
+        url: `${apiUrl}/firedep/news/${id}`,
         headers: {
           'Authorization': `Bearer ${token}`,
-        },
+        }
       });
+  
       if (response.status === 200) {
         setNewsItems(prevNewsItems => prevNewsItems.filter(item => item.newsId !== id));
+      } else {
+        // Handle other status codes or response scenarios
       }
     } catch (error) {
       console.error('Failed to delete news:', error);
     }
   };
+  
 
   return (
     <div className={styles.container}>

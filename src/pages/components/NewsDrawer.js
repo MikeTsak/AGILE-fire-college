@@ -13,6 +13,9 @@ export default function NewsDrawer({ isOpen, onClose, onSubmit }) {
         image: null
       });
 
+      const [submitSuccess, setSubmitSuccess] = useState(false);
+      const [newNewsId, setNewNewsId] = useState(null);
+
       const handleChange = (e) => {
         if (e.target.name === 'image') {
           setNewsData({ ...newsData, image: e.target.files[0] });
@@ -54,12 +57,13 @@ export default function NewsDrawer({ isOpen, onClose, onSubmit }) {
             data: formData,
             headers: {
               'Authorization': `Bearer ${token}`,
-              // No need to set 'Content-Type', Axios will set it for multipart/form-data
             }
           });
       
-          if (response.status === 200) {
-            onClose(); // Close the drawer after successful submission
+          if (response.status) {
+            setSubmitSuccess(true);
+            setNewNewsId(response.data);
+            console.log(response.data);
           } else {
             // Handle errors
           }
@@ -67,9 +71,34 @@ export default function NewsDrawer({ isOpen, onClose, onSubmit }) {
           console.error('Failed to submit news:', error);
         }
       };
+
+      const handleViewArticle = () => {
+        window.location.href = `/news/${newNewsId}`; // Redirect to the new article
+      };    
       
     
       if (!isOpen) return null;
+
+      if (submitSuccess) {
+        return (
+          <div className={styles.drawer}>
+            <div className={styles.drawerContentSuccess}>
+              <p className={styles.aboutMainHeader}>Article successfully added!</p>
+              <button onClick={handleViewArticle} className={styles.submitButton}>View Article</button>
+              <button 
+                onClick={() => {
+                  onClose();
+                  setSubmitSuccess(false);
+                }} 
+                className={styles.closeButton}
+              >
+                Close
+              </button>
+
+            </div>
+          </div>
+        );
+      }
 
   return (
     <div className={styles.drawer}>

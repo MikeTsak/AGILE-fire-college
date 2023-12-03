@@ -1,26 +1,25 @@
 // pages/news/[newsid].js
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import axios from 'axios';
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
 import Logo from '../components/Logo';
 import styles from '../../styles/News.module.css';
 
 const months = [
-    "Jan", "Feb", "Mar", "Apr",
-    "May", "Jun", "Jul", "Aug",
-    "Sep", "Oct", "Nov", "Dec"
-  ];
+  "Jan", "Feb", "Mar", "Apr",
+  "May", "Jun", "Jul", "Aug",
+  "Sep", "Oct", "Nov", "Dec"
+];
 
-  // Function to format the date with the translated month
-  const formatDate = (createdAt) => {
-    const dateObj = new Date(createdAt);
-    const day = dateObj.getDate();
-    const monthIndex = dateObj.getMonth();
-    const year = dateObj.getFullYear();
-
-    return `${day} ${months[monthIndex]} ${year}`;
-  };
+const formatDate = (createdAt) => {
+  const dateObj = new Date(createdAt);
+  const day = dateObj.getDate();
+  const monthIndex = dateObj.getMonth();
+  const year = dateObj.getFullYear();
+  return `${day} ${months[monthIndex]} ${year}`;
+};
 
 const NewsItemDetail = () => {
   const router = useRouter();
@@ -28,12 +27,13 @@ const NewsItemDetail = () => {
   const [newsItem, setNewsItem] = useState(null);
 
   useEffect(() => {
-    // Fetch the news item from your API
     const fetchNewsItem = async () => {
-      const response = await fetch(`http://localhost:8080/firedep/news/${newsid}`);
-      const data = await response.json();
-      console.log(data);
-      setNewsItem(data);
+      try {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/firedep/news/${newsid}`);
+        setNewsItem(response.data);
+      } catch (error) {
+        console.error('Error fetching news item:', error);
+      }
     };
 
     if (newsid) {
@@ -82,7 +82,11 @@ const NewsItemDetail = () => {
             className={styles.newsImage}
           />
         </div>
+        <br />
+        <br />
         <p className={styles.newsContent}>{newsItem.content}</p>
+        <br />
+        <br />
         {/* Render the video if videoURL exists */}
         {renderVideo(newsItem.videoURL)}
       </div>
