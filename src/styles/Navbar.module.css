@@ -1,0 +1,128 @@
+/* Navbar.module.css */
+
+.bmItem {
+  display: block;
+  padding: 0.5em;
+  text-decoration: none;
+  color: black;
+  transition: color 0.4s;
+  font-size: 20px;
+}
+
+.menuHeader {
+  padding-top: 9em;
+}
+
+.bmItem :hover {
+  cursor: pointer;
+}
+
+.menuItem {
+  /* Styles for menu items */
+  color: black; /* Original color */
+  transition: color 0.3s ease; /* Smooth transition for color change */
+}
+
+.bm-overlay {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: calc(100% - 80px); 
+  position: fixed;
+  z-index: 1050; /* Ensure this is less than the z-index of the footer */
+
+}
+
+/* Position and sizing of burger button */
+.bm-burger-button {
+  position: fixed;;
+  width: 36px;
+  height: 30px;
+  right: 0;
+  top: 0;
+}
+
+
+.bmBurgerButton {
+  position: fixed;
+  width: 70px;
+  height: 70px;
+  right: 36px;
+  right: 8%;
+  top: 0;
+  z-index: 1100;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  color: black;
+  background: white;
+  border-top: 25px solid white;
+  border-bottom: 25px solid white;
+  border-left: 20px solid white;
+  border-right: 20px solid white;
+  cursor: pointer;
+}
+
+.bmBurgerButtonOpen .bmBurgerBars:nth-child(1),
+.bmBurgerButtonOpen .bmBurgerBars:nth-child(3) {
+  opacity: 0;
+  transition: opacity 0.3s 0.3s ease; /* Fades out with delay */
+}
+
+.bmBurgerButtonOpen .bmBurgerBars:nth-child(2) {
+  transform: rotate(0); /* If you have any rotation initially for the animation */
+}
+
+.bmBurgerBars {
+  background-color: black;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  height: 2px;
+  width: 100%;
+}
+.bmMenuWrap {
+  position: fixed;
+  height: 100%;
+}
+
+/* Styles for the menu */
+.bmMenu {
+  background: white;
+  padding: 2.5em 1.5em 0;
+  font-size: '1.15em';
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.bmItemList {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+/* Custom styling for the footer inside the menu */
+.menuFooter {
+  margin-top: auto;
+  font-size: 15px;
+  width: 100%;
+  color: rgb(180, 180, 180);
+  padding: 0.5em;
+}
+
+.languageToggle {
+  padding: 5px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.languageToggle img {
+  height: 20px; /* Adjust as needed */
+  width: auto;
+}
+
+
+@media (max-width: 1000px) { /* Adjust the max-width as needed for your breakpoint */
+  .bmBurgerButton {
+    right: 0 /* Align to the left edge on mobile */
+  }
+}
