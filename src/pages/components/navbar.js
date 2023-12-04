@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { slide as Menu } from 'react-burger-menu';
 import Link from 'next/link';
-import styles from '../../styles/Navbar.module.css'; // Make sure to create a corresponding CSS module file
+import styles from '../../styles/navbar.module.css'; // Make sure to create a corresponding CSS module file
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
