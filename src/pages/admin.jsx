@@ -7,7 +7,7 @@ import CourcesDrawer from './components/CourcesDrawer';
 import Logo from './components/Logo';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight, faChevronLeft, faChevronRight, faTrashAlt  } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faChevronLeft, faChevronRight, faTrashAlt, faRightFromBracket} from '@fortawesome/free-solid-svg-icons';
 
 export default function Admin() {
   const [news, setNews] = useState([]);
@@ -16,6 +16,9 @@ export default function Admin() {
   const [newsItems, setNewsItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+
+  const [showCourses, setShowCourses] = useState(false); // State to toggle between news and courses
+
 
   const [isDrawerOpenForNews, setIsDrawerOpenForNews] = useState(false);
   const [isDrawerOpenForCourses, setIsDrawerOpenForCourses] = useState(false);
@@ -40,9 +43,13 @@ export default function Admin() {
     sessionStorage.removeItem('token'); // Remove the token from session storage
     router.push('/login'); // Redirect to login page
   };
-  const confirmDeleteNews = (id) => {
-    if (window.confirm("Are you sure you want to delete this news article?")) {
-      deleteNews(id);
+  const confirmDeleteItem = (id, itemType) => {
+    const message = itemType === 'news'
+      ? "Are you sure you want to delete this news article?"
+      : "Are you sure you want to delete this course?";
+    
+    if (window.confirm(message)) {
+      deleteItem(id, itemType);
     }
   };
 
@@ -60,26 +67,50 @@ export default function Admin() {
     }
   };
 
-  const deleteNews = async (id) => {
+  // Function to fetch courses
+  const fetchCourses = async () => {
+    try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+      const response = await axios.get(`${apiUrl}/firedep/courses`);
+      console.log(response.data.content); 
+      setCourses(response.data.content); 
+    } catch (error) {
+      console.error('Error fetching courses:', error);
+    }
+  };
+  
+
+  const toggleDisplay = () => {
+    setShowCourses(!showCourses);
+    if (!showCourses) {
+      fetchCourses(); // Fetch courses when switching to show courses
+    }
+  };
+
+  const deleteItem = async (id, itemType) => {
     try {
       const token = sessionStorage.getItem('token');
       const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   
       const response = await axios({
         method: 'delete',
-        url: `${apiUrl}/firedep/news/${id}`,
+        url: `${apiUrl}/firedep/${itemType}/${id}`,
         headers: {
           'Authorization': `Bearer ${token}`,
         }
       });
   
       if (response.status === 200) {
-        setNewsItems(prevNewsItems => prevNewsItems.filter(item => item.newsId !== id));
+        if (itemType === 'news') {
+          setNewsItems(prevItems => prevItems.filter(item => item.newsId !== id));
+        } else if (itemType === 'courses') {
+          setCourses(prevItems => prevItems.filter(item => item.courseId !== id));
+        }
       } else {
         // Handle other status codes or response scenarios
       }
     } catch (error) {
-      console.error('Failed to delete news:', error);
+      console.error(`Failed to delete ${itemType}:`, error);
     }
   };
   
@@ -89,7 +120,7 @@ export default function Admin() {
       <Logo />
       <div className={styles.header}>
         <h1 className={styles.aboutMainHeader}>Admin Page</h1>
-        <button onClick={logout} className={styles.logoutButton}>Logout</button>
+        <button onClick={logout} className={styles.logoutButton}>Logout <FontAwesomeIcon icon={faRightFromBracket} /></button>
       </div>
   
       <div className={styles.formSection}>  
@@ -104,15 +135,41 @@ export default function Admin() {
         onClose={closeDrawerForCourses}
       />
 
-      <button className={styles.button}>Show Courses</button>
+      <button onClick={toggleDisplay} className={styles.button}>{showCourses ? 'Show News' : 'Show Courses'}</button>
       </div>
   
       <div>
         {/* NEWS ARTICLES FROM THIS POINT DOWNWARD */}
-        <h2 className={styles.collegenameForPage}>News Articles:</h2>
-        <div className={styles.newsCards}>
-          {newsItems.map((item) => (
-            <div key={item.newsId} className={styles.newsCardDel}>
+        {showCourses ? (
+        <div>
+          <h2 className={styles.collegenameForPage}>Courses:</h2>
+          <div className={styles.coursesContainer}>
+            {courses.map((course) => (
+              <div key={course.courseId} className={styles.newsCardDel}>
+              <div className={styles.newsCard}>
+                  <div className={styles.cardContent}>
+                    <img src={`data:image/jpeg;base64,${course.image}`} className={styles.imagenews}/>
+                    <div className={styles.category}>{course.category}
+                    <h4>{course.sectors}</h4>
+                    <h2 className={styles.collegenameForPage}>{course.title}</h2>
+                    <h3 className={styles.subTitle}>{course.subTitle}</h3>
+                    <Link href={`/courses/${course.courseId}`} key={course.courseId} className={styles.clickable}><b>View Course</b> <FontAwesomeIcon icon={faArrowRight} className={styles.arrowIcon} /></Link>
+                    </div>
+                  </div>
+              </div>
+              <button onClick={() => confirmDeleteItem(course.courseId, "courses")} className={styles.deleteButton}>
+              <FontAwesomeIcon icon={faTrashAlt} />
+            </button>
+            </div>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div>
+          <h2 className={styles.collegenameForPage}>News Articles:</h2>
+          <div className={styles.newsCards}>
+            {newsItems.map((item) => (
+              <div key={item.newsId} className={styles.newsCardDel}>
               <div className={styles.newsCard}>
                   <div className={styles.cardContent}>
                     <img src={`data:image/jpeg;base64,${item.image}`} className={styles.imagenews}/>
@@ -124,14 +181,14 @@ export default function Admin() {
                     </div>
                   </div>
               </div>
-              <button onClick={() => confirmDeleteNews(item.newsId)} className={styles.deleteButton}>
+              <button onClick={() => confirmDeleteItem(item.newsId, "news")} className={styles.deleteButton}>
               <FontAwesomeIcon icon={faTrashAlt} />
             </button>
             </div>
-          ))}
-        </div>
-        {/* Pagination */}
-        <div className={styles.pagination}>
+            ))}
+          </div>
+          {/* ...pagination */}
+          <div className={styles.pagination}>
         <button 
           onClick={() => goToPage(currentPage - 1)} 
           disabled={currentPage <= 0}
@@ -148,9 +205,10 @@ export default function Admin() {
           <FontAwesomeIcon icon={faChevronRight} />
         </button>
       </div>
+        </div>
+      )}
+
       </div>
-  
-      {/* Render courses here */}
     </div>
   );
 }

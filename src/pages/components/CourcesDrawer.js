@@ -1,5 +1,6 @@
 // CourcesDrawer.js
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import axios from 'axios';
 import styles from '../../styles/Drawer.module.css'; // Ensure to create this CSS module
 
@@ -30,6 +31,10 @@ export default function CourcesDrawer({ isOpen, onClose }) {
         videoURL: '',
         courseId: ''
     });
+
+    const [submitSuccess, setSubmitSuccess] = useState(false);
+    const [newCourseId, setNewCourseId] = useState(null);
+    const router = useRouter();
 
     const handleChange = (e) => {
       let value = e.target.value;
@@ -72,7 +77,7 @@ export default function CourcesDrawer({ isOpen, onClose }) {
             type: 'application/json'
         });
         formData.append('coursesCreateDto', courseInfoBlob);
-        console.log(courseInfoJson);
+        // console.log(courseInfoJson);
 
         try {
             const token = sessionStorage.getItem('token');
@@ -82,8 +87,10 @@ export default function CourcesDrawer({ isOpen, onClose }) {
                 }
             });
 
-            if (response.status === 200) {
-                onClose(); // Close the drawer after successful submission
+            if (response.status) {
+                onClose();
+                setSubmitSuccess(true);
+                setNewCourseId(response.data.courseId); 
             } else {
                 // Handle errors
             }
@@ -93,14 +100,37 @@ export default function CourcesDrawer({ isOpen, onClose }) {
 
     };
 
+    const handleViewCourse = () => {
+        router.push(`/courses/${newCourseId}`); // Redirect to the new course page.
+    };    
+
     if (!isOpen) return null;
+
+    if (submitSuccess) {
+        return (
+          <div className={styles.drawer}>
+            <div className={styles.drawerContent}>
+              <p className={styles.aboutMainHeader}>Course successfully added!</p>
+              <button onClick={handleViewCourse} className={styles.submitButton}>View Course</button>
+              <button 
+                onClick={() => {
+                  onClose();
+                  setSubmitSuccess(false);
+                }} 
+                className={styles.closeButton}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        );
+      }
 
     const renderInputsForTemplate = (templateNumber) => {
         switch (templateNumber) {
             case 1:
                 return (
                     <>
-                        <textarea name="content" value={courseData.content} onChange={handleChange} placeholder="Content" className={styles.textarea} />
                         <textarea name="content2" value={courseData.content2} onChange={handleChange} placeholder="Content 2" className={styles.textarea} />
                         <textarea name="content3" value={courseData.content3} onChange={handleChange} placeholder="Content 3" className={styles.textarea} />
                         <input type="file" name="image2" onChange={handleChange} className={styles.input} />
@@ -111,6 +141,7 @@ export default function CourcesDrawer({ isOpen, onClose }) {
                 return (
                     <>
                         <input type="file" name="image2" onChange={handleChange} className={styles.input} />
+                        <textarea name="content2" value={courseData.content2} onChange={handleChange} placeholder="Content 2" className={styles.textarea} />
                     </>
                 );
             default:
@@ -132,6 +163,7 @@ export default function CourcesDrawer({ isOpen, onClose }) {
                     <input name="subTitle" value={courseData.subTitle} onChange={handleChange} placeholder="Subtitle" className={styles.input} />
                     <textarea name="overview" value={courseData.overview} onChange={handleChange} placeholder="Overview" className={styles.textarea} />
                     {renderInputsForTemplate(selectedTemplate)}
+                    <textarea name="content" value={courseData.content} onChange={handleChange} placeholder="Content" className={styles.textarea} />
                     <input name="length" value={courseData.length} onChange={handleChange} placeholder="Length" className={styles.input} />
                     <input name="accreditations" value={courseData.accreditations} onChange={handleChange} placeholder="Accreditations" className={styles.input} />
                     <input type="file" name="image" onChange={handleChange} className={styles.input} />

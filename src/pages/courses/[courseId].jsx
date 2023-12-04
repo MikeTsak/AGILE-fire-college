@@ -89,7 +89,7 @@ const CourseItemDetail = () => {
     <>
       <div className={styles.newsItemDetailContainer} >
             <div className={styles.aboutHeaderText}>
-            <h2 className={styles.aboutSubHeader}>{courseItem.sectors}</h2>
+            <h2 className={styles.aboutSubHeader}>{t('Courses')}</h2>
             <h1 className={styles.aboutMainHeader}>{courseItem.title}</h1>
             <h2 className={styles.aboutSubHeader}>{courseItem.subTitle}</h2>
         </div>
@@ -111,7 +111,7 @@ const CourseItemDetail = () => {
                 <p className={styles.BlueWow}>{courseItem.sectors}</p>
             </div>
             <div className={styles.OverviewText}>
-                <h2 className={styles.newsTitle}>{t('Course overview')}</h2>
+                <h2 className={styles.newsTitle}>{t('CourseOverview')}</h2>
                 <p>{courseItem.overview}</p>
             </div>
         </div>
@@ -179,9 +179,44 @@ const CourseItemDetail = () => {
     // Adjust the following to match your data structure and desired layout
     return (
       <>
-        <h2>Overview: {courseItem.overview}</h2>
-        <p>{courseItem.content}</p>
-        {/* Add other fields and images as needed */}
+      <div className={styles.newsItemDetailContainer} >
+            <div className={styles.aboutHeaderText}>
+            <h2 className={styles.aboutSubHeader}>{t('Courses')}</h2>
+            <h1 className={styles.aboutMainHeader}>{courseItem.title}</h1>
+            <h2 className={styles.aboutSubHeader}>{courseItem.subTitle}</h2>
+        </div>
+        <div className={styles.newsImageContainer}>
+        <img
+                src={`data:image/jpeg;base64,${courseItem.image}`}
+                alt="Image1"
+                layout="fill"
+                objectFit="cover"
+                priority
+                className={styles.newsImage}
+        />
+        </div>
+        <div className={styles.Overview}>
+            <div className={styles.OverviewStats}>
+                <h2>{t('Length')}</h2>
+                <p className={styles.BlueWow}>{courseItem.length}</p>
+                <h2>{t('Sectors')}</h2>
+                <p className={styles.BlueWow}>{courseItem.sectors}</p>
+            </div>
+            <div className={styles.OverviewText}>
+                <h2 className={styles.newsTitle}>{t('CourseOverview')}</h2>
+                <p>{courseItem.overview}</p>
+            </div>
+        </div>
+        </div>
+
+
+        <div className={styles.redContainer}>
+                <h2 className={styles.redContainerHeader}>{courseItem.accreditations}</h2>
+                <p className={styles.aboutMainText}>{courseItem.content}</p>
+                <br />
+        </div>
+
+
       </>
     );
   };
@@ -191,9 +226,56 @@ const CourseItemDetail = () => {
     // Adjust the following to match your data structure and desired layout
     return (
       <>
-        <h2>Overview: {courseItem.overview}</h2>
-        <p>{courseItem.content}</p>
-        {/* Add other fields and images as needed */}
+      <div className={styles.newsItemDetailContainer} >
+            <div className={styles.aboutHeaderText}>
+            <h2 className={styles.aboutSubHeader}>{t('Courses')}</h2>
+            <h1 className={styles.aboutMainHeader}>{courseItem.title}</h1>
+            <h2 className={styles.aboutSubHeader}>{courseItem.subTitle}</h2>
+        </div>
+        <div className={styles.newsImageContainer}>
+        <img
+                src={`data:image/jpeg;base64,${courseItem.image}`}
+                alt="Image1"
+                layout="fill"
+                objectFit="cover"
+                priority
+                className={styles.newsImage}
+        />
+        </div>
+        <div className={styles.Overview}>
+            <div className={styles.OverviewStats}>
+                <h2>{t('Length')}</h2>
+                <p className={styles.BlueWow}>{courseItem.length}</p>
+                <h2>{t('Sectors')}</h2>
+                <p className={styles.BlueWow}>{courseItem.sectors}</p>
+            </div>
+            <div className={styles.OverviewText}>
+                <h2 className={styles.newsTitle}>{t('CourseOverview')}</h2>
+                <p>{courseItem.overview}</p>
+            </div>
+        </div>
+        </div>
+
+        <div className={styles.redContainer}>
+                <h2 className={styles.redContainerHeader}>{courseItem.accreditations}</h2>
+                <p className={styles.aboutMainText}>{courseItem.content}</p>
+                <br />
+        </div>
+
+        <motion.div
+            ref={ref3}
+            initial="hidden"
+            animate={inView3 ? 'visible' : 'hidden'}
+            variants={fadeInVariant}
+            className={styles.networkingSection}
+            style={{ backgroundImage: `url(${`data:image/jpeg;base64,${courseItem.image2}`})` }}
+            >
+            <div className={styles.networkingContent}>
+                <p className={styles.networkingText}>
+                {courseItem.content2}
+                </p>
+            </div>
+          </motion.div>
       </>
     );
   };

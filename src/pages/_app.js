@@ -1,5 +1,5 @@
 // pages/_app.js
-import './i18n';
+import '../../public/lib/i18n';
 import '@/styles/globals.css';
 
 function MyApp({ Component, pageProps }) {

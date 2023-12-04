@@ -3,8 +3,8 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
 // Import your translation files
-import translationEN from '../../public/locales/en/common.json';
-import translationEL from '../../public/locales/el/common.json';
+import translationEN from '../locales/en/common.json';
+import translationEL from '../locales/el/common.json';
 
 // the translations
 const resources = {
