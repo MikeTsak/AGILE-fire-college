@@ -1,3 +1,4 @@
+//Index page for the website
 import Navbar from './components/navbar';
 import Footer from './components/footer';
 import Slideshow from './components/slideshow';

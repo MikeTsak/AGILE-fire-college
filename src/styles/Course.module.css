@@ -548,3 +548,110 @@
 .OverviewText p {
   font-size: 18px;
 }
+@media (max-width: 768px) {
+  .aboutHeaderContainer,
+  .Overview {
+    /* Stack the elements vertically */
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+  }
+
+  .aboutHeaderText,
+  .OverviewStats,
+  .OverviewText {
+    /* Full width and center alignment for header text and overview stats */
+    width: 100%;
+    padding-right: 0;
+    text-align: center;
+  }
+
+  .aboutMainHeader {
+    /* Reduce the font size for main header */
+    font-size: 36px; /* Adjust as needed */
+  }
+
+  .aboutSubHeader,
+  .aboutSubHeader2 {
+    /* Reduce the font size for sub headers */
+    font-size: 18px; /* Adjust as needed */
+  }
+
+  .BlueWow {
+    /* Adjust the BlueWow element */
+    padding: 10px; /* Adjust as needed */
+    font-size: 18px; /* Adjust as needed */
+    margin: 10px 0; /* Add margin for spacing */
+    text-align: center; /* Center the text */
+  }
+
+  .redContainer {
+    /* Reduce the padding for the red container */
+    padding: 5% 10%; /* Adjust as needed */
+  }
+
+  .redContainerHeader {
+    /* Reduce the font size for red container header */
+    font-size: 24px; /* Adjust as needed */
+  }
+
+  /* Adjust the layout for the leading section */
+  .leadingSection {
+    padding: 0; /* Remove padding */
+  }
+
+  .imageWrapper,
+  .textWrapper {
+    /* Full width for image and text wrappers */
+    width: 100%;
+    padding: 0; /* Remove padding */
+  }
+
+  .leadingTitle {
+    /* Reduce the font size for the leading title */
+    font-size: 24px; /* Adjust as needed */
+  }
+
+  .leadingText {
+    /* Reduce the font size for the leading text */
+    font-size: 16px; /* Adjust as needed */
+  }
+
+  /* Adjust the networking section layout */
+  .networkingSection {
+    padding: 20px; /* Adjust padding */
+    height: auto; /* Adjust height */
+  }
+
+  .networkingContent {
+    /* Full width for networking content */
+    width: 100%;
+    padding: 0; /* Remove padding */
+  }
+
+  .networkingTitle {
+    /* Reduce the font size for networking title */
+    font-size: 24px; /* Adjust as needed */
+  }
+
+  .networkingText {
+    /* Reduce the font size for networking text */
+    font-size: 16px; /* Adjust as needed */
+  }
+
+  .networkingImage {
+    height: auto; /* Adjust height to maintain aspect ratio */
+  }
+
+  /* Adjustments for video container */
+  .videoContainer iframe {
+    height: auto; /* Adjust height to maintain aspect ratio */
+    width: 100%; /* Ensure full width */
+  }
+  
+  /* Ensure all text and content is vertically stacked and centered */
+  .OverviewStats,
+  .OverviewText {
+    margin-bottom: 20px; /* Adjust as needed for spacing */
+  }
+}

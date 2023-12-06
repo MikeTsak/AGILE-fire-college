@@ -10,7 +10,16 @@ const Footer = () => {
 
     return (
         <>
-        <div className={styles.separatorStyle}>{t("collegePhone")}</div>
+        {/* red tel line */}
+
+        <div className={styles.separatorStyle}>  
+        <a href={`tel:${t('collegePhone')}`}>
+            {t('collegePhone')}
+        </a>
+        </div>
+
+        {/* footer */}
+
         <footer className={styles.footer}>
             <div className={styles.footerContent}>
                 <div className={styles.logoSection}>
@@ -42,9 +51,9 @@ const Footer = () => {
                     <a href="/legal/" className={styles.link}>{t('legal')}</a>
                     <a href="/terms-and-conditions/" className={styles.link}>{t('termsAndConditions')}</a>
                 </div>
-                <p className={styles.credit}>
+                {/* <p className={styles.credit}>
                     <a href="https://agileadvisors.gr/" target="_blank">Made by agileadvisors.gr</a>
-                </p>
+                </p> */}
                 </div>
             </div>
             <div className={styles.footerBottom}>

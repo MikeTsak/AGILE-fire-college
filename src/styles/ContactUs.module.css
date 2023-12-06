@@ -33,7 +33,7 @@
 }
 .contactTabOpen {
     /* background-color: #be1200; */
-    background-color: cyan;
+    background-color: var(--yellow01);
     color: white;
     padding: 10px;
     cursor: pointer;
@@ -44,12 +44,13 @@
     z-index: 1049;
     bottom: 450px;
     right: 0;
+    text-shadow: 1px 1px 2px black;
     transition: bottom 0.5s ease-in-out;
 }
 
 
 .contactTab {
-    background-color: cyan;
+    background-color: var(--yellow01);
     color: white;
     padding: 10px;
     cursor: pointer;
@@ -78,7 +79,7 @@
 
 .closeButton {
     background-color: #FFFFFF; 
-    color: cyan; 
+    color: var(--yellow01); 
     border: none;
     cursor: pointer;
     font-size: 25px;
@@ -238,3 +239,108 @@
     max-width: 1100px;
     height: 100vh;
   }
+
+  /* Responsive styles for mobile devices */
+@media (max-width: 768px) {
+    .contactContainer {
+        height: auto; /* Adjust height to fit content */
+        width: 100%; /* Make contact container full-width */
+        right: 0; /* Align to the right */
+        left: 0; /* Align to the left */
+        transform: translateY(100%); /* Start off-screen */
+        transition: transform 0.5s ease-in-out;
+        box-sizing: border-box;
+    }
+
+    .contactContainerOpen {
+        transform: translateY(0); /* Slide into view when active */
+    }
+
+    .contactTabOpen, .contactTab {
+        width: 100%; /* Full-width for contact tabs */
+        bottom: 0; /* Adjust as necessary for your content */
+        right: 0; /* Align to the right */
+        left: 0; /* Align to the left */
+    }
+
+    .contactFormContainer {
+        padding: 15px; /* Reduce padding for mobile */
+    }
+
+    .contactFormHeader, .contactFormContainer img {
+        width: calc(100% - 30px); /* Full width minus padding */
+        margin: 0 auto; /* Center align */
+    }
+
+    .formGroupContainer {
+        flex-direction: column; /* Stack form groups vertically */
+    }
+
+    .formRow {
+        flex-direction: column; /* Stack form fields vertically */
+    }
+
+    .formGroup {
+        width: 100%; /* Full width for form groups */
+        margin-bottom: 10px; /* Space between form groups */
+    }
+
+    .submitButton {
+        font-size: 18px; /* Adjust submit button font size for mobile */
+    }
+
+    .phone {
+        font-size: 20px; /* Adjust phone number font size for mobile */
+    }
+
+    .overlay {
+        /* Ensure overlay covers the whole screen */
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    .closeButton {
+        /* Adjust close button size for mobile */
+        font-size: 1.5em;
+    }
+
+
+    /* FOR PAGE */
+
+    /* Hide larger static images on mobile */
+    .contactFormContainer img {
+        display: none;
+    }
+    .contactContainerForPage {
+        max-width: 100%; /* Limit width to 100% of the viewport */
+        padding: 0 20px; /* Add padding on the sides for some space */
+        padding-top: 6rem; /* Add padding on the top to account for the header */
+        height: auto; /* Adjust height automatically to the content */
+        margin: 0 auto; /* Center the container */
+    }
+
+    .collegenameForPage,
+    .detailsForPage,
+    .detailsCildrenForPage,
+    .headerForPage {
+        text-align: center; /* Center align the text */
+        font-size: 20PX; /* Reduce the font size */
+        padding: 0 10px; /* Add some padding on the sides */
+    }
+    
+    .formGroup {
+        width: 100%; /* Full width for form elements */
+        margin: 0 0 10px; /* Adjust margin for form groups */
+    }
+    .contactFormContainer {
+        padding: 10px; /* Reduce padding inside the form container */
+        text-align: center; /* Center align the form elements */
+        font-weight: 540;
+
+    }
+
+
+}

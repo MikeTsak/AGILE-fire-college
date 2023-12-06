@@ -165,85 +165,78 @@
   }
   
   @media (max-width: 768px) {
-    .networkingSection {
+    .aboutHeaderContainer {
       flex-direction: column;
+      height: auto; /* Adjust height for stacked layout */
+      padding: 1rem;
+      padding-top: 6rem;
+    }
+  
+    .aboutHeaderText {
+      padding-right: 0; /* Remove right padding on mobile */
+      text-align: center; /* Center text for mobile */
+    }
+  
+    .aboutMainHeader {
+      font-size: 48px; /* Reduce font size for mobile */
+    }
+  
+    .aboutSubHeader {
+      font-size: 24px; /* Reduce font size for mobile */
+    }
+  
+    .aboutHeaderImage {
+      height: 300px + 6rem; /* Set a fixed height for the image container */
+      order: -1; /* Place image above the text on mobile */
+    }
+  
+    .redContainer {
+      padding: 3rem; /* Add padding for smaller screens */
+      text-align: center; /* Center text for mobile */
+    }
+  
+    .leadingSection {
+      flex-direction: column;
+      padding: 1rem; /* Reduce padding for mobile */
+    }
+  
+    .imageWrapper,
+    .textWrapper {
+      width: 100%; /* Full width for images and text on mobile */
+      padding: 0; /* Remove padding on mobile */
+    }
+  
+    .leadingTitle {
+      font-size: 2rem; /* Reduce title font size for mobile */
+    }
+  
+    .leadingText {
+      font-size: 1rem; /* Reduce text font size for mobile */
+    }
+  
+    .networkingSection {
+      flex-direction: column; /* Stack content vertically for mobile */
+      height: auto; /* Adjust height to fit content */
+      padding: 1rem; /* Adjust padding for smaller screens */
     }
   
     .networkingContent,
     .networkingImage {
-      width: 100%;
-      left: 0;
-      padding: 0;
-      text-align: center;
+      width: 100%; /* Full width for content and image on mobile */
+      padding: 0; /* Remove padding on mobile */
+    }
+  
+    .networkingTitle {
+      font-size: 2rem; /* Reduce title font size for mobile */
+    }
+  
+    .networkingText {
+      font-size: 1rem; /* Reduce text font size for mobile */
     }
   
     .networkingImage {
-      height: 300px; /* Adjust the height as needed */
+      height: auto; /* Adjust height to fit content */
     }
-  }
-  
-  @media (max-width: 768px) {
-    .leadingSection {
-      flex-direction: column;
-    }
-  
-    .imageWrapper {
-      width: 100%;
-    }
-  
-    .textWrapper {
-      padding-left: 0;
-    }
-  
-    .leadingTitle {
-      font-size: 2rem; /* Smaller font size for mobile */
-    }
-  
-    .leadingText {
-      font-size: 1rem; /* Smaller font size for mobile */
-    }
-  }
-  
-
-
-  @media (max-width: 768px) { 
-    .aboutHeaderContainer {
-      flex-direction: column;
-    }
-  
-    .aboutHeaderImage {
-      height: 500px; /* Set a fixed height for the image container */
-    }
-  
-    .aboutMainHeader {
-      font-size: 48px; /* Smaller font size for mobile */
-    }
-  
-    .aboutSubHeader {
-      font-size: 24px; /* Smaller font size for mobile */
-    }
-    .redContainer{
-        padding: 5% 15% 5% 15%; /*Less padding for mobile*/
-    }
-    .leadingSection {
-        flex-direction: column;
-      }
-    
-      .imageWrapper {
-        width: 100%;
-      }
-    
-      .textWrapper {
-        padding-left: 0;
-      }
-    
-      .leadingTitle {
-        font-size: 2rem; /* Smaller font size for mobile */
-      }
-    
-      .leadingText {
-        font-size: 1rem; /* Smaller font size for mobile */
-      }
   }
 
 

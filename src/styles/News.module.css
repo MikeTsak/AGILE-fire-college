@@ -195,6 +195,7 @@
     align-items: flex-start;
     justify-content: center;
     margin-bottom: 20px;
+    padding-top: 6rem;
   }
   
   .newsDate {
@@ -236,14 +237,91 @@
   }
   
   /* Responsiveness for smaller screens */
+
   @media (max-width: 768px) {
-    .videoContainer iframe {
-      height: 300px; /* Adjust as needed */
+    .newsContainer {
+        padding: 5% 10%;
+        background-color: white;
     }
-    .newsItemDetailContainer {
-      padding: 20% 20px 20px 20px;
-    }
+
     .newsHeader {
-      align-items: center;
+        text-align: center;
     }
-  }
+
+    .aboutMainHeader {
+        font-size: 60px;
+    }
+
+    .collegenameForPage {
+        font-size: 20px;
+    }
+
+    .newsCards {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .newsCard {
+        min-height: 200px;
+        min-width: 200px;
+    }
+
+    .newsCard h2 {
+        font-size: 1.5rem;
+        margin: 8px;
+    }
+
+    .subTitle {
+        font-size: 1rem;
+        margin: 0 8px;
+    }
+
+    .newsCard h4 {
+        font-size: 1rem;
+        margin: 8px;
+    }
+
+    .cardContent {
+        margin-top: auto;
+    }
+
+    .arrowIcon {
+        font-size: 2rem;
+        bottom: 5px;
+        right: 5px;
+    }
+
+    .pagination button {
+        font-size: 1rem;
+        padding: 0.25rem 0.5rem;
+    }
+
+    .pagination span {
+        font-size: 1rem;
+    }
+
+    .newsItemDetailContainer {
+        padding: 10% 10px 10px 10px;
+    }
+
+    .newsHeader {
+        align-items: center;
+    }
+
+    .newsTitle {
+        font-size: 40px;
+    }
+
+    .newsContent {
+        font-size: 16px;
+    }
+
+    .newsImageContainer {
+        margin-top: 10px;
+    }
+
+    .videoContainer iframe {
+        height: 200px;
+    }
+}

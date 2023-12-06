@@ -70,3 +70,32 @@
   .activeDot {
     background-color: #fff; /* Active dot is filled */
   }
+
+/* Responsive styles for mobile devices */
+@media (max-width: 768px) {
+  .slideshow {
+      height: 90vh; /* Adjust height for mobile screens */
+  }
+
+  .text {
+      font-size: 60px; /* Smaller text for mobile screens, need more possible change */
+      padding: 0 10px; /* Padding to prevent text cutting off */
+  }
+
+  .dots {
+    flex-direction: row; /* Align dots horizontally for mobile */
+    top: auto; /* Reset the top property */
+    bottom: 10px; /* Position dots at the bottom of the slideshow */
+    left: 50%;
+    transform: translateX(-50%); /* Center the dots horizontally */
+}
+
+  /* Adjust dot size for easier touch */
+  .dot {
+      height: 20px;
+      width: 20px;
+      margin: 0px 8px;
+  }
+  
+}
+  

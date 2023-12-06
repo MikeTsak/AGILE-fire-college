@@ -2,7 +2,7 @@
 .footer {
     background-color: white;
     color: black;
-    padding: 40px 150px 20px 150px;
+    padding: 5px 12px 5px 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -74,13 +74,78 @@
     border-top: 1px solid white;
   };
 
-/* Responsive styles */
+/* Responsive styles for mobile devices */
+/* Responsive styles for mobile devices */
 @media (max-width: 768px) {
     .footerContent {
-        flex-direction: column;
+        flex-direction: column; /* Stack children vertically */
+        align-items: center; /* Center-align the children */
+        padding: 0px;
     }
 
-    .logoSection, .address, .socials, .navLinks {
-        margin-bottom: 20px;
+    .logoSection {
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px; /* Space between logo and address */
+    }
+
+    /* Ensure logos stack if they are side by side */
+    .logoSection img,
+    .logoSection .image {
+        margin-bottom: 10px; /* Space between the logos */
+    }
+
+    .addressSocials {
+        order: 2;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px; /* Space between address and social media */
+    }
+
+    .address {
+        text-align: center; /* Center text for address */
+    }
+
+    .socials {
+        flex-direction: row; /* Align social icons horizontally */
+        justify-content: center;
+        margin-bottom: 20px; /* Space between social media icons and nav links */
+    }
+
+    .socials a {
+        margin-right: 10px; /* Space between social media icons */
+    }
+
+    .navLinks {
+        order: 3;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navLinks .link {
+        margin-bottom: 5px; /* Space between nav links */
+    }
+
+    .credit {
+        display: none; /* Hide the credit section */
+    }
+
+    .addressSocials, .address, .socials, .navLinks, .footerBottom {
+        /* Ensure each section is full-width and stacks vertically */
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px; /* Provide space between sections */
+    }
+    .separatorStyle{
+        font-size: 20px;
+    }
+}
+
+/* Add padding for screens wider than 1000px */
+@media (min-width: 767px) { /* Use 1001px to include anything above 1000px */
+    .footer {
+        padding: 40px 150px 20px 150px; /* Apply desired padding for larger screens */
     }
 }

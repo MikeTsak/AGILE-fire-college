@@ -121,8 +121,35 @@
 }
 
 
-@media (max-width: 1000px) { /* Adjust the max-width as needed for your breakpoint */
+/* Adjustments for mobile */
+@media (max-width: 768px) {
   .bmBurgerButton {
-    right: 0 /* Align to the left edge on mobile */
+    width: 50px; 
+    height: 45px;
+    right: 5%;
+      color: black;
+    background: white;
+    border-top: 15px solid white;
+    border-bottom: 15px solid white;
+    border-left: 15px solid white;
+    border-right: 0px solid white;
+  }
+
+  .bmBurgerBars {
+    width: 60%; /* Adjust width for smaller button */
+  }
+
+  .bmItem {
+    font-size: 18px; /* Slightly smaller text */
+  }
+
+  .menuHeader {
+    padding-top: 5em; /* Adjust padding for mobile */
+  }
+
+  /* Adjust the language toggle button for mobile */
+  .languageToggle img {
+    height: 15px; /* Smaller flag icons */
   }
 }
+
