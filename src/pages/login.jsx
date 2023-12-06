@@ -13,7 +13,7 @@ export default function Login() {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:8080/firedep/login', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/firedep/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
