@@ -78,21 +78,22 @@
 }
 
 .closeButton {
+    order: -1;
     background-color: #FFFFFF; 
-    color: var(--yellow01); 
+    color: var(--red01); 
     border: none;
     cursor: pointer;
     font-size: 25px;
     font-weight: 700;
+    margin-right: 10px;
     padding: 10px;
     font-size: 1em; 
-    position: absolute;
-    top: 0;
-    right: 0;
 }
 
 .submitButtonContainer {
-    text-align: right; /* Aligns the button to the right */
+    display: flex; /* Use flexbox to align buttons */
+    justify-content: space-between; /* Space between the buttons */
+    align-items: center; /* Align buttons vertically */
 }
 
 .submitButton {
@@ -254,6 +255,8 @@
 
     .contactContainerOpen {
         transform: translateY(0); /* Slide into view when active */
+        max-height: 100vh; /* 100% of the viewport height */
+        overflow-y: auto; /* Allows vertical scrolling */
     }
 
     .contactTabOpen, .contactTab {

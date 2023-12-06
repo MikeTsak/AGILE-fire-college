@@ -22,9 +22,6 @@ const ContactUs = () => {
         {isOpen ? (
             <div className={styles.contactTabOpen} onClick={toggleForm}>
                 <b>{t('ContactUsQ')}</b>
-                <button className={styles.closeButton} onClick={toggleForm}>
-                    {t('Close')}
-                </button>
             </div>
         ) : (
             <div className={styles.contactTab} onClick={toggleForm}>
@@ -75,6 +72,9 @@ const ContactUs = () => {
                 <div className={styles.privacyPolicy}><span>{t('DataInForm')}</span> <Link href="/legal/"className={styles.privacyPolicyLink}>{t('PrivacyPolicy')}</Link></div>
                 <span className={styles.required}>*{t('Required')}</span>
                 <div className={styles.submitButtonContainer}>
+                <button className={styles.closeButton} onClick={toggleForm}>
+                    {t('Close')}
+                </button>
                 <button type="submit" className={styles.submitButton}>
                     {t('Submit')}
                     <FontAwesomeIcon icon={faArrowRight} />
