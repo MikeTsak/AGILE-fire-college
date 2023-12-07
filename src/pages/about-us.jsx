@@ -49,9 +49,11 @@ const About = () => {
       <Logo />
       {/* TOP */}
       <div className={styles.aboutHeaderContainer}>
+        <div className={styles.aboutHeaderContainerForText}>
         <div className={styles.aboutHeaderText}>
           <h2 className={styles.aboutSubHeader}>{t('AboutUs')}</h2>
           <h1 className={styles.aboutMainHeader}>{t('AboutHeader')}</h1>
+        </div>
         </div>
         <div className={styles.aboutHeaderImage}>
           <Image

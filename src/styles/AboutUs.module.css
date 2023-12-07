@@ -14,7 +14,7 @@
     font-display: swap;
   }
   
-  .aboutHeaderContainer {
+  .aboutHeaderContainerForText {
     display: flex;
     height: 90vh;
     flex-direction: row;
@@ -23,6 +23,15 @@
     margin: 0 auto;
     position: relative;
     max-width: var(--max-width);
+  }
+  .aboutHeaderContainer {
+    display: flex;
+    height: 90vh;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between; 
+    margin: 0 auto;
+    position: relative;
   }
   
   .aboutHeaderText {
@@ -52,7 +61,8 @@
     text-transform: uppercase;
     line-height: 1;
     font-size: 120px;
-  }
+    text-shadow: 2px 2px 4px rgb(99, 77, 77);
+    }
   
   .aboutHeaderImage {
     position: absolute;
@@ -187,6 +197,7 @@
   
     .aboutHeaderImage {
       height: 300px + 6rem; /* Set a fixed height for the image container */
+      width: 100%; /* Set full width for the image container */
       order: -1; /* Place image above the text on mobile */
     }
   

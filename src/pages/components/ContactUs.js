@@ -33,7 +33,7 @@ const ContactUs = () => {
             <div className={pageDimClass}></div>
             
             <div className={styles.contactFormContainer}>
-                <img src='/images/building.webp' alt='Building' width="250"/> {/*!!! IN CASE YOU CHANGR THE WIDTH OF THE IMAGE CHANGE "contactFormHeader" IT IN THE CSS TOO !!!*/}
+                <img src='/images/contact-popup.png' alt='Building' width="250"/> {/*!!! IN CASE YOU CHANGR THE WIDTH OF THE IMAGE CHANGE "contactFormHeader" IT IN THE CSS TOO !!!*/}
                 <div className={styles.contactFormHeader}>
                     <span>{t('SpeekWithUs')}</span>
                 </div>
