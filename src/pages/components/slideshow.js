@@ -10,6 +10,7 @@ const Slideshow = () => {
     { img: '/images/slide-1.jpg', text: t('imageText1') }, // Replace with your image paths and texts
     { img: '/images/slide-2.jpg', text: t('imageText2') },
     { img: '/images/slide-3.jpg', text: t('imageText3') },
+    { img: '/images/slide-4.png', text: t('imageText3') },
   ];
 
   useEffect(() => {
