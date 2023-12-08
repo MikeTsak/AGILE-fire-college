@@ -142,7 +142,7 @@
     height: 500px;
     padding: 4rem;
     position: relative;
-    background: url("/images/about-backimage.jpg") no-repeat center center;
+    background: url("/images/about-backimage.png") no-repeat center center;
     background-size: cover; 
     background-color: #333; 
   }

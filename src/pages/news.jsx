@@ -10,6 +10,7 @@ import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
+import Head from 'next/head';
 
 const months = [
   "Jan", "Feb", "Mar", "Apr",
@@ -58,6 +59,13 @@ const News = () => {
 
   return (
     <div>
+      <Head>
+        <title>{t('NewsHeader')}</title>
+        <meta name="description" content={t('NewsTextP1')} />
+        <meta name="keywords" content={'Πυροσβεστικό Σώμα Ελλαδας, Fire Department Training Center, Κέντρο Εκπαίδευσης Πυροσβεστικού Σώματος'} />
+        <meta name="author" content={t('collegeName')} />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Head>
       <Navbar />
       <Logo />
       {/* STATIC COMPONENTS */}

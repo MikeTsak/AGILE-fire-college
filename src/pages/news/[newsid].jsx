@@ -6,6 +6,7 @@ import Navbar from '../components/navbar';
 import Footer from '../components/footer';
 import Logo from '../components/Logo';
 import styles from '../../styles/News.module.css';
+import Head from 'next/head';
 
 const months = [
   "Jan", "Feb", "Mar", "Apr",
@@ -67,6 +68,21 @@ const NewsItemDetail = () => {
 
   return (
     <> 
+      <Head>
+        <title>{newsItem.title}</title>
+        <meta name="description" content={newsItem.subTitle} />
+        <meta property="og:title" content={newsItem.title} />
+        <meta property="og:description" content={newsItem.subTitle} />
+        <meta property="og:image" content={`data:image/jpeg;base64,${newsItem.image}`} />
+        <meta property="og:url" content={`https://firedep.com/news/${newsItem.newsId}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Firedep" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={newsItem.title} />
+        <meta name="twitter:description" content={newsItem.subTitle} />
+        <meta name="twitter:image" content={`data:image/jpeg;base64,${newsItem.image}`} />
+        <meta name="twitter:image:alt" content={newsItem.title} />
+      </Head>
         <Logo />
       <Navbar />
       <div className={styles.newsItemDetailContainer}>

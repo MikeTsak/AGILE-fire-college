@@ -4,8 +4,10 @@ import styles from '../../styles/Slideshow.module.css'; // Update the path as ne
 import { useTranslation } from 'react-i18next';
 
 const Slideshow = () => {
-    const { t } = useTranslation();
+  const { t } = useTranslation();
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [previousSlide, setPreviousSlide] = useState(null);
+  const [animationClass, setAnimationClass] = useState('');
   const slides = [
     { img: '/images/slide-1.jpg', text: t('imageText1') }, // Replace with your image paths and texts
     { img: '/images/slide-2.jpg', text: t('imageText2') },
@@ -13,23 +15,26 @@ const Slideshow = () => {
     { img: '/images/slide-4.png', text: t('imageText3') },
   ];
 
+  const animations = ['slideInFromRight', 'zoomIn', 'flipInX', 'rotateAndFadeIn'];
+
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide((currentSlide) => (currentSlide + 1) % slides.length);
-    }, 5000); // Change image every 5 seconds
+        setPreviousSlide(currentSlide);
+        const nextSlide = (currentSlide + 1) % slides.length;
+        setCurrentSlide(nextSlide);
+
+        const randomAnimation = animations[Math.floor(Math.random() * animations.length)];
+        setAnimationClass(randomAnimation);
+    }, 5000);
 
     return () => clearInterval(interval);
-  }, [slides.length]);
-
-  const goToSlide = (index) => {
-    setCurrentSlide(index);
-  };
+}, [currentSlide, slides.length, animations]);
 
   return (
     <div className={styles.slideshow}>
       {slides.map((slide, index) => (
         <div
-          className={`${styles.slide} ${index === currentSlide ? styles.active : ''}`}
+         className={`${styles.slide} ${index === currentSlide ? styles[animationClass] : ''} ${index === previousSlide ? styles.fadeOut : ''}`}
           key={index}
           style={{ backgroundImage: `url(${slide.img})` }}
         >

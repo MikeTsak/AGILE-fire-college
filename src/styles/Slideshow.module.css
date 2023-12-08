@@ -15,6 +15,7 @@
     position: absolute;
     opacity: 0;
     transition: opacity 1s ease-in-out;
+    z-index: 2;
   }
   @font-face {
     font-family: 'Roboto Condensed';
@@ -99,3 +100,78 @@
   
 }
   
+/* Animations */
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes flipInX {
+  from {
+    transform: perspective(400px) rotateX(90deg);
+    opacity: 0;
+  }
+  to {
+    transform: perspective(400px) rotateX(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes rotateAndFadeIn {
+  from {
+    transform: rotate(-20deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotate(0deg);
+    opacity: 1;
+  }
+}
+/* Fade-out animation */
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Animation Classes */
+.slideInFromRight {
+  animation: slideInFromRight 1s ease-in-out forwards;
+}
+
+.zoomIn {
+  animation: zoomIn 1s ease-in-out forwards;
+}
+
+.flipInX {
+  animation: flipInX 1s ease-in-out forwards;
+}
+
+.rotateAndFadeIn {
+  animation: rotateAndFadeIn 1s ease-in-out forwards;
+}
+
+.fadeOut {
+  animation: fadeOut 2s ease-in-out forwards;
+  z-index: 1; /* Ensure this is behind the incoming slide */
+}

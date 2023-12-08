@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import Head from 'next/head';
 
 const CourseItemDetail = () => {
   const router = useRouter();
@@ -87,6 +88,13 @@ const CourseItemDetail = () => {
     // Adjust the following to match your data structure and desired layout
     return (
     <>
+    <Head>
+        <title>{courseItem.title}</title>
+        <meta name="description" content={courseItem.subTitle} />
+        <meta name="keywords" content={courseItem.title} />
+        <meta name="author" content="FireDep" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </Head>
       <div className={styles.newsItemDetailContainer} >
             <div className={styles.aboutHeaderText}>
             <h2 className={styles.aboutSubHeader}>{t('Courses')}</h2>

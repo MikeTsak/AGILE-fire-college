@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import styles from '../styles/Login.module.css';
+import Head from 'next/head';
 
 export default function Login() {
   const [username, setUsername] = useState('');
@@ -38,6 +39,9 @@ export default function Login() {
 
   return (
     <div className={styles.container}>
+      <Head>
+        <title>Login</title>
+      </Head>
       <form onSubmit={handleSubmit} className={styles.form}>
         <h1>Login</h1>
         {error && <p className={styles.error}>{error}</p>}

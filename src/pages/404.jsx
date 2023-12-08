@@ -1,9 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
+import Head from 'next/head';
 
 const Custom404 = () => {
     return (
         <div className="container">
+        <Head>
+            <title>404 - Page Not Found</title>
+        </Head>
             <h1 className='aboutMainHeader'>404 - Page Not Found</h1>
             <p className='collegenameForPage'>The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
             <br />

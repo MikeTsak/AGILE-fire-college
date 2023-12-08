@@ -1,4 +1,10 @@
 {
+  "HeaderIndex": "Κέντρο Εκπαίδευσης Πυροσβεστικού Σώματος",
+  "ContactHeader": "Επικοινωνήστε μαζί μας",
+  "AboutHeaderMeta": "Σχετικά με Εμάς",
+  "CoursesHeader": "Μαθήματα",
+  "NewsHeader": "Νέα",
+
   "imageText1": "Το Πυροσβεστικό Σώμα είναι Καλό",
   "imageText2": "Προετοιμαστείτε για το μέλλον",
   "imageText3": "Το ΠΣ είναι το μέρος που πρέπει να είστε",
@@ -26,8 +32,8 @@
 
   "AboutUs": "Σχετικά με εμάς",
   "AboutHeader": "ΕΚΠΑΙΔΕΥΣΗ ΠΥΡΟΣΒΕΣΤΙΚΩΝ ΚΑΙ ΑΝΤΙΣΤΑΣΗΣ ΣΕ ΠΡΟΗΓΜΕΝΟ ΕΠΙΠΕΔΟ",
-  "Welcome": "Καλώς ήρθατε",
-  "AboutTextP1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Aenean pharetra magna ac placerat vestibulum lectus mauris ultrices. Duis ut diam quam nulla. Molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Integer quis auctor elit sed. Est lorem ipsum dolor sit amet consectetur adipiscing. Risus quis varius quam quisque id diam vel quam. Aliquam ultrices sagittis orci a scelerisque purus semper eget. Rutrum quisque non tellus orci. Vulputate enim nulla aliquet porttitor. Montes nascetur ridiculus mus mauris. Nunc congue nisi vitae suscipit tellus mauris a diam maecenas. Cursus risus at ultrices mi tempus imperdiet nulla malesuada.",
+  "AboutHeaderP1": "Με λίγα λογία:",
+  "AboutTextP1": "Μέσα από την εκπαίδευση οι υποψήφιοι Εθελοντές μπορούν να λάβουν την απαραίτητη και βασική γνώση, ώστε να είναι ικανοί να συμμετέχουν στην άσκηση του πυροσβεστικού έργου με ασφάλεια δίπλα στους επαγγελματίες πυροσβέστες.",
   "AboutTextP2": "Volutpat commodo sed egestas egestas fringilla phasellus faucibus scelerisque. Neque gravida in fermentum et sollicitudin. Faucibus interdum posuere lorem ipsum dolor. Vestibulum lectus mauris ultrices eros in cursus turpis massa. Et tortor at risus viverra. Mi tempus imperdiet nulla malesuada pellentesque elit eget gravida cum. Id faucibus nisl tincidunt eget nullam non nisi est sit. Etiam tempor orci eu lobortis elementum nibh tellus. Id ornare arcu odio ut sem nulla pharetra diam sit. Ornare aenean euismod elementum nisi quis eleifend quam adipiscing. Dignissim diam quis enim lobortis scelerisque fermentum dui faucibus.",
   "AboutTextP3": "Erat velit scelerisque in dictum non consectetur a erat. Blandit libero volutpat sed cras ornare arcu dui. Aliquam faucibus purus in massa tempor nec. Tincidunt arcu non sodales neque sodales. Suscipit tellus mauris a diam maecenas. Nunc mattis enim ut tellus elementum sagittis vitae. Quis imperdiet massa tincidunt nunc pulvinar sapien et. Et ultrices neque ornare aenean euismod elementum nisi. Nisi est sit amet facilisis magna etiam. Aliquet lectus proin nibh nisl condimentum. Bibendum enim facilisis gravida neque convallis a. Vestibulum lorem sed risus ultricies tristique nulla aliquet enim tortor. Consequat semper viverra nam libero. Blandit aliquam etiam erat velit scelerisque in dictum. Tempor commodo ullamcorper a lacus. Semper viverra nam libero justo laoreet. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Venenatis a condimentum vitae sapien pellentesque habitant morbi tristique. Aliquam faucibus purus in massa.",
   "AboutTextP4": "Lacus sed turpis tincidunt id aliquet. Sapien pellentesque habitant morbi tristique senectus et. Eu feugiat pretium nibh ipsum consequat nisl. Rhoncus dolor purus non enim praesent elementum facilisis leo. Eget mauris pharetra et ultrices. Et odio pellentesque diam volutpat commodo sed egestas egestas fringilla. Morbi enim nunc faucibus a pellentesque sit amet. Commodo elit at imperdiet dui accumsan sit amet. Aliquam sem fringilla ut morbi tincidunt augue interdum. Risus pretium quam vulputate dignissim suspendisse in. Nec feugiat in fermentum posuere urna nec tincidunt praesent semper. Porttitor eget dolor morbi non arcu. Cursus turpis massa tincidunt dui ut ornare lectus sit amet. Vestibulum sed arcu non odio euismod lacinia. Sit amet luctus venenatis lectus magna fringilla urna porttitor rhoncus. Dictumst quisque sagittis purus sit amet volutpat. Varius duis at consectetur lorem donec. At urna condimentum mattis pellentesque. Sit amet mattis vulputate enim. Suspendisse faucibus interdum posuere lorem ipsum.",
@@ -57,8 +63,8 @@
   "CourseOverview": "Επισκόπηση μαθήματος",
 
 
-  "footerLogoAlt": "Λογότυπο της Ακαδημίας Πυροσβεστικής",
-  "collegeName": "Ακαδημία Πυροσβεστικής",
+  "footerLogoAlt": "Λογότυπο Κεντρο Εκπαιδευσης Πυροσβεστικου Σωματος",
+  "collegeName": "Κεντρο Εκπαιδευσης Πυροσβεστικου Σωματος",
   "collegeAddress": "35ο χιλ. Λεωφ. Μαραθώνος, 190 05",
   "collegePhone": "210 6265100",
   "collegeEmail": "info@keps-isn.com",
@@ -66,7 +72,7 @@
   "PhoneSort": "Τηλ",
   "contactUs": "Επικοινωνία",
   "legal": "Νομικό",
-  "copyrightText": "Fire Service College Limited. Όλα τα δικαιώματα είναι επιφυλαγμένα",
+  "copyrightText": "Πυροσβεστικό Σώμα Ελλαδας. Όλα τα δικαιώματα είναι επιφυλαγμένα",
   "termsAndConditions": "Όροι και Προϋποθέσεις",
   "OpeningHours": "Ωράριο λειτουργίας",
   "collegeOpeningHours": "Δευτέρα - Παρασκευή: 9:00 π.μ. - 5:00 μ.μ.",

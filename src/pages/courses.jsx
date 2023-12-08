@@ -9,12 +9,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-
-const months = [
-  "Jan", "Feb", "Mar", "Apr",
-  "May", "Jun", "Jul", "Aug",
-  "Sep", "Oct", "Nov", "Dec"
-];
+import Head from 'next/head';
 
 const Courses = () => {
   const { t } = useTranslation();
@@ -33,6 +28,13 @@ const Courses = () => {
 
   return (
     <div>
+      <Head>
+        <title>{t('CoursesHeader')}</title>
+        <meta name="description" content={t('CoursesTextP1')} />
+        <meta name="keywords" content={'Πυροσβεστικό Σώμα Ελλαδας, Fire Department Training Center, Κέντρο Εκπαίδευσης Πυροσβεστικού Σώματος'} />
+        <meta name="author" content={t('collegeName')} />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Head>
       <Navbar />
       <Logo />
       {/* STATIC COMPONENTS */}

@@ -7,7 +7,7 @@ import styles from '../styles/ContactUs.module.css';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-
+import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
 
 
@@ -15,6 +15,13 @@ const Home = () => {
   const { t } = useTranslation();
   return (
       <div>
+            <Head>
+                <title>{t('ContactHeader')}</title>
+                <meta name="description" content={t('ContactTextP1')} />
+                <meta name="keywords" content={'Πυροσβεστικό Σώμα Ελλαδας, Fire Department Training Center, Κέντρο Εκπαίδευσης Πυροσβεστικού Σώματος'} />
+                <meta name="author" content={t('collegeName')} />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            </Head>
           <Navbar />
           <Logo />
           <div className={styles.contactContainerForPage}>

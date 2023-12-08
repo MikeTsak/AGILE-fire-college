@@ -11,6 +11,8 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
+import Head from 'next/head';
+
 const About = () => {
   const { t } = useTranslation();
 
@@ -45,6 +47,13 @@ const About = () => {
 
   return (
     <div>
+      <Head>
+        <title>{t('AboutHeaderMeta')}</title>
+        <meta name="description" content={t('AboutTextP1')} />
+        <meta name="keywords" content={'Πυροσβεστικό Σώμα Ελλαδας, Fire Department Training Center, Κέντρο Εκπαίδευσης Πυροσβεστικού Σώματος'} />
+        <meta name="author" content={t('collegeName')} />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Head>
       <Navbar />
       <Logo />
       {/* TOP */}
@@ -67,7 +76,7 @@ const About = () => {
       </div>
       {/* About */}
       <div className={styles.redContainer}>
-        <h2 className={styles.redContainerHeader}>{t('Welcome')}</h2>
+        <h2 className={styles.redContainerHeader}>{t('AboutHeaderP1')}</h2>
         <p className={styles.aboutMainText}>{t('AboutTextP1')}</p>
         <br />
         <p className={styles.aboutMainText}>{t('AboutTextP2')}</p>

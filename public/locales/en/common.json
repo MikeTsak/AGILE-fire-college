@@ -1,4 +1,11 @@
 {
+  "HeaderIndex": "Fire Department Training Center",
+  "ContactHeader": "Contact Us",
+  "AboutHeaderMeta": "About Us",
+  "CoursesHeader": "Courses",
+  "NewsHeader": "News",
+
+
     "imageText1": "The Fire Service is Cool",
     "imageText2": "Prepare for the future",
     "imageText3": "The FD is the place to be",
@@ -26,7 +33,7 @@
 
     "AboutUs": "About Us",
     "AboutHeader": "LEADING FIRE & RESILIENCE TRAINING",
-    "Welcome": "Welcome",
+    "AboutHeaderP1": "In a few words:",
     "AboutTextP1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Aenean pharetra magna ac placerat vestibulum lectus mauris ultrices. Duis ut diam quam nulla. Molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Integer quis auctor elit sed. Est lorem ipsum dolor sit amet consectetur adipiscing. Risus quis varius quam quisque id diam vel quam. Aliquam ultrices sagittis orci a scelerisque purus semper eget. Rutrum quisque non tellus orci. Vulputate enim nulla aliquet porttitor. Montes nascetur ridiculus mus mauris. Nunc congue nisi vitae suscipit tellus mauris a diam maecenas. Cursus risus at ultrices mi tempus imperdiet nulla malesuada.",
     "AboutTextP2": "Volutpat commodo sed egestas egestas fringilla phasellus faucibus scelerisque. Neque gravida in fermentum et sollicitudin. Faucibus interdum posuere lorem ipsum dolor. Vestibulum lectus mauris ultrices eros in cursus turpis massa. Et tortor at risus viverra. Mi tempus imperdiet nulla malesuada pellentesque elit eget gravida cum. Id faucibus nisl tincidunt eget nullam non nisi est sit. Etiam tempor orci eu lobortis elementum nibh tellus. Id ornare arcu odio ut sem nulla pharetra diam sit. Ornare aenean euismod elementum nisi quis eleifend quam adipiscing. Dignissim diam quis enim lobortis scelerisque fermentum dui faucibus.",
     "AboutTextP3": "Erat velit scelerisque in dictum non consectetur a erat. Blandit libero volutpat sed cras ornare arcu dui. Aliquam faucibus purus in massa tempor nec. Tincidunt arcu non sodales neque sodales. Suscipit tellus mauris a diam maecenas. Nunc mattis enim ut tellus elementum sagittis vitae. Quis imperdiet massa tincidunt nunc pulvinar sapien et. Et ultrices neque ornare aenean euismod elementum nisi. Nisi est sit amet facilisis magna etiam. Aliquet lectus proin nibh nisl condimentum. Bibendum enim facilisis gravida neque convallis a. Vestibulum lorem sed risus ultricies tristique nulla aliquet enim tortor. Consequat semper viverra nam libero. Blandit aliquam etiam erat velit scelerisque in dictum. Tempor commodo ullamcorper a lacus. Semper viverra nam libero justo laoreet. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Venenatis a condimentum vitae sapien pellentesque habitant morbi tristique. Aliquam faucibus purus in massa.",
@@ -57,8 +64,8 @@
     "CourseOverview": "Course Overview",
 
 
-    "footerLogoAlt": "Fire Service College Logo",
-    "collegeName": "The Fire Service College",
+    "footerLogoAlt": "Fire Department Training Center Logo",
+    "collegeName": "Fire Department Training Center",
     "collegeAddress": "35th km Leof Marathonos, 190 05",
     "collegePhone": "210 6265100",
     "collegeEmail": "info@keps-isn.com",
@@ -66,7 +73,7 @@
     "PhoneSort": "Tel",
     "contactUs": "Contact Us",
     "legal": "Legal",
-    "copyrightText": "Fire Service College Limited. All rights reserved",
+    "copyrightText": "Fire Service of Greece. All rights reserved",
     "termsAndConditions": "Terms and Conditions",
     "OpeningHours": "Opening Hours",
     "collegeOpeningHours": "Monday - Friday 9am - 5pm",

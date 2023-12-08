@@ -8,6 +8,7 @@ import Logo from './components/Logo';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faChevronLeft, faChevronRight, faTrashAlt, faRightFromBracket} from '@fortawesome/free-solid-svg-icons';
+import Head from 'next/head';
 
 export default function Admin() {
   const [news, setNews] = useState([]);
@@ -117,6 +118,9 @@ export default function Admin() {
 
   return (
     <div className={styles.container}>
+      <Head>
+        <title>Admin Page</title>
+      </Head>
       <Logo />
       <div className={styles.header}>
         <h1 className={styles.aboutMainHeader}>Admin Page</h1>
