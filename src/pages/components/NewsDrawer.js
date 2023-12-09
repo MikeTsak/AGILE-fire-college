@@ -53,7 +53,7 @@ export default function NewsDrawer({ isOpen, onClose, onSubmit }) {
           const token = sessionStorage.getItem('token');
           const response = await axios({
             method: 'post',
-            url: 'http://localhost:8080/firedep/news',
+            url: `${process.env.NEXT_PUBLIC_API_URL}/firedep/news`,
             data: formData,
             headers: {
               'Authorization': `Bearer ${token}`,

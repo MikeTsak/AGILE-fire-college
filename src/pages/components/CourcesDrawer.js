@@ -81,7 +81,7 @@ export default function CourcesDrawer({ isOpen, onClose }) {
 
         try {
             const token = sessionStorage.getItem('token');
-            const response = await axios.post('http://localhost:8080/firedep/courses', formData, {
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/firedep/courses`, formData, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

@@ -17,7 +17,7 @@ const Courses = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch('http://localhost:8080/firedep/courses');
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/firedep/courses`);
       const data = await response.json();
       // console.log(data.content);
       setCoursesItems(data.content);
