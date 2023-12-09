@@ -7,6 +7,7 @@ import Footer from '../components/footer';
 import Logo from '../components/Logo';
 import styles from '../../styles/News.module.css';
 import Head from 'next/head';
+import { useTranslation } from 'react-i18next';
 
 const months = [
   "Jan", "Feb", "Mar", "Apr",
@@ -26,6 +27,7 @@ const NewsItemDetail = () => {
   const router = useRouter();
   const { newsid } = router.query;
   const [newsItem, setNewsItem] = useState(null);
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     const fetchNewsItem = async () => {
@@ -66,6 +68,11 @@ const NewsItemDetail = () => {
     );
   };
 
+  const currentLanguage = i18n.language;
+  const title = currentLanguage === 'en' ? newsItem.enTitle : newsItem.elTitle;
+  const subTitle = currentLanguage === 'en' ? newsItem.enSubtitle : newsItem.elSubtitle;
+  const content = currentLanguage === 'en' ? newsItem.enContent : newsItem.elContent;
+
   return (
     <> 
       <Head>
@@ -88,22 +95,19 @@ const NewsItemDetail = () => {
       <div className={styles.newsItemDetailContainer}>
         <div className={styles.newsHeader}>
           <span className={styles.newsDate}>{newsItem.createdAt && formatDate(newsItem.createdAt)}</span>
-          <h1 className={styles.newsTitle}>{newsItem.title}</h1>
-          <h2 className={styles.newsSubtitle}>{newsItem.subTitle}</h2>
+          <h1 className={styles.newsTitle}>{title}</h1>
+          <h2 className={styles.newsSubtitle}>{subTitle}</h2>
         </div>
         <div className={styles.newsImageContainer}>
           <img
             src={`data:image/jpeg;base64,${newsItem.image}`}
-            alt={newsItem.title}
+            alt={title}
             className={styles.newsImage}
           />
         </div>
-        <br />
-        <br />
-        <p className={styles.newsContent}>{newsItem.content}</p>
-        <br />
-        <br />
-        {/* Render the video if videoURL exists */}
+        <br /><br />
+        <p className={styles.newsContent}>{content}</p>
+        <br /><br />
         {renderVideo(newsItem.videoURL)}
       </div>
       <Footer />

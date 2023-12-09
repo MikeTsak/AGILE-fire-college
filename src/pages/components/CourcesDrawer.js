@@ -16,21 +16,31 @@ const greekToLatinMap = {
 export default function CourcesDrawer({ isOpen, onClose }) {
     const [selectedTemplate, setSelectedTemplate] = useState(1);
     const [courseData, setCourseData] = useState({
-        title: '',
-        subTitle: '',
-        overview: '',
-        content: '',
-        content2: '',
-        content3: '',
-        length: '',
-        accreditations: '',
+        enTitle: '',
+        enSubtitle: '',
+        enOverview: '',
+        enContent: '',
+        enContent2: '',
+        enContent3: '',
+        enLength: '',
+        enAccreditations: '',
+        elTitle: '',
+        elSubtitle: '',
+        elOverview: '',
+        elContent: '',
+        elContent2: '',
+        elContent3: '',
+        elLength: '',
+        elAccreditations: '',
         image: null,
         image2: null,
         image3: null,
-        sectors: '',
+        enSectors: '',
+        elSectors: '',
         videoURL: '',
         courseId: ''
     });
+
 
     const [submitSuccess, setSubmitSuccess] = useState(false);
     const [newCourseId, setNewCourseId] = useState(null);
@@ -70,6 +80,7 @@ export default function CourcesDrawer({ isOpen, onClose }) {
 
         // Prepare the non-file data as JSON
         const { image, image2, image3, ...courseInfo } = courseData;
+        coursesCreateDto.templateType = selectedTemplate.toString();
         // Convert to JSON string and then to Blob
         courseInfo.templateType = selectedTemplate.toString();
         const courseInfoJson = JSON.stringify(courseInfo);
@@ -78,7 +89,6 @@ export default function CourcesDrawer({ isOpen, onClose }) {
         });
         formData.append('coursesCreateDto', courseInfoBlob);
         // console.log(courseInfoJson);
-
         try {
             const token = sessionStorage.getItem('token');
             const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/firedep/courses`, formData, {
@@ -87,17 +97,16 @@ export default function CourcesDrawer({ isOpen, onClose }) {
                 }
             });
 
-            if (response.status) {
+            if (response.status === 200) {
                 onClose();
                 setSubmitSuccess(true);
-                setNewCourseId(response.data.courseId); 
+                setNewCourseId(response.data.courseId);
             } else {
                 // Handle errors
             }
         } catch (error) {
             console.error('Failed to submit course:', error);
         }
-
     };
 
     const handleViewCourse = () => {
@@ -126,13 +135,15 @@ export default function CourcesDrawer({ isOpen, onClose }) {
         );
       }
 
-    const renderInputsForTemplate = (templateNumber) => {
+      const renderInputsForTemplate = (templateNumber) => {
         switch (templateNumber) {
             case 1:
                 return (
                     <>
-                        <textarea name="content2" value={courseData.content2} onChange={handleChange} placeholder="Content 2" className={styles.textarea} />
-                        <textarea name="content3" value={courseData.content3} onChange={handleChange} placeholder="Content 3" className={styles.textarea} />
+                        <textarea name="enContent2" value={courseData.enContent2} onChange={handleChange} placeholder="English Content 2" className={styles.textarea} />
+                        <textarea name="enContent3" value={courseData.enContent3} onChange={handleChange} placeholder="English Content 3" className={styles.textarea} />
+                        <textarea name="elContent2" value={courseData.elContent2} onChange={handleChange} placeholder="Greek Content 2" className={styles.textarea} />
+                        <textarea name="elContent3" value={courseData.elContent3} onChange={handleChange} placeholder="Greek Content 3" className={styles.textarea} />
                         <input type="file" name="image2" onChange={handleChange} className={styles.input} />
                         <input type="file" name="image3" onChange={handleChange} className={styles.input} />
                     </>
@@ -141,35 +152,45 @@ export default function CourcesDrawer({ isOpen, onClose }) {
                 return (
                     <>
                         <input type="file" name="image2" onChange={handleChange} className={styles.input} />
-                        <textarea name="content2" value={courseData.content2} onChange={handleChange} placeholder="Content 2" className={styles.textarea} />
+                        <textarea name="enContent2" value={courseData.enContent2} onChange={handleChange} placeholder="English Content 2" className={styles.textarea} />
+                        <textarea name="elContent2" value={courseData.elContent2} onChange={handleChange} placeholder="Greek Content 2" className={styles.textarea} />
                     </>
                 );
             default:
                 return null;
         }
-    };
+      };
 
-    return (
+      return (
         <div className={styles.drawer}>
             <div className={styles.drawerContent}>
                 <h2>Add Course</h2>
                 <form onSubmit={handleSubmit} encType="multipart/form-data">
-                    <select value={selectedTemplate} onChange={(e) => setSelectedTemplate(Number(e.target.value))} className={styles.select}>
-                        <option value="1">Template 1</option>
-                        <option value="2">Template 2</option>
-                        <option value="3">Template 3</option>
-                    </select>
-                    <input name="title" value={courseData.title} onChange={handleChange} placeholder="Title" className={styles.input} />
-                    <input name="subTitle" value={courseData.subTitle} onChange={handleChange} placeholder="Subtitle" className={styles.input} />
-                    <textarea name="overview" value={courseData.overview} onChange={handleChange} placeholder="Overview" className={styles.textarea} />
-                    {renderInputsForTemplate(selectedTemplate)}
-                    <textarea name="content" value={courseData.content} onChange={handleChange} placeholder="Content" className={styles.textarea} />
-                    <input name="length" value={courseData.length} onChange={handleChange} placeholder="Length" className={styles.input} />
-                    <input name="accreditations" value={courseData.accreditations} onChange={handleChange} placeholder="Accreditations" className={styles.input} />
+                    {/* Form fields for English version */}
+                    <input name="enTitle" value={courseData.enTitle} onChange={handleChange} placeholder="English Title" className={styles.input} />
+                    <input name="enSubtitle" value={courseData.enSubtitle} onChange={handleChange} placeholder="English Subtitle" className={styles.input} />
+                    <textarea name="enOverview" value={courseData.enOverview} onChange={handleChange} placeholder="English Overview" className={styles.textarea} />
+                    <textarea name="enContent" value={courseData.enContent} onChange={handleChange} placeholder="English Content" className={styles.textarea} />
+                    <input name="enLength" value={courseData.enLength} onChange={handleChange} placeholder="English Length" className={styles.input} />
+                    <input name="enAccreditations" value={courseData.enAccreditations} onChange={handleChange} placeholder="English Accreditations" className={styles.input} />
+                    <input name="enSectors" value={courseData.enSectors} onChange={handleChange} placeholder="English Sectors" className={styles.input} />
+    
+                    {/* Form fields for Greek version */}
+                    <input name="elTitle" value={courseData.elTitle} onChange={handleChange} placeholder="Greek Title" className={styles.input} />
+                    <input name="elSubtitle" value={courseData.elSubtitle} onChange={handleChange} placeholder="Greek Subtitle" className={styles.input} />
+                    <textarea name="elOverview" value={courseData.elOverview} onChange={handleChange} placeholder="Greek Overview" className={styles.textarea} />
+                    <textarea name="elContent" value={courseData.elContent} onChange={handleChange} placeholder="Greek Content" className={styles.textarea} />
+                    <input name="elLength" value={courseData.elLength} onChange={handleChange} placeholder="Greek Length" className={styles.input} />
+                    <input name="elAccreditations" value={courseData.elAccreditations} onChange={handleChange} placeholder="Greek Accreditations" className={styles.input} />
+                    <input name="elSectors" value={courseData.elSectors} onChange={handleChange} placeholder="Greek Sectors" className={styles.input} />
+    
+                    {/* Image upload and other fields */}
                     <input type="file" name="image" onChange={handleChange} className={styles.input} />
-                    <input name="sectors" value={courseData.sectors} onChange={handleChange} placeholder="Sectors" className={styles.input} />
+                    {renderInputsForTemplate(selectedTemplate)}
+    
                     <input name="videoURL" value={courseData.videoURL} onChange={handleChange} placeholder="Video URL (optional)" className={styles.input} />
-                    <input name="courseId" value={courseData.courseId} onChange={handleChange} placeholder="courseId" className={styles.input} />
+                    <input name="courseId" value={courseData.courseId} onChange={handleChange} placeholder="Course ID" className={styles.input} />
+    
                     <button type="submit" className={styles.submitButton}>Submit</button>
                 </form>
                 <button onClick={onClose} className={styles.closeButton}>Close</button>

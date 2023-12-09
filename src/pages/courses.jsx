@@ -12,8 +12,10 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import Head from 'next/head';
 
 const Courses = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [CoursesItems, setCoursesItems] = useState([]);
+
+  const currentLangPrefix = i18n.language === 'en' ? 'en' : 'el';
 
   useEffect(() => {
     const fetchData = async () => {
@@ -46,23 +48,21 @@ const Courses = () => {
           <h3 className={styles.aboutSubHeader}>{t('CoursesSubtitle')}</h3>
         </div>
 
-        {/* NEWS CARDS */}
+        {/* COURSE CARDS */}
         <div className={styles.newsCards}>
-        {CoursesItems.map((item) => (
-            <Link href={`/courses/${item.courseId}`} passHref
-                key={item.newsId}
-                className={styles.newsCard}
-                style={{ backgroundImage: `url(data:image/jpeg;base64,${item.image})` }}
-            >
+          {CoursesItems.map((item) => (
+            <Link href={`/courses/${item.courseId}`} passHref key={item.courseId} className={styles.newsCard}>
+              <a style={{ backgroundImage: `url(data:image/jpeg;base64,${item.image})` }}>
                 <h4>{item.sectors}</h4>
                 <div className={styles.cardContent}>
-                    <h3 className={styles.subTitle}>{item.subTitle}</h3>
-                    <h2>{item.title}</h2>
+                  <h3 className={styles.subTitle}>{item[`${currentLangPrefix}Subtitle`]}</h3>
+                  <h2>{item[`${currentLangPrefix}Title`]}</h2>
+                  <FontAwesomeIcon icon={faArrowRight} className={styles.arrowIcon} />
                 </div>
-                <FontAwesomeIcon icon={faArrowRight} className={styles.arrowIcon} />
+              </a>
             </Link>
-            ))}
-        </div>
+          ))}
+      </div>
       </div>
       <ContactUs />
       <Footer />

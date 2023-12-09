@@ -14,7 +14,7 @@ import Head from 'next/head';
 
 const CourseItemDetail = () => {
   const router = useRouter();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { courseId } = router.query;
   const [courseItem, setCourseItem] = useState(null);
 
@@ -84,209 +84,211 @@ const CourseItemDetail = () => {
     );
   };
 //   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~renderTemplateType1~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  const renderTemplateType1 = () => {
-    // Adjust the following to match your data structure and desired layout
-    return (
+const renderTemplateType1 = () => {
+  const currentLangPrefix = i18n.language === 'en' ? 'en' : 'el';
+  
+  return (
     <>
-    <Head>
-        <title>{courseItem.title}</title>
-        <meta name="description" content={courseItem.subTitle} />
-        <meta name="keywords" content={courseItem.title} />
-        <meta name="author" content="FireDep" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    </Head>
+      <Head>
+          <title>{courseItem[`${currentLangPrefix}Title`]}</title>
+          <meta name="description" content={courseItem[`${currentLangPrefix}Subtitle`]} />
+          <meta name="keywords" content={courseItem[`${currentLangPrefix}Title`]} />
+          <meta name="author" content="FireDep" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Head>
       <div className={styles.newsItemDetailContainer} >
-            <div className={styles.aboutHeaderText}>
-            <h2 className={styles.aboutSubHeader}>{t('Courses')}</h2>
-            <h1 className={styles.aboutMainHeader}>{courseItem.title}</h1>
-            <h2 className={styles.aboutSubHeader}>{courseItem.subTitle}</h2>
-        </div>
-        <div className={styles.newsImageContainer}>
-        <img
-                src={`data:image/jpeg;base64,${courseItem.image}`}
-                alt="Image1"
-                layout="fill"
-                objectFit="cover"
-                priority
-                className={styles.newsImage}
-        />
-        </div>
-        <div className={styles.Overview}>
-            <div className={styles.OverviewStats}>
-                <h2>{t('Length')}</h2>
-                <p className={styles.BlueWow}>{courseItem.length}</p>
-                <h2>{t('Sectors')}</h2>
-                <p className={styles.BlueWow}>{courseItem.sectors}</p>
-            </div>
-            <div className={styles.OverviewText}>
-                <h2 className={styles.newsTitle}>{t('CourseOverview')}</h2>
-                <p>{courseItem.overview}</p>
-            </div>
-        </div>
-        </div>
-        <div className={styles.courseItemDetailContainer}>
-            {/* Content With Image Backgrond */}
-            <motion.div
-            ref={ref3}
-            initial="hidden"
-            animate={inView3 ? 'visible' : 'hidden'}
-            variants={fadeInVariant}
-            className={styles.networkingSection}
-            style={{ backgroundImage: `url(${`data:image/jpeg;base64,${courseItem.image2}`})` }}
-            >
-            <div className={styles.networkingContent}>
-                <p className={styles.networkingText}>
-                {courseItem.content}
-                </p>
-            </div>
-            </motion.div>
-
-
-            <div className={styles.redContainer}>
-                <h2 className={styles.redContainerHeader}>{t('Welcome')}</h2>
-                <p className={styles.aboutMainText}>{courseItem.content2}</p>
-                <br />
-            </div>
-
-        <div className={styles.leadingSection}>
-        <motion.div
-          ref={ref2}
-          initial="hidden"
-          animate={inView2 ? 'visible' : 'hidden'}
-          variants={fadeInRightVariant }
-          className={styles.imageWrapper}
-        >
-          <h1 className={styles.leadingTitle}>{courseItem.accreditations}</h1>
-          <p className={styles.leadingText}>
-            {courseItem.content3}
-          </p>
-        </motion.div> 
-        <motion.div
-          ref={ref2}
-          initial="hidden"
-          animate={inView2 ? 'visible' : 'hidden'}
-          variants={fadeInRightVariant }
-          className={styles.textWrapper}
-        >
-          <Image
-            src={`data:image/jpeg;base64,${courseItem.image3}`}
-            alt="Firefighters Training"
-            layout="responsive"
-            width={700} 
-            height={400} 
-          />
-        </motion.div>
-        </div>
+          <div className={styles.aboutHeaderText}>
+          <h2 className={styles.aboutSubHeader}>{t('Courses')}</h2>
+          <h1 className={styles.aboutMainHeader}>{courseItem[`${currentLangPrefix}Title`]}</h1>
+          <h2 className={styles.aboutSubHeader}>{courseItem[`${currentLangPrefix}Subtitle`]}</h2>
       </div>
-      </>
-    );
-  };
+      <div className={styles.newsImageContainer}>
+      <img
+              src={`data:image/jpeg;base64,${courseItem.image}`}
+              alt={courseItem[`${currentLangPrefix}Title`]}
+              layout="fill"
+              objectFit="cover"
+              priority
+              className={styles.newsImage}
+      />
+      </div>
+      <div className={styles.Overview}>
+          <div className={styles.OverviewStats}>
+              <h2>{t('Length')}</h2>
+              <p className={styles.BlueWow}>{courseItem[`${currentLangPrefix}Length`]}</p>
+              <h2>{t('Sectors')}</h2>
+              <p className={styles.BlueWow}>{courseItem[`${currentLangPrefix}Sectors`]}</p>
+          </div>
+          <div className={styles.OverviewText}>
+              <h2 className={styles.newsTitle}>{t('CourseOverview')}</h2>
+              <p>{courseItem[`${currentLangPrefix}Overview`]}</p>
+          </div>
+      </div>
+      </div>
+      <div className={styles.courseItemDetailContainer}>
+          {/* Content With Image Background */}
+          <motion.div
+          ref={ref3}
+          initial="hidden"
+          animate={inView3 ? 'visible' : 'hidden'}
+          variants={fadeInVariant}
+          className={styles.networkingSection}
+          style={{ backgroundImage: `url(${`data:image/jpeg;base64,${courseItem.image2}`})` }}
+          >
+          <div className={styles.networkingContent}>
+              <p className={styles.networkingText}>
+              {courseItem[`${currentLangPrefix}Content`]}
+              </p>
+          </div>
+          </motion.div>
+
+          <div className={styles.redContainer}>
+              <h2 className={styles.redContainerHeader}>{t('Welcome')}</h2>
+              <p className={styles.aboutMainText}>{courseItem[`${currentLangPrefix}Content2`]}</p>
+              <br />
+          </div>
+
+      <div className={styles.leadingSection}>
+      <motion.div
+        ref={ref2}
+        initial="hidden"
+        animate={inView2 ? 'visible' : 'hidden'}
+        variants={fadeInRightVariant }
+        className={styles.imageWrapper}
+      >
+        <h1 className={styles.leadingTitle}>{courseItem[`${currentLangPrefix}Accreditations`]}</h1>
+        <p className={styles.leadingText}>
+          {courseItem[`${currentLangPrefix}Content3`]}
+        </p>
+      </motion.div> 
+      <motion.div
+        ref={ref2}
+        initial="hidden"
+        animate={inView2 ? 'visible' : 'hidden'}
+        variants={fadeInRightVariant }
+        className={styles.textWrapper}
+      >
+        <Image
+          src={`data:image/jpeg;base64,${courseItem.image3}`}
+          alt="Course Image"
+          layout="responsive"
+          width={700} 
+          height={400} 
+        />
+      </motion.div>
+      </div>
+    </div>
+    </>
+  );
+};
+
 
   //~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~renderTemplateType2~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   const renderTemplateType2 = () => {
-    // Adjust the following to match your data structure and desired layout
+    const currentLangPrefix = i18n.language === 'en' ? 'en' : 'el';
+  
     return (
       <>
-      <div className={styles.newsItemDetailContainer} >
-            <div className={styles.aboutHeaderText}>
+        <div className={styles.newsItemDetailContainer}>
+          <div className={styles.aboutHeaderText}>
             <h2 className={styles.aboutSubHeader}>{t('Courses')}</h2>
-            <h1 className={styles.aboutMainHeader}>{courseItem.title}</h1>
-            <h2 className={styles.aboutSubHeader}>{courseItem.subTitle}</h2>
-        </div>
-        <div className={styles.newsImageContainer}>
-        <img
-                src={`data:image/jpeg;base64,${courseItem.image}`}
-                alt="Image1"
-                layout="fill"
-                objectFit="cover"
-                priority
-                className={styles.newsImage}
-        />
-        </div>
-        <div className={styles.Overview}>
+            <h1 className={styles.aboutMainHeader}>{courseItem[`${currentLangPrefix}Title`]}</h1>
+            <h2 className={styles.aboutSubHeader}>{courseItem[`${currentLangPrefix}Subtitle`]}</h2>
+          </div>
+          <div className={styles.newsImageContainer}>
+            <img
+              src={`data:image/jpeg;base64,${courseItem.image}`}
+              alt={courseItem[`${currentLangPrefix}Title`]}
+              layout="fill"
+              objectFit="cover"
+              priority
+              className={styles.newsImage}
+            />
+          </div>
+          <div className={styles.Overview}>
             <div className={styles.OverviewStats}>
-                <h2>{t('Length')}</h2>
-                <p className={styles.BlueWow}>{courseItem.length}</p>
-                <h2>{t('Sectors')}</h2>
-                <p className={styles.BlueWow}>{courseItem.sectors}</p>
+              <h2>{t('Length')}</h2>
+              <p className={styles.BlueWow}>{courseItem[`${currentLangPrefix}Length`]}</p>
+              <h2>{t('Sectors')}</h2>
+              <p className={styles.BlueWow}>{courseItem[`${currentLangPrefix}Sectors`]}</p>
             </div>
             <div className={styles.OverviewText}>
-                <h2 className={styles.newsTitle}>{t('CourseOverview')}</h2>
-                <p>{courseItem.overview}</p>
+              <h2 className={styles.newsTitle}>{t('CourseOverview')}</h2>
+              <p>{courseItem[`${currentLangPrefix}Overview`]}</p>
             </div>
+          </div>
         </div>
-        </div>
-
-
+  
         <div className={styles.redContainer}>
-                <h2 className={styles.redContainerHeader}>{courseItem.accreditations}</h2>
-                <p className={styles.aboutMainText}>{courseItem.content}</p>
-                <br />
+          <h2 className={styles.redContainerHeader}>{courseItem[`${currentLangPrefix}Accreditations`]}</h2>
+          <p className={styles.aboutMainText}>{courseItem[`${currentLangPrefix}Content`]}</p>
+          <br />
         </div>
-
-
       </>
     );
   };
+  
 
   //~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~renderTemplateType3~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   const renderTemplateType3 = () => {
-    // Adjust the following to match your data structure and desired layout
+    const currentLangPrefix = i18n.language === 'en' ? 'en' : 'el';
+  
     return (
       <>
-      <div className={styles.newsItemDetailContainer} >
-            <div className={styles.aboutHeaderText}>
+        <div className={styles.newsItemDetailContainer}>
+          <div className={styles.aboutHeaderText}>
             <h2 className={styles.aboutSubHeader}>{t('Courses')}</h2>
-            <h1 className={styles.aboutMainHeader}>{courseItem.title}</h1>
-            <h2 className={styles.aboutSubHeader}>{courseItem.subTitle}</h2>
-        </div>
-        <div className={styles.newsImageContainer}>
-        <img
-                src={`data:image/jpeg;base64,${courseItem.image}`}
-                alt="Image1"
-                layout="fill"
-                objectFit="cover"
-                priority
-                className={styles.newsImage}
-        />
-        </div>
-        <div className={styles.Overview}>
+            <h1 className={styles.aboutMainHeader}>{courseItem[`${currentLangPrefix}Title`]}</h1>
+            <h2 className={styles.aboutSubHeader}>{courseItem[`${currentLangPrefix}Subtitle`]}</h2>
+          </div>
+          <div className={styles.newsImageContainer}>
+            <img
+              src={`data:image/jpeg;base64,${courseItem.image}`}
+              alt={courseItem[`${currentLangPrefix}Title`]}
+              layout="fill"
+              objectFit="cover"
+              priority
+              className={styles.newsImage}
+            />
+          </div>
+          <div className={styles.Overview}>
             <div className={styles.OverviewStats}>
-                <h2>{t('Length')}</h2>
-                <p className={styles.BlueWow}>{courseItem.length}</p>
-                <h2>{t('Sectors')}</h2>
-                <p className={styles.BlueWow}>{courseItem.sectors}</p>
+              <h2>{t('Length')}</h2>
+              <p className={styles.BlueWow}>{courseItem[`${currentLangPrefix}Length`]}</p>
+              <h2>{t('Sectors')}</h2>
+              <p className={styles.BlueWow}>{courseItem[`${currentLangPrefix}Sectors`]}</p>
             </div>
             <div className={styles.OverviewText}>
-                <h2 className={styles.newsTitle}>{t('CourseOverview')}</h2>
-                <p>{courseItem.overview}</p>
+              <h2 className={styles.newsTitle}>{t('CourseOverview')}</h2>
+              <p>{courseItem[`${currentLangPrefix}Overview`]}</p>
             </div>
+          </div>
         </div>
-        </div>
-
+  
         <div className={styles.redContainer}>
-                <h2 className={styles.redContainerHeader}>{courseItem.accreditations}</h2>
-                <p className={styles.aboutMainText}>{courseItem.content}</p>
-                <br />
+          <h2 className={styles.redContainerHeader}>{courseItem[`${currentLangPrefix}Accreditations`]}</h2>
+          <p className={styles.aboutMainText}>{courseItem[`${currentLangPrefix}Content`]}</p>
+          <br />
         </div>
-
+  
         <motion.div
-            ref={ref3}
-            initial="hidden"
-            animate={inView3 ? 'visible' : 'hidden'}
-            variants={fadeInVariant}
-            className={styles.networkingSection}
-            style={{ backgroundImage: `url(${`data:image/jpeg;base64,${courseItem.image2}`})` }}
-            >
-            <div className={styles.networkingContent}>
-                <p className={styles.networkingText}>
-                {courseItem.content2}
-                </p>
-            </div>
-          </motion.div>
+          ref={ref3}
+          initial="hidden"
+          animate={inView3 ? 'visible' : 'hidden'}
+          variants={fadeInVariant}
+          className={styles.networkingSection}
+          style={{ backgroundImage: `url(${`data:image/jpeg;base64,${courseItem.image2}`})` }}
+        >
+          <div className={styles.networkingContent}>
+            <p className={styles.networkingText}>
+              {courseItem[`${currentLangPrefix}Content2`]}
+            </p>
+          </div>
+        </motion.div>
       </>
     );
   };
+  
 
   if (!courseItem) {
     return <div>Loading...</div>;

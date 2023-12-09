@@ -4,10 +4,11 @@ import axios from 'axios'; // CORS policy
 import styles from '../styles/Admin.module.css';
 import NewsDrawer from './components/NewsDrawer';
 import CourcesDrawer from './components/CourcesDrawer';
+import EditNewsDrawer from './components/EditNewsDrawer';
 import Logo from './components/Logo';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight, faChevronLeft, faChevronRight, faTrashAlt, faRightFromBracket} from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faChevronLeft, faChevronRight, faTrashAlt, faRightFromBracket, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import Head from 'next/head';
 
 export default function Admin() {
@@ -28,6 +29,9 @@ export default function Admin() {
   const closeDrawerForNews = () => setIsDrawerOpenForNews(false);
   const openDrawerForCourses = () => setIsDrawerOpenForCourses(true);
   const closeDrawerForCourses = () => setIsDrawerOpenForCourses(false);
+
+  const [isEditNewsDrawerOpen, setIsEditNewsDrawerOpen] = useState(false);
+  const [editingNewsId, setEditingNewsId] = useState(null);
 
   const apiBaseURL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -88,6 +92,11 @@ export default function Admin() {
     }
   };
 
+  const openEditNewsDrawer = (newsId) => {
+    setEditingNewsId(newsId);
+    setIsEditNewsDrawerOpen(true);
+  };
+
   const deleteItem = async (id, itemType) => {
     try {
       const token = sessionStorage.getItem('token');
@@ -138,6 +147,13 @@ export default function Admin() {
         isOpen={isDrawerOpenForCourses}
         onClose={closeDrawerForCourses}
       />
+      
+    <EditNewsDrawer
+      isOpen={isEditNewsDrawerOpen}
+      onClose={() => setIsEditNewsDrawerOpen(false)}
+      newsId={editingNewsId}
+      onSubmit={() => fetchNews()} // Refetch news after editing
+    />
 
       <button onClick={toggleDisplay} className={styles.button}>{showCourses ? 'Show News' : 'Show Courses'}</button>
       </div>
@@ -185,6 +201,9 @@ export default function Admin() {
                     </div>
                   </div>
               </div>
+              <button onClick={() => openEditNewsDrawer(item.newsId)} className={styles.editButton}>
+                <FontAwesomeIcon icon={faPencilAlt} /> Edit
+              </button>
               <button onClick={() => confirmDeleteItem(item.newsId, "news")} className={styles.deleteButton}>
               <FontAwesomeIcon icon={faTrashAlt} />
             </button>

@@ -1,9 +1,8 @@
-// NewsDrawer.js
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from '../../styles/Drawer.module.css'; // Ensure to create this CSS module
 
-export default function NewsDrawer({ isOpen, onClose, onSubmit }) {
+export default function EditNewsDrawer({ isOpen, onClose, newsId, onSubmit }) {
     const [newsData, setNewsData] = useState({
         enTitle: '',
         enSubtitle: '',
@@ -16,8 +15,21 @@ export default function NewsDrawer({ isOpen, onClose, onSubmit }) {
         image: null
     });
 
-    const [submitSuccess, setSubmitSuccess] = useState(false);
-    const [newNewsId, setNewNewsId] = useState(null);
+    useEffect(() => {
+        if (newsId) {
+            // Fetch the news data to edit
+            fetchNewsData(newsId);
+        }
+    }, [newsId]);
+
+    const fetchNewsData = async (id) => {
+        try {
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/firedep/news/${id}`);
+            setNewsData(response.data);
+        } catch (error) {
+            console.error('Error fetching news data:', error);
+        }
+    };
 
     const handleChange = (e) => {
         if (e.target.name === 'image') {
@@ -31,7 +43,9 @@ export default function NewsDrawer({ isOpen, onClose, onSubmit }) {
         e.preventDefault();
         
         const formData = new FormData();
-        formData.append('image', newsData.image);
+        if (newsData.image instanceof File) {
+            formData.append('image', newsData.image);
+        }
 
         // Convert the news object to a JSON string
         const newsJson = JSON.stringify(newsData);
@@ -47,55 +61,31 @@ export default function NewsDrawer({ isOpen, onClose, onSubmit }) {
         try {
             const token = sessionStorage.getItem('token');
             const response = await axios({
-                method: 'post',
-                url: `${process.env.NEXT_PUBLIC_API_URL}/firedep/news`,
+                method: 'put',
+                url: `${process.env.NEXT_PUBLIC_API_URL}/firedep/news/${newsId}`,
                 data: formData,
                 headers: {
                     'Authorization': `Bearer ${token}`,
                 }
             });
-      
-            if (response.status) {
-                setSubmitSuccess(true);
-                setNewNewsId(response.data.id); // Assuming the response contains the id of the new news
+
+            if (response.status === 200) {
+                onSubmit?.(response.data); // Callback for successful submission
+                onClose(); // Close the drawer
             } else {
                 // Handle errors
             }
         } catch (error) {
-            console.error('Failed to submit news:', error);
+            console.error('Failed to update news:', error);
         }
     };
-
-    const handleViewArticle = () => {
-        window.location.href = `/news/${newNewsId}`; // Redirect to the new article
-    };    
       
     if (!isOpen) return null;
-
-    if (submitSuccess) {
-        return (
-            <div className={styles.drawer}>
-                <div className={styles.drawerContentSuccess}>
-                    <p className={styles.aboutMainHeader}>Article successfully added!</p>
-                    <button onClick={handleViewArticle} className={styles.submitButton}>View Article</button>
-                    <button 
-                        onClick={() => {
-                            onClose();
-                            setSubmitSuccess(false);
-                        }} 
-                        className={styles.closeButton}
-                    >
-                        Close
-                    </button>
-                </div>
-            </div>
-        );
-    }
 
     return (
         <div className={styles.drawer}>
             <div className={styles.drawerContent}>
-                <h2>Add News Article</h2>
+                <h2>Edit News Article</h2>
                 <form onSubmit={handleSubmit} encType="multipart/form-data">
                     <input 
                         name="enTitle"
@@ -159,8 +149,9 @@ export default function NewsDrawer({ isOpen, onClose, onSubmit }) {
                         placeholder="Video URL"
                         className={styles.input}
                     />
-                    <button type="submit" className={styles.submitButton}>Submit</button>
+                    <button type="submit" className={styles.submitButton}>Update</button>
                 </form>
+
                 <button onClick={onClose} className={styles.closeButton}>Close</button>
             </div>
         </div>

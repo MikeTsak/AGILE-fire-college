@@ -55,6 +55,20 @@
   .deleteButton:hover {
     background-color: #c82333;
   }
+
+  .editButton {
+    background-color: #2a36e6;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .editButton:hover {
+    background-color: #2c38df;
+  }
   
   .error {
     color: #dc3545;

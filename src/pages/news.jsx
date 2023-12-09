@@ -19,11 +19,13 @@ const months = [
 ];
 
 const News = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const router = useRouter();
   const [newsItems, setNewsItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+
+  const currentLangPrefix = i18n.language === 'en' ? 'en' : 'el';
 
   useEffect(() => {
     const fetchData = async () => {
@@ -83,8 +85,8 @@ const News = () => {
             <Link href={`/news/${item.newsId}`} key={item.newsId} className={styles.newsCard} style={{ backgroundImage: `url(data:image/jpeg;base64,${item.image})` }}>
                 <div className={styles.cardContent}>
                   <h4>{item.createdAt && formatDate(item.createdAt)}</h4>
-                  <h3 className={styles.subTitle}>{item.subTitle}</h3>
-                  <h2>{item.title}</h2>
+                  <h3 className={styles.subTitle}>{item[`${currentLangPrefix}Subtitle`]}</h3>
+                  <h2>{item[`${currentLangPrefix}Title`]}</h2>
                   <FontAwesomeIcon icon={faArrowRight} className={styles.arrowIcon} />
                 </div>
             </Link>
