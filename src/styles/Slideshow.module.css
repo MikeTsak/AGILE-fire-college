@@ -175,3 +175,8 @@
   animation: fadeOut 2s ease-in-out forwards;
   z-index: 1; /* Ensure this is behind the incoming slide */
 }
+
+/*this dixied the star with the first image being white*/
+.slide:first-child {
+  opacity: 1;
+}

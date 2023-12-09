@@ -30,6 +30,14 @@ const Slideshow = () => {
     return () => clearInterval(interval);
 }, [currentSlide, slides.length, animations]);
 
+const goToSlide = (index) => {
+  setPreviousSlide(currentSlide);
+  setCurrentSlide(index);
+
+  const randomAnimation = animations[Math.floor(Math.random() * animations.length)];
+  setAnimationClass(randomAnimation);
+}
+
   return (
     <div className={styles.slideshow}>
       {slides.map((slide, index) => (
