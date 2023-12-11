@@ -2,6 +2,7 @@ import Navbar from './components/navbar';
 import Footer from './components/footer';
 import Logo from './components/Logo';
 import ContactUs from './components/ContactUs';
+import LoadingFire from './components/LoadingFire';
 import styles from '../styles/News.module.css';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
@@ -24,6 +25,8 @@ const News = () => {
   const [newsItems, setNewsItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+
 
   const currentLangPrefix = i18n.language === 'en' ? 'en' : 'el';
 
@@ -37,8 +40,10 @@ const News = () => {
         setNewsItems(data.content);
         setTotalPages(data.totalPages);
         setCurrentPage(data.number);
+        setIsLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
+        setIsLoading(false);
       }
     };
 
@@ -81,7 +86,9 @@ const News = () => {
 
         {/* NEWS CARDS */}
         <div className={styles.newsCards}>
-          {newsItems.map((item) => (
+        {isLoading ? (
+          <LoadingFire mode="latestNews" />
+        ) : (newsItems.map((item) => (
             <Link href={`/news/${item.newsId}`} key={item.newsId} className={styles.newsCard} style={{ backgroundImage: `url(data:image/jpeg;base64,${item.image})` }}>
                 <div className={styles.cardContent}>
                   <h4>{item.createdAt && formatDate(item.createdAt)}</h4>
@@ -90,9 +97,11 @@ const News = () => {
                   <FontAwesomeIcon icon={faArrowRight} className={styles.arrowIcon} />
                 </div>
             </Link>
-          ))}
+          )))}
         </div>
         {/* Pagination */}
+        {isLoading ? null : (
+          
         <div className={styles.pagination}>
         <button 
           onClick={() => goToPage(currentPage - 1)} 
@@ -109,7 +118,7 @@ const News = () => {
         >
           <FontAwesomeIcon icon={faChevronRight} />
         </button>
-      </div>
+      </div>)}
       </div>
       <ContactUs />
       <Footer />

@@ -6,6 +6,7 @@ import styles from '../styles/Admin.module.css';
 import NewsDrawer from './components/NewsDrawer';
 import CourcesDrawer from './components/CourcesDrawer';
 import EditNewsDrawer from './components/EditNewsDrawer';
+import EditCourcesDrawer from './components/EditCourcesDrawer';
 import Logo from './components/Logo';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -34,6 +35,9 @@ export default function Admin() {
   const [isEditNewsDrawerOpen, setIsEditNewsDrawerOpen] = useState(false);
   const [editingNewsId, setEditingNewsId] = useState(null);
 
+  const[isEditCourcesDrawerOpen, setIsEditCourcesDrawerOpen] = useState(false);
+  const [editingCourcesId, setEditingCourcesId] = useState(null);
+
   const apiBaseURL = process.env.NEXT_PUBLIC_API_URL;
 
   useEffect(() => {
@@ -51,9 +55,9 @@ export default function Admin() {
   };
   const confirmDeleteItem = (id, itemType) => {
     const message = itemType === 'news'
-      ? "Are you sure you want to delete this news article?"
-      : "Are you sure you want to delete this course?";
-    
+      ? "Είστε σίγουροι ότι θέλετε να διαγράψετε αυτό το άρθρο ειδήσεων;"
+      : "Είστε σίγουροι ότι θέλετε να διαγράψετε αυτό το μάθημα;"
+
     if (window.confirm(message)) {
       deleteItem(id, itemType);
     }
@@ -69,7 +73,7 @@ export default function Admin() {
       setTotalPages(data.totalPages);
       setCurrentPage(data.number);
     } catch (error) {
-      console.error('Error fetching data:', error);
+      ('Σφάλμα κατά τη λήψη των δεδομένων:', error);
     }
   };
 
@@ -81,7 +85,7 @@ export default function Admin() {
       console.log(response.data.content); 
       setCourses(response.data.content); 
     } catch (error) {
-      console.error('Error fetching courses:', error);
+      console.error('Σφάλμα κατά τη λήψη των μαθημάτων:', error);
     }
   };
   
@@ -97,6 +101,11 @@ export default function Admin() {
     setEditingNewsId(newsId);
     setIsEditNewsDrawerOpen(true);
   };
+
+  const openEditCourcesDrawer = (courcesId) => {
+    setEditingCourcesId(courcesId);
+    setIsEditCourcesDrawerOpen(true);
+  }
 
   const deleteItem = async (id, itemType) => {
     try {
@@ -121,120 +130,134 @@ export default function Admin() {
         // Handle other status codes or response scenarios
       }
     } catch (error) {
-      console.error(`Failed to delete ${itemType}:`, error);
+      console.error(`Αποτυχία διαγραφής ${itemType}:`, error);
     }
   };
   
 
   return (
     <div className={styles.holePage}>
-    <div className={styles.container}>
-      <Head>
-        <title>Admin Page</title>
-      </Head>
-      <Logo />
-      <div className={styles.header}>
-        <h1 className={styles.aboutMainHeader}>Admin Page</h1>
-        <button onClick={logout} className={styles.logoutButton}>Logout <FontAwesomeIcon icon={faRightFromBracket} /></button>
-      </div>
-  
-      <div className={styles.formSection}>  
-      <button onClick={openDrawerForNews} className={styles.button}>Add News Article</button>
-      <NewsDrawer
-        isOpen={isDrawerOpenForNews}
-        onClose={closeDrawerForNews}
-      />
-      <button onClick={openDrawerForCourses} className={styles.button}>Add Course</button>
-      <CourcesDrawer
-        isOpen={isDrawerOpenForCourses}
-        onClose={closeDrawerForCourses}
-      />
-      
-    <EditNewsDrawer
-      isOpen={isEditNewsDrawerOpen}
-      onClose={() => setIsEditNewsDrawerOpen(false)}
-      newsId={editingNewsId}
-      onSubmit={() => fetchNews()} // Refetch news after editing
-    />
+      <div className={styles.container}>
+        <Head>
+          <title>Σελίδα Διαχειριστή</title>
+        </Head>
+        <Logo />
+        <div className={styles.header}>
+          <h1 className={styles.aboutMainHeader}>Σελιδα Διαχειριστη</h1>
+          <button onClick={logout} className={styles.logoutButton}>Αποσύνδεση <FontAwesomeIcon icon={faRightFromBracket} /></button>
+        </div>
 
-      <button onClick={toggleDisplay} className={styles.button}>{showCourses ? 'Show News' : 'Show Courses'}</button>
-      </div>
-  
-      <div>
-        {/* NEWS ARTICLES FROM THIS POINT DOWNWARD */}
-        {showCourses ? (
+        <div className={styles.formSection}>
+          <button onClick={openDrawerForNews} className={styles.button}>Προσθήκη Άρθρου Ειδήσεων</button>
+          <NewsDrawer
+            isOpen={isDrawerOpenForNews}
+            onClose={closeDrawerForNews}
+          />
+          <button onClick={openDrawerForCourses} className={styles.button}>Προσθήκη Μαθήματος</button>
+          <CourcesDrawer
+            isOpen={isDrawerOpenForCourses}
+            onClose={closeDrawerForCourses}
+          />
+
+          <EditNewsDrawer
+            isOpen={isEditNewsDrawerOpen}
+            onClose={() => setIsEditNewsDrawerOpen(false)}
+            newsId={editingNewsId}
+            onSubmit={() => fetchNews()} // Επανάληψη λήψης ειδήσεων μετά την επεξεργασία
+          />
+
+          <EditCourcesDrawer
+            isOpen={isEditCourcesDrawerOpen}
+            onClose={() => setIsEditCourcesDrawerOpen(false)}
+            courcesId={editingCourcesId}
+            onSubmit={() => fetchCourses()} // Επανάληψη λήψης μαθημάτων μετά την επεξεργασία
+          />
+
+          <button onClick={toggleDisplay} className={styles.button}>{showCourses ? 'Εμφάνιση Ειδήσεων' : 'Εμφάνιση Μαθημάτων'}</button>
+        </div>
+
         <div>
-          <h2 className={styles.collegenameForPage}>Courses:</h2>
-          <div className={styles.coursesContainer}>
-            {courses.map((course) => (
-              <div key={course.courseId} className={styles.newsCardDel}>
-              <div className={styles.newsCard}>
-                  <div className={styles.cardContent}>
-                    <img src={`data:image/jpeg;base64,${course.image}`} className={styles.imagenews}/>
-                    <div className={styles.category}>{course.category}
-                    <h4>{course.sectors}</h4>
-                    <h2 className={styles.collegenameForPage}>{course.title}</h2>
-                    <h3 className={styles.subTitle}>{course.subTitle}</h3>
-                    <Link href={`/courses/${course.courseId}`} key={course.courseId} className={styles.clickable}><b>View Course</b> <FontAwesomeIcon icon={faArrowRight} className={styles.arrowIcon} /></Link>
+          {/* ΕΙΔΗΣΕΙΣ ΑΡΘΡΑ ΑΠΟ ΑΥΤΟ ΤΟ ΣΗΜΕΙΟ ΚΑΙ ΚΑΤΩ */}
+          {showCourses ? (
+            <div>
+              <h2 className={styles.collegenameForPage}>Μαθήματα:</h2>
+              <div className={styles.coursesContainer}>
+                {courses.map((course) => (
+                  <div key={course.courseId} className={styles.newsCardDel}>
+                    <div className={styles.newsCard}>
+                      <div className={styles.cardContent}>
+                        <img src={`data:image/jpeg;base64,${course.image}`} className={styles.imagenews} />
+                        <div className={styles.category}>{course.category}
+                          <h4>{course.sectors}</h4>
+                          <h2 className={styles.collegenameForPage}>{course.enTitle} || {course.elTitle}</h2>
+                          <h3 className={styles.subTitle}>{course.subTitle}</h3>
+                          <Link href={`/courses/${course.courseId}`} key={course.courseId} className={styles.clickable}><b>Προβολή Μαθήματος</b> <FontAwesomeIcon icon={faArrowRight} className={styles.arrowIcon} /></Link>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                    {/* <button onClick={() => openEditCourcesDrawer(course.courseId)} className={styles.editButton}>
+                        <FontAwesomeIcon icon={faPencilAlt} />
+                      </button> */}
+                    <button onClick={() => confirmDeleteItem(course.courseId, "courses")} className={styles.deleteButton}>
+                      <FontAwesomeIcon icon={faTrashAlt} />
+                    </button>
                     </div>
                   </div>
+                ))}
               </div>
-              <button onClick={() => confirmDeleteItem(course.courseId, "courses")} className={styles.deleteButton}>
-              <FontAwesomeIcon icon={faTrashAlt} />
-            </button>
             </div>
-            ))}
-          </div>
-        </div>
-      ) : (
-        <div>
-          <h2 className={styles.collegenameForPage}>News Articles:</h2>
-          <div className={styles.newsCards}>
-            {newsItems.map((item) => (
-              <div key={item.newsId} className={styles.newsCardDel}>
-              <div className={styles.newsCard}>
-                  <div className={styles.cardContent}>
-                    <img src={`data:image/jpeg;base64,${item.image}`} className={styles.imagenews}/>
-                    <div className={styles.category}>{item.category}
-                    <h4>{item.createdAt}</h4>
-                    <h2 className={styles.collegenameForPage}>{item.title}</h2>
-                    <h3 className={styles.subTitle}>{item.subTitle}</h3>
-                    <Link href={`/news/${item.newsId}`} key={item.newsId} className={styles.clickable}><b>View Article</b> <FontAwesomeIcon icon={faArrowRight} className={styles.arrowIcon} /></Link>
+          ) : (
+            <div>
+              <h2 className={styles.collegenameForPage}>Άρθρα Ειδήσεων:</h2>
+              <div className={styles.newsCards}>
+                {newsItems.map((item) => (
+                  <div key={item.newsId} className={styles.newsCardDel}>
+                    <div className={styles.newsCard}>
+                      <div className={styles.cardContent}>
+                        <img src={`data:image/jpeg;base64,${item.image}`} className={styles.imagenews} />
+                        <div className={styles.category}>
+                          <h4>{item.createdAt}</h4>
+                          <h2 className={styles.subTitle}>{item.enTitle} || {item.elTitle}</h2>
+                          <h3 className={styles.subTitle}>{item.enubTitle}</h3>
+                          <Link href={`/news/${item.newsId}`} key={item.newsId} className={styles.clickable}><b>Προβολή Άρθρου</b> <FontAwesomeIcon icon={faArrowRight} className={styles.arrowIcon} /></Link>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <button onClick={() => openEditNewsDrawer(item.newsId)} className={styles.editButton}>
+                        <FontAwesomeIcon icon={faPencilAlt} />
+                      </button>
+                      <button onClick={() => confirmDeleteItem(item.newsId, "news")} className={styles.deleteButton}>
+                        <FontAwesomeIcon icon={faTrashAlt} />
+                      </button>
                     </div>
                   </div>
+                ))}
               </div>
-              <button onClick={() => openEditNewsDrawer(item.newsId)} className={styles.editButton}>
-                <FontAwesomeIcon icon={faPencilAlt} /> Edit
-              </button>
-              <button onClick={() => confirmDeleteItem(item.newsId, "news")} className={styles.deleteButton}>
-              <FontAwesomeIcon icon={faTrashAlt} />
-            </button>
+              {/* ...pagination */}
+              <div className={styles.pagination}>
+                <button
+                  onClick={() => goToPage(currentPage - 1)}
+                  disabled={currentPage <= 0}
+                  className={currentPage <= 0 ? styles.disabled : ''}
+                >
+                  <FontAwesomeIcon icon={faChevronLeft} />
+                </button>
+                <span>{`${currentPage + 1} από ${totalPages}`}</span>
+                <button
+                  onClick={() => goToPage(currentPage + 1)}
+                  disabled={currentPage >= totalPages - 1}
+                  className={currentPage >= totalPages - 1 ? styles.disabled : ''}
+                >
+                  <FontAwesomeIcon icon={faChevronRight} />
+                </button>
+              </div>
             </div>
-            ))}
-          </div>
-          {/* ...pagination */}
-          <div className={styles.pagination}>
-        <button 
-          onClick={() => goToPage(currentPage - 1)} 
-          disabled={currentPage <= 0}
-          className={currentPage <= 0 ? styles.disabled : ''}
-        >
-          <FontAwesomeIcon icon={faChevronLeft} />
-        </button>
-        <span>{`${currentPage + 1} of ${totalPages}`}</span>
-        <button 
-          onClick={() => goToPage(currentPage + 1)} 
-          disabled={currentPage >= totalPages - 1}
-          className={currentPage >= totalPages - 1 ? styles.disabled : ''}
-        >
-          <FontAwesomeIcon icon={faChevronRight} />
-        </button>
-      </div>
-        </div>
-      )}
+          )}
 
+        </div>
       </div>
-    </div>
     </div>
   );
 }

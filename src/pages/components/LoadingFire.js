@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import styles from '../../styles/LoadingFire.module.css'; // Update the import path as needed
 
 const LoadingFire = ({ mode = "animationOnly" }) => {
+    const { t, i18n } = useTranslation();
     const [loadingText, setLoadingText] = useState('Loading .');
 
     useEffect(() => {
         if (mode === "animationAndText") {
             const interval = setInterval(() => {
                 setLoadingText(prev => {
-                    if (prev === 'Loading .') return 'Loading ..';
-                    if (prev === 'Loading ..') return 'Loading ...';
-                    return 'Loading .';
+                    if (prev === t('Loading') + ' .') return t('Loading') + ' ..';
+                    if (prev === t('Loading') + ' ..') return t('Loading') + ' ...';
+                    return t('Loading') + ' .';
                 });
             }, 500); // Change the speed of the text change as needed
 
@@ -18,9 +20,21 @@ const LoadingFire = ({ mode = "animationOnly" }) => {
         }
     }, [mode]);
 
+    
+    const getText = () => {
+        switch (mode) {
+            case "latestNews":
+                return t('gettingLatestNews');
+            case "latestCourses":
+                return t('gettingLatestCourses');
+            default:
+                return loadingText;
+        }
+    };
+
     return (
         <>
-        <div className={`${styles.fire} ${mode === "animationAndText" ? styles.centered : ''}`}>
+         <div className={`${styles.fire} ${["animationAndText", "latestNews", "latestCourses"].includes(mode) ? styles.centered : ''}`}>
 
             <div className={styles.blur}>
                 <div className={styles.fire__flame_big}></div>
@@ -34,7 +48,7 @@ const LoadingFire = ({ mode = "animationOnly" }) => {
             </div>
             <div className={styles.fire__light}></div>
         </div>
-        {mode === "animationAndText" && <p className={styles.loadingText}>{loadingText}</p>}
+        {["animationAndText", "latestNews", "latestCourses"].includes(mode) && <p className={styles.loadingText}>{getText()}</p>}
         </>
     );
 }

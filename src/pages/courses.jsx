@@ -3,6 +3,7 @@ import Navbar from './components/navbar';
 import Footer from './components/footer';
 import Logo from './components/Logo';
 import ContactUs from './components/ContactUs';
+import LoadingFire from './components/LoadingFire';
 import styles from '../styles/News.module.css';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
@@ -10,19 +11,25 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import Head from 'next/head';
+import axios from 'axios';
 
 const Courses = () => {
   const { t, i18n } = useTranslation();
   const [CoursesItems, setCoursesItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const currentLangPrefix = i18n.language === 'en' ? 'en' : 'el';
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/firedep/courses`);
-      const data = await response.json();
-      // console.log(data.content);
-      setCoursesItems(data.content);
+      try {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/firedep/courses`);
+        setCoursesItems(response.data.content);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     fetchData();
@@ -50,7 +57,9 @@ const Courses = () => {
 
         {/* COURSE CARDS */}
         <div className={styles.newsCards}>
-          {CoursesItems.map((item) => (
+        {isLoading ? (
+          <LoadingFire mode="latestNews" />
+        ) : (CoursesItems.map((item) => (
             <Link href={`/courses/${item.courseId}`} passHref key={item.courseId} className={styles.newsCard} style={{ backgroundImage: `url(data:image/jpeg;base64,${item.image})` }}>
                 <h4>{item.sectors}</h4>
                 <div className={styles.cardContent}>
@@ -59,7 +68,7 @@ const Courses = () => {
                   <FontAwesomeIcon icon={faArrowRight} className={styles.arrowIcon} />
                 </div>
             </Link>
-          ))}
+          )))}
       </div>
       </div>
       <ContactUs />

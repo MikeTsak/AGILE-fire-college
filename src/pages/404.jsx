@@ -2,18 +2,21 @@ import React from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 import LoadingFire from './components/LoadingFire';
+import { useTranslation } from 'react-i18next';
 
 const Custom404 = () => {
+    const { t } = useTranslation();
+    
     return (
         <div className="container">
         <Head>
-            <title>404 - Page Not Found</title>
+            <title>{t('pageNotFound')}</title>
         </Head>
-            <h1 className='aboutMainHeader'>404 - Page Not Found</h1>
-            <p className='collegenameForPage'>The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
+            <h1 className='aboutMainHeader'>{t('pageNotFound')}</h1>
+            <p className='collegenameForPage'>{t('pageNotFoundDescription')}</p>
             <br />
             <Link href="/">
-                <h2 className='collegenameForPage'>Go back home</h2>
+                <h2 className='collegenameForPage'>{t('goBackHome')}</h2>
             </Link>
 
             <LoadingFire mode="animationOnly" />

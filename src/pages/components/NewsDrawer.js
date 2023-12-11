@@ -67,7 +67,7 @@ export default function NewsDrawer({ isOpen, onClose, onSubmit }) {
       
             if (response.status) {
                 setSubmitSuccess(true);
-                setNewNewsId(response.data.id); // Assuming the response contains the id of the new news
+                setNewNewsId(response.data); // Assuming the response contains the id of the new news
             } else {
                 // Handle errors
             }
@@ -86,8 +86,8 @@ export default function NewsDrawer({ isOpen, onClose, onSubmit }) {
         return (
             <div className={styles.drawer}>
                 <div className={styles.drawerContentSuccess}>
-                    <p className={styles.aboutMainHeader}>Article successfully added!</p>
-                    <button onClick={handleViewArticle} className={styles.submitButton}>View Article</button>
+                    <p className={styles.aboutMainHeader}>Το άρθρο προστέθηκε με επιτυχία!</p>
+                    <button onClick={handleViewArticle} className={styles.submitButton}>Προβολή Άρθρου</button>
                     <button 
                         onClick={() => {
                             onClose();
@@ -95,7 +95,7 @@ export default function NewsDrawer({ isOpen, onClose, onSubmit }) {
                         }} 
                         className={styles.closeButton}
                     >
-                        Close
+                        Κλείσιμο
                     </button>
                 </div>
             </div>
@@ -105,72 +105,59 @@ export default function NewsDrawer({ isOpen, onClose, onSubmit }) {
     return (
         <div className={styles.drawer}>
             <div className={styles.drawerContent}>
-                <h2>Add News Article</h2>
+            <button onClick={onClose} className={styles.closeButtonTopRight}>Κλείσιμο</button>
+                <h2>Προσθήκη Άρθρου Ειδήσεων</h2>
                 <form onSubmit={handleSubmit} encType="multipart/form-data">
-                <div className={styles.sectionDivider}>English Content</div>
+                <div className={styles.sectionDivider}>Περιεχόμενο στα Αγγλικά</div>
                     <input 
                         name="enTitle"
                         value={newsData.enTitle}
                         onChange={handleChange}
-                        placeholder="English Title"
+                        placeholder="Τίτλος στα Αγγλικά"
                         className={styles.input}
                     />
                     <input 
                         name="enSubtitle"
                         value={newsData.enSubtitle}
                         onChange={handleChange}
-                        placeholder="English Subtitle"
+                        placeholder="Υπότιτλος στα Αγγλικά"
                         className={styles.input}
                     />
-                    {/* <textarea 
-                        name="enContent"
-                        value={newsData.enContent}
-                        onChange={handleChange}
-                        placeholder="English Content"
-                        className={styles.textarea}
-                    /> */}
                     <ReactQuill
                         value={newsData.enContent}
                         onChange={(content) => handleEditorChange('enContent', content)}
-                        placeholder="English Content"
+                        placeholder="Περιεχόμενο στα Αγγλικά"
                         className={styles.customQuillEditor}
                     />
                     <br />
-                    <div className={styles.sectionDivider}>Greek Content</div>
+                    <div className={styles.sectionDivider}>Περιεχόμενο στα Ελληνικά</div>
                     <input 
                         name="elTitle"
                         value={newsData.elTitle}
                         onChange={handleChange}
-                        placeholder="Greek Title"
+                        placeholder="Τίτλος στα Ελληνικά"
                         className={styles.input}
                     />
                     <input 
                         name="elSubtitle"
                         value={newsData.elSubtitle}
                         onChange={handleChange}
-                        placeholder="Greek Subtitle"
+                        placeholder="Υπότιτλος στα Ελληνικά"
                         className={styles.input}
                     />
-                    {/* <textarea 
-                        name="elContent"
-                        value={newsData.elContent}
-                        onChange={handleChange}
-                        placeholder="Greek Content"
-                        className={styles.textarea}
-                    /> */}
                     <ReactQuill
                         value={newsData.elContent}
                         onChange={(content) => handleEditorChange('elContent', content)}
-                        placeholder="Greek Content"
+                        placeholder="Περιεχόμενο στα Ελληνικά"
                         className={styles.customQuillEditor}
                     />
                     <br />
-                    <div className={styles.sectionDivider}>General Information</div>
+                    <div className={styles.sectionDivider}>Γενικές Πληροφορίες</div>
                     <input 
                         name="category"
                         value={newsData.category}
                         onChange={handleChange}
-                        placeholder="Category"
+                        placeholder="Κατηγορία"
                         className={styles.input}
                     />
                     <input 
@@ -183,12 +170,11 @@ export default function NewsDrawer({ isOpen, onClose, onSubmit }) {
                         name="videoURL"
                         value={newsData.videoURL}
                         onChange={handleChange}
-                        placeholder="Video URL"
+                        placeholder="Σύνδεσμος Βίντεο"
                         className={styles.input}
                     />
-                    <button type="submit" className={styles.submitButton}>Submit</button>
+                    <button type="submit" className={styles.submitButton}>Υποβολή</button>
                 </form>
-                <button onClick={onClose} className={styles.closeButton}>Close</button>
             </div>
         </div>
     );

@@ -240,3 +240,53 @@
 .templateButtonActive:hover {
   background-color: #0056b3;
 }
+.closeButtonTopRight {
+  position: absolute;
+  top: 10px;
+  right: 20%;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: whitesmoke; /* Or any color you prefer */
+  cursor: pointer;
+  background-color: #be1200;
+  border-radius: 2em;
+  padding: 0.5em 1em;
+  z-index: 1000;
+}
+.closeButtonTopRight:hover {
+  background-color: #691921;
+}
+
+.imagePreviewContainer {
+  display: flex;
+  flex-direction: column; /* Align children vertically */
+  align-items: center; /* Center children horizontally */
+  justify-content: center; /* Center children vertically if there's extra space */
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 4px;
+  background-color: #2a2a2a;
+}
+
+.imagePreviewContainer img {
+  max-width: 100%; /* Ensure the image does not exceed the container's width */
+  height: auto; /* Maintain the aspect ratio */
+  border-radius: 4px; /* Optional: for rounded corners */
+  margin-bottom: 10px; /* Add some space between the image and the button */
+}
+
+.changeImageButton {
+  padding: 10px 20px;
+  margin-top: 10px; /* Add space above the button */
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.changeImageButton:hover {
+  background-color: #0056b3;
+}

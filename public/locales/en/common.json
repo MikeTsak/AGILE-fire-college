@@ -5,6 +5,8 @@
   "CoursesHeader": "Courses",
   "NewsHeader": "News",
 
+  "Loading": "Loading",
+
 
     "imageText1": "The Fire Service is Cool",
     "imageText2": "Prepare for the future",
@@ -77,6 +79,10 @@
     "termsAndConditions": "Terms and Conditions",
     "OpeningHours": "Opening Hours",
     "collegeOpeningHours": "Monday - Friday 9am - 5pm",
+
+    "pageNotFound": "404 - Page Not Found",
+    "pageNotFoundDescription": "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.",
+    "goBackHome": "Go back home",
     
       "months": {
         "0": "Jan",

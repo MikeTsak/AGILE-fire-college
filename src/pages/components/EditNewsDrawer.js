@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import dynamic from 'next/dynamic';
-import styles from '../../styles/Drawer.module.css'; // Ensure to create this CSS module
-import 'react-quill/dist/quill.snow.css'; // Import quill styles
+import styles from '../../styles/Drawer.module.css'; // Βεβαιωθείτε ότι δημιουργήσατε αυτό το CSS module
+import 'react-quill/dist/quill.snow.css'; // Εισαγωγή των στυλ του quill
 
-// Dynamically import ReactQuill with no SSR
+// Δυναμική εισαγωγή του ReactQuill χωρίς SSR
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import 'react-quill/dist/quill.snow.css';
 
@@ -20,10 +20,11 @@ export default function EditNewsDrawer({ isOpen, onClose, newsId, onSubmit }) {
         videoURL: '',
         image: null
     });
+    const [imagePreview, setImagePreview] = useState(null);
+    const [isChangingImage, setIsChangingImage] = useState(false);
 
     useEffect(() => {
         if (newsId) {
-            // Fetch the news data to edit
             fetchNewsData(newsId);
         }
     }, [newsId]);
@@ -32,143 +33,175 @@ export default function EditNewsDrawer({ isOpen, onClose, newsId, onSubmit }) {
         try {
             const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/firedep/news/${id}`);
             setNewsData(response.data);
+            setImagePreview(`data:image/jpeg;base64,${response.data.image}`);
         } catch (error) {
-            console.error('Error fetching news data:', error);
+            console.error('Σφάλμα κατά τη λήψη των δεδομένων της είδησης:', error);
         }
     };
 
     const handleChange = (e) => {
         if (e.target.name === 'image') {
-            setNewsData({ ...newsData, image: e.target.files[0] });
+            const file = e.target.files[0];
+            setNewsData({ ...newsData, image: file });
+            setImagePreview(URL.createObjectURL(file));
         } else {
             setNewsData({ ...newsData, [e.target.name]: e.target.value });
         }
     };
 
+    const handleEditorChange = (name, value) => {
+        setNewsData({ ...newsData, [name]: value });
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
         const formData = new FormData();
-        if (newsData.image instanceof File) {
+        if (isChangingImage && newsData.image && typeof newsData.image === 'object') {
             formData.append('image', newsData.image);
+        } else if (!isChangingImage && typeof newsData.image === 'string') {
+            try {
+                // Έλεγχος αν η συμβολοσειρά της εικόνας ξεκινά με το σχήμα δεδομένων του URL
+                const base64Pattern = /^data:image\/[a-z]+;base64,/;
+                if (!base64Pattern.test(newsData.image)) {
+                    // Αν το σχήμα δεδομένων του URL λείπει, προσθέστε το (ή χειριστείτε όπως χρειάζεται)
+                    newsData.image = `data:image/jpeg;base64,${newsData.image}`;
+                }
+
+                const base64String = newsData.image.replace(base64Pattern, '');
+
+                // Μετατροπή της συμβολοσειράς base64 σε Blob
+                const byteCharacters = atob(base64String);
+                const byteNumbers = Array.from(byteCharacters, (char) => char.charCodeAt(0));
+                const byteArray = new Uint8Array(byteNumbers);
+                const blob = new Blob([byteArray], { type: 'image/jpeg' });
+
+                // Μετατροπή του Blob σε αρχείο (File)
+                const imageFile = new File([blob], 'image.jpg', { type: 'image/jpeg' });
+                formData.append('image', imageFile);
+            } catch (error) {
+                console.error('Σφάλμα κατά την επεξεργασία της εικόνας:', error);
+                return; // Έξοδος από τη συνάρτηση αν η επεξεργασία της εικόνας αποτύχει
+            }
         }
 
-        // Convert the news object to a JSON string
-        const newsJson = JSON.stringify(newsData);
-      
-        // Create a blob from the JSON string
-        const newsBlob = new Blob([newsJson], {
-          type: 'application/json'
-        });
-      
-        // Append the blob to the formData
-        formData.append('news', newsBlob);
-      
+        const { image, ...newsDataForSubmission } = newsData;
+        formData.append('news', new Blob([JSON.stringify(newsDataForSubmission)], { type: 'application/json' }));
+
         try {
             const token = sessionStorage.getItem('token');
-            const response = await axios({
-                method: 'put',
-                url: `${process.env.NEXT_PUBLIC_API_URL}/firedep/news/${newsId}`,
-                data: formData,
+            await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/firedep/news/${newsId}`, formData, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                 }
             });
-
-            if (response.status === 200) {
-                onSubmit?.(response.data); // Callback for successful submission
-                onClose(); // Close the drawer
-            } else {
-                // Handle errors
-            }
+            onSubmit && onSubmit(); // Κλήση της συνάρτησης onSubmit μετά από επιτυχή ενημέρωση
+            onClose(); // Κλείσιμο του συρταριού μετά από επιτυχή ενημέρωση
         } catch (error) {
-            console.error('Failed to update news:', error);
+            console.error('Αποτυχία ενημέρωσης της είδησης:', error);
         }
     };
-      
+
+    const handleImageChangeClick = () => {
+        setIsChangingImage(true);
+    };
+
     if (!isOpen) return null;
 
     return (
         <div className={styles.drawer}>
             <div className={styles.drawerContent}>
-                <h2>Edit News Article</h2>
+                <h2>Επεξεργασία Άρθρου</h2>
                 <form onSubmit={handleSubmit} encType="multipart/form-data">
-                    <input 
+                    <input
                         name="enTitle"
-                        value={newsData.enTitle}
+                        value={newsData.enTitle || ''}
                         onChange={handleChange}
-                        placeholder="English Title"
+                        placeholder="Τίτλος στα Αγγλικά"
                         className={styles.input}
                     />
-                    <input 
+                    <input
                         name="enSubtitle"
-                        value={newsData.enSubtitle}
+                        value={newsData.enSubtitle || ''}
                         onChange={handleChange}
-                        placeholder="English Subtitle"
+                        placeholder="Υπότιτλος στα Αγγλικά"
                         className={styles.input}
                     />
                     {/* <textarea 
                         name="enContent"
                         value={newsData.enContent}
                         onChange={handleChange}
-                        placeholder="English Content"
+                        placeholder="Περιεχόμενο στα Αγγλικά"
                         className={styles.textarea}
                     /> */}
                     <ReactQuill
                         value={newsData.enContent}
                         onChange={(content) => handleEditorChange('enContent', content)}
-                        placeholder="English Content"
+                        placeholder="Περιεχόμενο στα Αγγλικά"
+                        className={styles.customQuillEditor}
                     />
-                    <input 
+                    <input
                         name="elTitle"
-                        value={newsData.elTitle}
+                        value={newsData.elTitle || ''}
                         onChange={handleChange}
-                        placeholder="Greek Title"
+                        placeholder="Τίτλος στα Ελληνικά"
                         className={styles.input}
                     />
-                    <input 
+                    <input
                         name="elSubtitle"
-                        value={newsData.elSubtitle}
+                        value={newsData.elSubtitle || ''}
                         onChange={handleChange}
-                        placeholder="Greek Subtitle"
+                        placeholder="Υπότιτλος στα Ελληνικά"
                         className={styles.input}
                     />
                     {/* <textarea 
                         name="elContent"
                         value={newsData.elContent}
                         onChange={handleChange}
-                        placeholder="Greek Content"
+                        placeholder="Περιεχόμενο στα Ελληνικά"
                         className={styles.textarea}
                     /> */}
                     <ReactQuill
                         value={newsData.elContent}
                         onChange={(content) => handleEditorChange('elContent', content)}
-                        placeholder="Greek Content"
+                        placeholder="Περιεχόμενο στα Ελληνικά"
+                        className={styles.customQuillEditor}
                     />
-                    <input 
+                    <input
                         name="category"
-                        value={newsData.category}
+                        value={newsData.category || ''}
                         onChange={handleChange}
-                        placeholder="Category"
+                        placeholder="Κατηγορία"
                         className={styles.input}
                     />
-                    <input 
-                        type="file"
-                        name="image"
-                        onChange={handleChange}
-                        className={styles.input}
-                    />
-                    <input 
+                    {imagePreview && !isChangingImage && (
+                        <div className={styles.imagePreviewContainer}>
+                            <img src={imagePreview} alt="Προεπισκόπηση" />
+                            <p>Τρέχουσα Εικόνα</p>
+                            <button onClick={handleImageChangeClick} className={styles.changeImageButton}>
+                                Αλλαγή Εικόνας
+                            </button>
+                        </div>
+                    )}
+                    {isChangingImage && (
+                        <input
+                            type="file"
+                            name="image"
+                            onChange={handleChange}
+                            className={styles.input}
+                        />
+                    )}
+                    <input
                         name="videoURL"
-                        value={newsData.videoURL}
+                        value={newsData.videoURL || ''}
                         onChange={handleChange}
-                        placeholder="Video URL"
+                        placeholder="Σύνδεσμος Βίντεο"
                         className={styles.input}
                     />
-                    <button type="submit" className={styles.submitButton}>Update</button>
+                    <button type="submit" className={styles.submitButton}>Ενημέρωση</button>
                 </form>
 
-                <button onClick={onClose} className={styles.closeButton}>Close</button>
+                <button onClick={onClose} className={styles.closeButtonTopRight}>Κλείσιμο</button>
             </div>
         </div>
     );

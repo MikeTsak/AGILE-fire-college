@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import axios from 'axios';
-import styles from '../../styles/Drawer.module.css'; // Ensure to create this CSS module
+import styles from '../../styles/Drawer.module.css'; 
 import 'react-quill/dist/quill.snow.css';
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false }); // Dynamically import ReactQuill with no SSR
@@ -57,19 +57,19 @@ export default function CourcesDrawer({ isOpen, onClose }) {
                     onClick={() => setSelectedTemplate(1)}
                     className={selectedTemplate === 1 ? styles.templateButtonActive : styles.templateButton}
                 >
-                    Template 1
+                    Πρότυπο 1
                 </button>
                 <button 
                     onClick={() => setSelectedTemplate(2)}
                     className={selectedTemplate === 2 ? styles.templateButtonActive : styles.templateButton}
                 >
-                    Template 2
+                    Πρότυπο 2
                 </button>
                 <button 
                     onClick={() => setSelectedTemplate(3)}
                     className={selectedTemplate === 3 ? styles.templateButtonActive : styles.templateButton}
                 >
-                    Template 3
+                    Πρότυπο 3
                 </button>
             </div>
         );
@@ -174,34 +174,34 @@ export default function CourcesDrawer({ isOpen, onClose }) {
             case 1:
                 return (
                     <>
-                    <div className={styles.sectionDivider}>Template Specific Fields</div>
-                    <div className={styles.sectionDivider}>Template 1 - English Additional Content</div>
+                    <div className={styles.sectionDivider}>Πεδία Συγκεκριμένα για το Πρότυπο</div>
+                    <div className={styles.sectionDivider}>Πρότυπο 1 - Αγγλικό Πρόσθετο Περιεχόμενο</div>
                         <ReactQuill
-                             value={courseData.enContent2}
+                            value={courseData.enContent2}
                             onChange={(content) => handleEditorChange('enContent2', content)}
-                            placeholder="English Content 2"
+                            placeholder="Αγγλικό Περιεχόμενο 2"
                             className={styles.customQuillEditor}
                         />
                         <ReactQuill
                             value={courseData.enContent3}
                             onChange={(content) => handleEditorChange('enContent3', content)}
-                            placeholder="English Content 3"
+                            placeholder="Αγγλικό Περιεχόμενο 3"
                             className={styles.customQuillEditor}
                         />
-                                            <div className={styles.sectionDivider}>Template 1 - Greek Additional Content</div>
+                        <div className={styles.sectionDivider}>Πρότυπο 1 - Ελληνικό Πρόσθετο Περιεχόμενο</div>
                         <ReactQuill
                             value={courseData.elContent2}
                             onChange={(content) => handleEditorChange('elContent2', content)}
-                            placeholder="Greek Content 2"
+                            placeholder="Ελληνικό Περιεχόμενο 2"
                             className={styles.customQuillEditor}
                         />
                         <ReactQuill
                             value={courseData.elContent3}
                             onChange={(content) => handleEditorChange('elContent3', content)}
-                            placeholder="Greek Content 3"
+                            placeholder="Ελληνικό Περιεχόμενο 3"
                             className={styles.customQuillEditor}
                         />
-                                            <div className={styles.sectionDivider}>Template 1 - Additional Images</div>
+                        <div className={styles.sectionDivider}>Πρότυπο 1 - Επιπρόσθετες Εικόνες</div>
                         <input type="file" name="image2" onChange={handleChange} className={styles.input} />
                         <input type="file" name="image3" onChange={handleChange} className={styles.input} />
                     </>
@@ -209,85 +209,85 @@ export default function CourcesDrawer({ isOpen, onClose }) {
             case 3:
                 return (
                     <>
-                    <div className={styles.sectionDivider}>Template Specific Fields</div>
-                    <div className={styles.sectionDivider}>Template 3 - Additional Image and Content</div>
+                    <div className={styles.sectionDivider}>Πεδία Συγκεκριμένα για το Πρότυπο</div>
+                    <div className={styles.sectionDivider}>Πρότυπο 3 - Επιπρόσθετη Εικόνα και Περιεχόμενο</div>
                         <input type="file" name="image2" onChange={handleChange} className={styles.input} />
                         <ReactQuill
-                        value={courseData.enContent2}
-                        onChange={(content) => handleEditorChange('enContent', content)}
-                        placeholder="English Content 2"
-                        className={styles.customQuillEditor}
-                    />
+                            value={courseData.enContent2}
+                            onChange={(content) => handleEditorChange('enContent', content)}
+                            placeholder="Αγγλικό Περιεχόμενο 2"
+                            className={styles.customQuillEditor}
+                        />
                         <ReactQuill
-                        value={courseData.elContent2}
-                        onChange={(content) => handleEditorChange('enContent', content)}
-                        placeholder="Greek Content 2"
-                        className={styles.customQuillEditor}
-                    />
+                            value={courseData.elContent2}
+                            onChange={(content) => handleEditorChange('enContent', content)}
+                            placeholder="Ελληνικό Περιεχόμενο 2"
+                            className={styles.customQuillEditor}
+                        />
                     </>
                 );
             default:
                 return null;
         }
-      };
+    };
 
-      return (
+    return (
         <div className={styles.drawer}>
             <div className={styles.drawerContent}>
-                <h2>Add Course</h2>
+                <h2>Προσθήκη Μαθήματος</h2>
                 <form onSubmit={handleSubmit} encType="multipart/form-data">
-                {renderTemplateButtons()}
-                    {/* Form fields for English version */}
-                    <div className={styles.sectionDivider}>English Content</div>
-                    <input name="enTitle" value={courseData.enTitle} onChange={handleChange} placeholder="English Title" className={styles.input} />
-                    <input name="enSubtitle" value={courseData.enSubtitle} onChange={handleChange} placeholder="English Subtitle" className={styles.input} />
+                    {renderTemplateButtons()}
+                    {/* Φόρμα για την αγγλική έκδοση */}
+                    <div className={styles.sectionDivider}>Αγγλικό Περιεχόμενο</div>
+                    <input name="enTitle" value={courseData.enTitle} onChange={handleChange} placeholder="Τίτλος στα Αγγλικά" className={styles.input} />
+                    <input name="enSubtitle" value={courseData.enSubtitle} onChange={handleChange} placeholder="Υπότιτλος στα Αγγλικά" className={styles.input} />
                     <ReactQuill
                         value={courseData.enOverview}
                         onChange={(content) => handleEditorChange('enOverview', content)}
-                        placeholder="English Overview"
+                        placeholder="Αγγλική Επισκόπηση"
                         className={styles.customQuillEditor}
                     />
                     <ReactQuill
                         value={courseData.enContent}
                         onChange={(content) => handleEditorChange('enContent', content)}
-                        placeholder="English Content"
+                        placeholder="Αγγλικό Περιεχόμενο"
                         className={styles.customQuillEditor}
                     />
-                    <input name="enLength" value={courseData.enLength} onChange={handleChange} placeholder="English Length" className={styles.input} />
-                    <input name="enAccreditations" value={courseData.enAccreditations} onChange={handleChange} placeholder="English Accreditations" className={styles.input} />
-                    <input name="enSectors" value={courseData.enSectors} onChange={handleChange} placeholder="English Sectors" className={styles.input} />
+                    <input name="enLength" value={courseData.enLength} onChange={handleChange} placeholder="Διάρκεια στα Αγγλικά" className={styles.input} />
+                    <input name="enAccreditations" value={courseData.enAccreditations} onChange={handleChange} placeholder="Αγγλικές Πιστοποιήσεις" className={styles.input} />
+                    <input name="enSectors" value={courseData.enSectors} onChange={handleChange} placeholder="Αγγλικοί Τομείς" className={styles.input} />
     
-                    {/* Form fields for Greek version */}
-                    <div className={styles.sectionDivider}>Greek Content</div>
-                    <input name="elTitle" value={courseData.elTitle} onChange={handleChange} placeholder="Greek Title" className={styles.input} />
-                    <input name="elSubtitle" value={courseData.elSubtitle} onChange={handleChange} placeholder="Greek Subtitle" className={styles.input} />
+                    {/* Φόρμα για την ελληνική έκδοση */}
+                    <div className={styles.sectionDivider}>Ελληνικό Περιεχόμενο</div>
+                    <input name="elTitle" value={courseData.elTitle} onChange={handleChange} placeholder="Τίτλος στα Ελληνικά" className={styles.input} />
+                    <input name="elSubtitle" value={courseData.elSubtitle} onChange={handleChange} placeholder="Υπότιτλος στα Ελληνικά" className={styles.input} />
                     <ReactQuill
                         value={courseData.elOverview}
                         onChange={(content) => handleEditorChange('elOverview', content)}
-                        placeholder="Greek Overview"
+                        placeholder="Ελληνική Επισκόπηση"
                         className={styles.customQuillEditor}
                     />
                     <ReactQuill
                         value={courseData.elContent}
                         onChange={(content) => handleEditorChange('elContent', content)}
-                        placeholder="Greek Content"
+                        placeholder="Ελληνικό Περιεχόμενο"
                         className={styles.customQuillEditor}
                     />
-                    <input name="elLength" value={courseData.elLength} onChange={handleChange} placeholder="Greek Length" className={styles.input} />
-                    <input name="elAccreditations" value={courseData.elAccreditations} onChange={handleChange} placeholder="Greek Accreditations" className={styles.input} />
-                    <input name="elSectors" value={courseData.elSectors} onChange={handleChange} placeholder="Greek Sectors" className={styles.input} />
+                    <input name="elLength" value={courseData.elLength} onChange={handleChange} placeholder="Διάρκεια στα Ελληνικά" className={styles.input} />
+                    <input name="elAccreditations" value={courseData.elAccreditations} onChange={handleChange} placeholder="Ελληνικές Πιστοποιήσεις" className={styles.input} />
+                    <input name="elSectors" value={courseData.elSectors} onChange={handleChange} placeholder="Ελληνικοί Τομείς" className={styles.input} />
     
-                    {/* Image upload and other fields */}
+                    {/* Ανέβασμα εικόνας και άλλα πεδία */}
                     <input type="file" name="image" onChange={handleChange} className={styles.input} />
                     {renderInputsForTemplate(selectedTemplate)}
-                    <div className={styles.sectionDivider}>Common Fields</div>
+                    <div className={styles.sectionDivider}>Κοινά Πεδία</div>
     
-                    <input name="videoURL" value={courseData.videoURL} onChange={handleChange} placeholder="Video URL (optional)" className={styles.input} />
-                    <input name="courseId" value={courseData.courseId} onChange={handleChange} placeholder="Course ID" className={styles.input} />
+                    <input name="videoURL" value={courseData.videoURL} onChange={handleChange} placeholder="Σύνδεσμος Βίντεο (προαιρετικό)" className={styles.input} />
+                    <input name="courseId" value={courseData.courseId} onChange={handleChange} placeholder="Αναγνωριστικό Μαθήματος" className={styles.input} />
     
-                    <button type="submit" className={styles.submitButton}>Submit</button>
+                    <button type="submit" className={styles.submitButton}>Υποβολή</button>
                 </form>
-                <button onClick={onClose} className={styles.closeButton}>Close</button>
+                <button onClick={onClose} className={styles.closeButtonTopRight }>Κλείσιμο</button>
             </div>
         </div>
     );
