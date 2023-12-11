@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
+import LoadingFire from './components/LoadingFire';
 
 const Custom404 = () => {
     return (
@@ -15,12 +16,7 @@ const Custom404 = () => {
                 <h2 className='collegenameForPage'>Go back home</h2>
             </Link>
 
-            <div className="fire">
-                <div className="flame"></div>
-                <div className="flame"></div>
-                <div className="flame"></div>
-                <div className="flame"></div>
-            </div>
+            <LoadingFire mode="animationOnly" />
 
             <style jsx>{`
                 .container {

@@ -8,6 +8,7 @@ import Logo from '../components/Logo';
 import styles from '../../styles/News.module.css';
 import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
+import LoadingFire from '../components/LoadingFire';
 
 const months = [
   "Jan", "Feb", "Mar", "Apr",
@@ -50,7 +51,7 @@ const NewsItemDetail = () => {
   }, [newsid]);
 
   if (!newsItem) {
-    return <div>Loading...</div>;
+    return <LoadingFire mode="animationAndText" />;
   }
 
   // Function to render YouTube iframe if videoURL is present

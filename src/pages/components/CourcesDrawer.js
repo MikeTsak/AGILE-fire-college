@@ -50,6 +50,31 @@ export default function CourcesDrawer({ isOpen, onClose }) {
     const [newCourseId, setNewCourseId] = useState(null);
     const router = useRouter();
 
+    const renderTemplateButtons = () => {
+        return (
+            <div className={styles.templateButtonsContainer}>
+                <button 
+                    onClick={() => setSelectedTemplate(1)}
+                    className={selectedTemplate === 1 ? styles.templateButtonActive : styles.templateButton}
+                >
+                    Template 1
+                </button>
+                <button 
+                    onClick={() => setSelectedTemplate(2)}
+                    className={selectedTemplate === 2 ? styles.templateButtonActive : styles.templateButton}
+                >
+                    Template 2
+                </button>
+                <button 
+                    onClick={() => setSelectedTemplate(3)}
+                    className={selectedTemplate === 3 ? styles.templateButtonActive : styles.templateButton}
+                >
+                    Template 3
+                </button>
+            </div>
+        );
+    };
+
     const handleChange = (e) => {
       let value = e.target.value;
   
@@ -84,9 +109,9 @@ export default function CourcesDrawer({ isOpen, onClose }) {
 
         // Prepare the non-file data as JSON
         const { image, image2, image3, ...courseInfo } = courseData;
-        coursesCreateDto.templateType = selectedTemplate.toString();
-        // Convert to JSON string and then to Blob
+        // Add templateType to courseInfo
         courseInfo.templateType = selectedTemplate.toString();
+        // Convert to JSON string and then to Blob
         const courseInfoJson = JSON.stringify(courseInfo);
         const courseInfoBlob = new Blob([courseInfoJson], {
             type: 'application/json'
@@ -111,9 +136,6 @@ export default function CourcesDrawer({ isOpen, onClose }) {
         } catch (error) {
             console.error('Failed to submit course:', error);
         }
-    };
-    const handleTemplateChange = (e) => {
-        setSelectedTemplate(e.target.value);
     };
 
     const handleEditorChange = (name, value) => {
@@ -152,6 +174,7 @@ export default function CourcesDrawer({ isOpen, onClose }) {
             case 1:
                 return (
                     <>
+                    <div className={styles.sectionDivider}>Template Specific Fields</div>
                     <div className={styles.sectionDivider}>Template 1 - English Additional Content</div>
                         <ReactQuill
                              value={courseData.enContent2}
@@ -186,6 +209,7 @@ export default function CourcesDrawer({ isOpen, onClose }) {
             case 3:
                 return (
                     <>
+                    <div className={styles.sectionDivider}>Template Specific Fields</div>
                     <div className={styles.sectionDivider}>Template 3 - Additional Image and Content</div>
                         <input type="file" name="image2" onChange={handleChange} className={styles.input} />
                         <ReactQuill
@@ -212,23 +236,14 @@ export default function CourcesDrawer({ isOpen, onClose }) {
             <div className={styles.drawerContent}>
                 <h2>Add Course</h2>
                 <form onSubmit={handleSubmit} encType="multipart/form-data">
-                    <select
-                        name="templateType"
-                        value={selectedTemplate}
-                        onChange={handleTemplateChange}
-                        className={styles.select}
-                    >
-                        <option value="1">Template 1</option>
-                        <option value="2">Template 2</option>
-                        <option value="3">Template 3</option>
-                    </select>
+                {renderTemplateButtons()}
                     {/* Form fields for English version */}
                     <div className={styles.sectionDivider}>English Content</div>
                     <input name="enTitle" value={courseData.enTitle} onChange={handleChange} placeholder="English Title" className={styles.input} />
                     <input name="enSubtitle" value={courseData.enSubtitle} onChange={handleChange} placeholder="English Subtitle" className={styles.input} />
                     <ReactQuill
                         value={courseData.enOverview}
-                        onChange={(content) => handleEditorChange('enContent', content)}
+                        onChange={(content) => handleEditorChange('enOverview', content)}
                         placeholder="English Overview"
                         className={styles.customQuillEditor}
                     />
@@ -248,13 +263,13 @@ export default function CourcesDrawer({ isOpen, onClose }) {
                     <input name="elSubtitle" value={courseData.elSubtitle} onChange={handleChange} placeholder="Greek Subtitle" className={styles.input} />
                     <ReactQuill
                         value={courseData.elOverview}
-                        onChange={(content) => handleEditorChange('enContent', content)}
+                        onChange={(content) => handleEditorChange('elOverview', content)}
                         placeholder="Greek Overview"
                         className={styles.customQuillEditor}
                     />
                     <ReactQuill
                         value={courseData.elContent}
-                        onChange={(content) => handleEditorChange('enContent', content)}
+                        onChange={(content) => handleEditorChange('elContent', content)}
                         placeholder="Greek Content"
                         className={styles.customQuillEditor}
                     />
@@ -264,7 +279,6 @@ export default function CourcesDrawer({ isOpen, onClose }) {
     
                     {/* Image upload and other fields */}
                     <input type="file" name="image" onChange={handleChange} className={styles.input} />
-                    <div className={styles.sectionDivider}>Template Specific Fields</div>
                     {renderInputsForTemplate(selectedTemplate)}
                     <div className={styles.sectionDivider}>Common Fields</div>
     

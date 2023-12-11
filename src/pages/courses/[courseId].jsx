@@ -11,6 +11,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import Head from 'next/head';
+import LoadingFire from '../components/LoadingFire';
 
 const CourseItemDetail = () => {
   const router = useRouter();
@@ -83,6 +84,12 @@ const CourseItemDetail = () => {
       </div>
     );
   };
+
+  // Function to create markup from HTML content
+  const createMarkup = (htmlContent) => {
+    return { __html: htmlContent };
+  };
+
 //   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~renderTemplateType1~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const renderTemplateType1 = () => {
   const currentLangPrefix = i18n.language === 'en' ? 'en' : 'el';
@@ -121,7 +128,7 @@ const renderTemplateType1 = () => {
           </div>
           <div className={styles.OverviewText}>
               <h2 className={styles.newsTitle}>{t('CourseOverview')}</h2>
-              <p>{courseItem[`${currentLangPrefix}Overview`]}</p>
+              <div dangerouslySetInnerHTML={createMarkup(courseItem[`${currentLangPrefix}Overview`])} />
           </div>
       </div>
       </div>
@@ -136,15 +143,15 @@ const renderTemplateType1 = () => {
           style={{ backgroundImage: `url(${`data:image/jpeg;base64,${courseItem.image2}`})` }}
           >
           <div className={styles.networkingContent}>
-              <p className={styles.networkingText}>
-              {courseItem[`${currentLangPrefix}Content`]}
-              </p>
+              <div className={styles.networkingText} 
+              dangerouslySetInnerHTML={createMarkup(courseItem[`${currentLangPrefix}Content`])}
+              />
           </div>
           </motion.div>
 
           <div className={styles.redContainer}>
               <h2 className={styles.redContainerHeader}>{t('Welcome')}</h2>
-              <p className={styles.aboutMainText}>{courseItem[`${currentLangPrefix}Content2`]}</p>
+              <div className={styles.aboutMainText} dangerouslySetInnerHTML={createMarkup(courseItem[`${currentLangPrefix}Content2`])} />
               <br />
           </div>
 
@@ -157,9 +164,9 @@ const renderTemplateType1 = () => {
         className={styles.imageWrapper}
       >
         <h1 className={styles.leadingTitle}>{courseItem[`${currentLangPrefix}Accreditations`]}</h1>
-        <p className={styles.leadingText}>
-          {courseItem[`${currentLangPrefix}Content3`]}
-        </p>
+        <div className={styles.leadingText}
+          dangerouslySetInnerHTML={createMarkup(courseItem[`${currentLangPrefix}Content3`])}
+        />
       </motion.div> 
       <motion.div
         ref={ref2}
@@ -214,7 +221,7 @@ const renderTemplateType1 = () => {
             </div>
             <div className={styles.OverviewText}>
               <h2 className={styles.newsTitle}>{t('CourseOverview')}</h2>
-              <p>{courseItem[`${currentLangPrefix}Overview`]}</p>
+              <div dangerouslySetInnerHTML={createMarkup(courseItem[`${currentLangPrefix}Overview`])} />
             </div>
           </div>
         </div>
@@ -260,7 +267,7 @@ const renderTemplateType1 = () => {
             </div>
             <div className={styles.OverviewText}>
               <h2 className={styles.newsTitle}>{t('CourseOverview')}</h2>
-              <p>{courseItem[`${currentLangPrefix}Overview`]}</p>
+              <div dangerouslySetInnerHTML={createMarkup(courseItem[`${currentLangPrefix}Overview`])} />
             </div>
           </div>
         </div>
@@ -280,9 +287,9 @@ const renderTemplateType1 = () => {
           style={{ backgroundImage: `url(${`data:image/jpeg;base64,${courseItem.image2}`})` }}
         >
           <div className={styles.networkingContent}>
-            <p className={styles.networkingText}>
-              {courseItem[`${currentLangPrefix}Content2`]}
-            </p>
+            <div className={styles.networkingText}
+              dangerouslySetInnerHTML={createMarkup(courseItem[`${currentLangPrefix}Content2`])}
+            />
           </div>
         </motion.div>
       </>
@@ -291,7 +298,7 @@ const renderTemplateType1 = () => {
   
 
   if (!courseItem) {
-    return <div>Loading...</div>;
+    return <LoadingFire mode="animationAndText" />;
   }
   return (
     <> 
@@ -299,7 +306,7 @@ const renderTemplateType1 = () => {
       <Navbar />
       <div className={styles.courseItemDetailContainer}>
         {renderTemplate()}
-        <div className={styles.newsItemDetailContainer}>
+        <div className={styles.VideoItemDetailContainer}>
           {renderVideo()}
         </div>
       </div>

@@ -126,6 +126,7 @@
   margin: 0 auto;
   max-width: var(--max-width);
   padding: 4rem;
+  flex-direction: column;
 }
 
 .imageWrapper {
@@ -458,12 +459,19 @@
   font-size: 1.2rem;
 }
 
-/* ~~~~~~~~~~~~~~~~~~~~SINGLE NEWS WEBSITE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* ~~~~~~~~~~~~~~~~~~~~SINGLE Cource WEBSITE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 .newsItemDetailContainer {
   max-width: 1100px;
   margin: auto;
   padding: 10% 20px 20px 20px;
+  overflow: hidden;
+}
+
+.VideoItemDetailContainer {
+  max-width: 1100px;
+  margin: auto;
+  padding: 0 20px 20px 20px;
 }
 
 .newsDate {
@@ -512,7 +520,9 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 0px;
+  margin-bottom: 20px;
+  padding: 20px;
+  flex-wrap: wrap;
 }
 
 .OverviewStats {
@@ -620,7 +630,8 @@
   /* Adjust the networking section layout */
   .networkingSection {
     padding: 20px; /* Adjust padding */
-    height: auto; /* Adjust height */
+    height: auto;
+    flex-direction: column;
   }
 
   .networkingContent {
