@@ -1,14 +1,23 @@
 .drawer {
   position: fixed;
+  color: #f0f0f0;
   top: 0;
   right: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.8); 
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 100;
+}
+.customQuillEditor {
+  background-color: #f0f0f0; /* Dark background for editor */
+  border: 1px solid #555;
+  border-radius: 4px;
+  padding: 10px;
+  color: #555; /* Light text color */
+  min-height: 100px
 }
 
 .aboutMainHeader {
@@ -20,7 +29,8 @@
   font-size: 50px;
 }
 .drawerContent {
-  background-color: white;
+  background-color: #1a1a1a;
+  color: #f0f0f0; /* Light text color */
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
@@ -87,6 +97,7 @@
   background-color: #f7f7f7;
 }
 
+
 .submitButton, .closeButton {
   background-color: #007bff;
   color: white;
@@ -109,7 +120,7 @@
 
 .drawerContent h2 {
   margin-bottom: 20px;
-  color: #333;
+  color: #f0f0f0;
   text-align: center;
 }
 
@@ -182,4 +193,13 @@
   .successContainer {
       width: 80%;
   }
+}
+
+.sectionDivider {
+  width: 100%;
+  border-bottom: 2px solid #be1200; /* Red divider line */
+  color: #be1200; /* Red text color */
+  font-weight: bold;
+  margin: 20px 0;
+  padding-bottom: 5px;
 }

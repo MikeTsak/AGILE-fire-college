@@ -1,6 +1,12 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import dynamic from 'next/dynamic';
 import styles from '../../styles/Drawer.module.css'; // Ensure to create this CSS module
+import 'react-quill/dist/quill.snow.css'; // Import quill styles
+
+// Dynamically import ReactQuill with no SSR
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+import 'react-quill/dist/quill.snow.css';
 
 export default function EditNewsDrawer({ isOpen, onClose, newsId, onSubmit }) {
     const [newsData, setNewsData] = useState({
@@ -101,12 +107,17 @@ export default function EditNewsDrawer({ isOpen, onClose, newsId, onSubmit }) {
                         placeholder="English Subtitle"
                         className={styles.input}
                     />
-                    <textarea 
+                    {/* <textarea 
                         name="enContent"
                         value={newsData.enContent}
                         onChange={handleChange}
                         placeholder="English Content"
                         className={styles.textarea}
+                    /> */}
+                    <ReactQuill
+                        value={newsData.enContent}
+                        onChange={(content) => handleEditorChange('enContent', content)}
+                        placeholder="English Content"
                     />
                     <input 
                         name="elTitle"
@@ -122,12 +133,17 @@ export default function EditNewsDrawer({ isOpen, onClose, newsId, onSubmit }) {
                         placeholder="Greek Subtitle"
                         className={styles.input}
                     />
-                    <textarea 
+                    {/* <textarea 
                         name="elContent"
                         value={newsData.elContent}
                         onChange={handleChange}
                         placeholder="Greek Content"
                         className={styles.textarea}
+                    /> */}
+                    <ReactQuill
+                        value={newsData.elContent}
+                        onChange={(content) => handleEditorChange('elContent', content)}
+                        placeholder="Greek Content"
                     />
                     <input 
                         name="category"

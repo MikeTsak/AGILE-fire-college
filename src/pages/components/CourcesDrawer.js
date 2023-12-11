@@ -1,8 +1,12 @@
 // CourcesDrawer.js
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
 import axios from 'axios';
 import styles from '../../styles/Drawer.module.css'; // Ensure to create this CSS module
+import 'react-quill/dist/quill.snow.css';
+
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false }); // Dynamically import ReactQuill with no SSR
 
 const greekToLatinMap = {
   'α': 'a', 'β': 'b', 'γ': 'g', 'δ': 'd', 'ε': 'e', 'ζ': 'z', 'η': 'h', 'θ': 'th',
@@ -108,6 +112,13 @@ export default function CourcesDrawer({ isOpen, onClose }) {
             console.error('Failed to submit course:', error);
         }
     };
+    const handleTemplateChange = (e) => {
+        setSelectedTemplate(e.target.value);
+    };
+
+    const handleEditorChange = (name, value) => {
+        setCourseData({ ...courseData, [name]: value });
+    };
 
     const handleViewCourse = () => {
         router.push(`/courses/${newCourseId}`); // Redirect to the new course page.
@@ -134,16 +145,40 @@ export default function CourcesDrawer({ isOpen, onClose }) {
           </div>
         );
       }
+      
 
       const renderInputsForTemplate = (templateNumber) => {
         switch (templateNumber) {
             case 1:
                 return (
                     <>
-                        <textarea name="enContent2" value={courseData.enContent2} onChange={handleChange} placeholder="English Content 2" className={styles.textarea} />
-                        <textarea name="enContent3" value={courseData.enContent3} onChange={handleChange} placeholder="English Content 3" className={styles.textarea} />
-                        <textarea name="elContent2" value={courseData.elContent2} onChange={handleChange} placeholder="Greek Content 2" className={styles.textarea} />
-                        <textarea name="elContent3" value={courseData.elContent3} onChange={handleChange} placeholder="Greek Content 3" className={styles.textarea} />
+                    <div className={styles.sectionDivider}>Template 1 - English Additional Content</div>
+                        <ReactQuill
+                             value={courseData.enContent2}
+                            onChange={(content) => handleEditorChange('enContent2', content)}
+                            placeholder="English Content 2"
+                            className={styles.customQuillEditor}
+                        />
+                        <ReactQuill
+                            value={courseData.enContent3}
+                            onChange={(content) => handleEditorChange('enContent3', content)}
+                            placeholder="English Content 3"
+                            className={styles.customQuillEditor}
+                        />
+                                            <div className={styles.sectionDivider}>Template 1 - Greek Additional Content</div>
+                        <ReactQuill
+                            value={courseData.elContent2}
+                            onChange={(content) => handleEditorChange('elContent2', content)}
+                            placeholder="Greek Content 2"
+                            className={styles.customQuillEditor}
+                        />
+                        <ReactQuill
+                            value={courseData.elContent3}
+                            onChange={(content) => handleEditorChange('elContent3', content)}
+                            placeholder="Greek Content 3"
+                            className={styles.customQuillEditor}
+                        />
+                                            <div className={styles.sectionDivider}>Template 1 - Additional Images</div>
                         <input type="file" name="image2" onChange={handleChange} className={styles.input} />
                         <input type="file" name="image3" onChange={handleChange} className={styles.input} />
                     </>
@@ -151,9 +186,20 @@ export default function CourcesDrawer({ isOpen, onClose }) {
             case 3:
                 return (
                     <>
+                    <div className={styles.sectionDivider}>Template 3 - Additional Image and Content</div>
                         <input type="file" name="image2" onChange={handleChange} className={styles.input} />
-                        <textarea name="enContent2" value={courseData.enContent2} onChange={handleChange} placeholder="English Content 2" className={styles.textarea} />
-                        <textarea name="elContent2" value={courseData.elContent2} onChange={handleChange} placeholder="Greek Content 2" className={styles.textarea} />
+                        <ReactQuill
+                        value={courseData.enContent2}
+                        onChange={(content) => handleEditorChange('enContent', content)}
+                        placeholder="English Content 2"
+                        className={styles.customQuillEditor}
+                    />
+                        <ReactQuill
+                        value={courseData.elContent2}
+                        onChange={(content) => handleEditorChange('enContent', content)}
+                        placeholder="Greek Content 2"
+                        className={styles.customQuillEditor}
+                    />
                     </>
                 );
             default:
@@ -166,27 +212,61 @@ export default function CourcesDrawer({ isOpen, onClose }) {
             <div className={styles.drawerContent}>
                 <h2>Add Course</h2>
                 <form onSubmit={handleSubmit} encType="multipart/form-data">
+                    <select
+                        name="templateType"
+                        value={selectedTemplate}
+                        onChange={handleTemplateChange}
+                        className={styles.select}
+                    >
+                        <option value="1">Template 1</option>
+                        <option value="2">Template 2</option>
+                        <option value="3">Template 3</option>
+                    </select>
                     {/* Form fields for English version */}
+                    <div className={styles.sectionDivider}>English Content</div>
                     <input name="enTitle" value={courseData.enTitle} onChange={handleChange} placeholder="English Title" className={styles.input} />
                     <input name="enSubtitle" value={courseData.enSubtitle} onChange={handleChange} placeholder="English Subtitle" className={styles.input} />
-                    <textarea name="enOverview" value={courseData.enOverview} onChange={handleChange} placeholder="English Overview" className={styles.textarea} />
-                    <textarea name="enContent" value={courseData.enContent} onChange={handleChange} placeholder="English Content" className={styles.textarea} />
+                    <ReactQuill
+                        value={courseData.enOverview}
+                        onChange={(content) => handleEditorChange('enContent', content)}
+                        placeholder="English Overview"
+                        className={styles.customQuillEditor}
+                    />
+                    <ReactQuill
+                        value={courseData.enContent}
+                        onChange={(content) => handleEditorChange('enContent', content)}
+                        placeholder="English Content"
+                        className={styles.customQuillEditor}
+                    />
                     <input name="enLength" value={courseData.enLength} onChange={handleChange} placeholder="English Length" className={styles.input} />
                     <input name="enAccreditations" value={courseData.enAccreditations} onChange={handleChange} placeholder="English Accreditations" className={styles.input} />
                     <input name="enSectors" value={courseData.enSectors} onChange={handleChange} placeholder="English Sectors" className={styles.input} />
     
                     {/* Form fields for Greek version */}
+                    <div className={styles.sectionDivider}>Greek Content</div>
                     <input name="elTitle" value={courseData.elTitle} onChange={handleChange} placeholder="Greek Title" className={styles.input} />
                     <input name="elSubtitle" value={courseData.elSubtitle} onChange={handleChange} placeholder="Greek Subtitle" className={styles.input} />
-                    <textarea name="elOverview" value={courseData.elOverview} onChange={handleChange} placeholder="Greek Overview" className={styles.textarea} />
-                    <textarea name="elContent" value={courseData.elContent} onChange={handleChange} placeholder="Greek Content" className={styles.textarea} />
+                    <ReactQuill
+                        value={courseData.elOverview}
+                        onChange={(content) => handleEditorChange('enContent', content)}
+                        placeholder="Greek Overview"
+                        className={styles.customQuillEditor}
+                    />
+                    <ReactQuill
+                        value={courseData.elContent}
+                        onChange={(content) => handleEditorChange('enContent', content)}
+                        placeholder="Greek Content"
+                        className={styles.customQuillEditor}
+                    />
                     <input name="elLength" value={courseData.elLength} onChange={handleChange} placeholder="Greek Length" className={styles.input} />
                     <input name="elAccreditations" value={courseData.elAccreditations} onChange={handleChange} placeholder="Greek Accreditations" className={styles.input} />
                     <input name="elSectors" value={courseData.elSectors} onChange={handleChange} placeholder="Greek Sectors" className={styles.input} />
     
                     {/* Image upload and other fields */}
                     <input type="file" name="image" onChange={handleChange} className={styles.input} />
+                    <div className={styles.sectionDivider}>Template Specific Fields</div>
                     {renderInputsForTemplate(selectedTemplate)}
+                    <div className={styles.sectionDivider}>Common Fields</div>
     
                     <input name="videoURL" value={courseData.videoURL} onChange={handleChange} placeholder="Video URL (optional)" className={styles.input} />
                     <input name="courseId" value={courseData.courseId} onChange={handleChange} placeholder="Course ID" className={styles.input} />

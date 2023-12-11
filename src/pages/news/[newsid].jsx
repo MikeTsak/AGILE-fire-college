@@ -29,6 +29,11 @@ const NewsItemDetail = () => {
   const [newsItem, setNewsItem] = useState(null);
   const { t, i18n } = useTranslation();
 
+    const createMarkup = (htmlContent) => {
+    return { __html: htmlContent };
+  };
+
+
   useEffect(() => {
     const fetchNewsItem = async () => {
       try {
@@ -68,6 +73,7 @@ const NewsItemDetail = () => {
     );
   };
 
+
   const currentLanguage = i18n.language;
   const title = currentLanguage === 'en' ? newsItem.enTitle : newsItem.elTitle;
   const subTitle = currentLanguage === 'en' ? newsItem.enSubtitle : newsItem.elSubtitle;
@@ -106,8 +112,8 @@ const NewsItemDetail = () => {
           />
         </div>
         <br /><br />
-        <p className={styles.newsContent}>{content}</p>
-        <br /><br />
+  <div className={styles.newsContent} dangerouslySetInnerHTML={createMarkup(content)} />
+  <br /><br />
         {renderVideo(newsItem.videoURL)}
       </div>
       <Footer />

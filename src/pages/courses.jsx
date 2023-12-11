@@ -51,15 +51,13 @@ const Courses = () => {
         {/* COURSE CARDS */}
         <div className={styles.newsCards}>
           {CoursesItems.map((item) => (
-            <Link href={`/courses/${item.courseId}`} passHref key={item.courseId} className={styles.newsCard}>
-              <a style={{ backgroundImage: `url(data:image/jpeg;base64,${item.image})` }}>
+            <Link href={`/courses/${item.courseId}`} passHref key={item.courseId} className={styles.newsCard} style={{ backgroundImage: `url(data:image/jpeg;base64,${item.image})` }}>
                 <h4>{item.sectors}</h4>
                 <div className={styles.cardContent}>
                   <h3 className={styles.subTitle}>{item[`${currentLangPrefix}Subtitle`]}</h3>
                   <h2>{item[`${currentLangPrefix}Title`]}</h2>
                   <FontAwesomeIcon icon={faArrowRight} className={styles.arrowIcon} />
                 </div>
-              </a>
             </Link>
           ))}
       </div>

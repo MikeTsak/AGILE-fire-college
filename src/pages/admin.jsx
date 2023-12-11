@@ -127,6 +127,7 @@ export default function Admin() {
   
 
   return (
+    <div className={styles.holePage}>
     <div className={styles.container}>
       <Head>
         <title>Admin Page</title>
@@ -233,6 +234,7 @@ export default function Admin() {
       )}
 
       </div>
+    </div>
     </div>
   );
 }

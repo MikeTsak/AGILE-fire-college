@@ -1,7 +1,12 @@
 // NewsDrawer.js
 import { useState } from 'react';
+import dynamic from 'next/dynamic';
 import axios from 'axios';
-import styles from '../../styles/Drawer.module.css'; // Ensure to create this CSS module
+import styles from '../../styles/Drawer.module.css';
+
+// Dynamically import ReactQuill with no SSR
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+import 'react-quill/dist/quill.snow.css';
 
 export default function NewsDrawer({ isOpen, onClose, onSubmit }) {
     const [newsData, setNewsData] = useState({
@@ -27,6 +32,10 @@ export default function NewsDrawer({ isOpen, onClose, onSubmit }) {
         }
     };
 
+    const handleEditorChange = (name, value) => {
+        setNewsData({ ...newsData, [name]: value });
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         
@@ -35,6 +44,7 @@ export default function NewsDrawer({ isOpen, onClose, onSubmit }) {
 
         // Convert the news object to a JSON string
         const newsJson = JSON.stringify(newsData);
+        console.log(newsJson);
       
         // Create a blob from the JSON string
         const newsBlob = new Blob([newsJson], {
@@ -97,6 +107,7 @@ export default function NewsDrawer({ isOpen, onClose, onSubmit }) {
             <div className={styles.drawerContent}>
                 <h2>Add News Article</h2>
                 <form onSubmit={handleSubmit} encType="multipart/form-data">
+                <div className={styles.sectionDivider}>English Content</div>
                     <input 
                         name="enTitle"
                         value={newsData.enTitle}
@@ -111,13 +122,21 @@ export default function NewsDrawer({ isOpen, onClose, onSubmit }) {
                         placeholder="English Subtitle"
                         className={styles.input}
                     />
-                    <textarea 
+                    {/* <textarea 
                         name="enContent"
                         value={newsData.enContent}
                         onChange={handleChange}
                         placeholder="English Content"
                         className={styles.textarea}
+                    /> */}
+                    <ReactQuill
+                        value={newsData.enContent}
+                        onChange={(content) => handleEditorChange('enContent', content)}
+                        placeholder="English Content"
+                        className={styles.customQuillEditor}
                     />
+                    <br />
+                    <div className={styles.sectionDivider}>Greek Content</div>
                     <input 
                         name="elTitle"
                         value={newsData.elTitle}
@@ -132,13 +151,21 @@ export default function NewsDrawer({ isOpen, onClose, onSubmit }) {
                         placeholder="Greek Subtitle"
                         className={styles.input}
                     />
-                    <textarea 
+                    {/* <textarea 
                         name="elContent"
                         value={newsData.elContent}
                         onChange={handleChange}
                         placeholder="Greek Content"
                         className={styles.textarea}
+                    /> */}
+                    <ReactQuill
+                        value={newsData.elContent}
+                        onChange={(content) => handleEditorChange('elContent', content)}
+                        placeholder="Greek Content"
+                        className={styles.customQuillEditor}
                     />
+                    <br />
+                    <div className={styles.sectionDivider}>General Information</div>
                     <input 
                         name="category"
                         value={newsData.category}
