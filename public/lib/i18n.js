@@ -20,7 +20,7 @@ i18n
   .use(initReactI18next) // Passes i18n instance to react-i18next.
   .init({
     resources,
-    lng: 'en', // Default language
+    lng: 'el', // Default language
     keySeparator: false, // We do not use keys in form messages.welcome
     interpolation: {
       escapeValue: false, // React already safes from xss

@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 import LoadingFire from './components/LoadingFire';
+import Logo from './components/Logo';
 import { useTranslation } from 'react-i18next';
 
 const Custom404 = () => {
@@ -12,6 +13,7 @@ const Custom404 = () => {
         <Head>
             <title>{t('pageNotFound')}</title>
         </Head>
+            <Logo />
             <h1 className='aboutMainHeader'>{t('pageNotFound')}</h1>
             <p className='collegenameForPage'>{t('pageNotFoundDescription')}</p>
             <br />
