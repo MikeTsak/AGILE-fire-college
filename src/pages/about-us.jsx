@@ -99,7 +99,7 @@ const About = () => {
           className={styles.imageWrapper}
         >
           <Image
-            src="/images/Leader.webp" // Change to the path of your image
+            src="/images/Leader.JPG" // Change to the path of your image
             alt="Firefighters Training"
             layout="responsive"
             width={700} // Adjust according to your aspect ratio

@@ -6,17 +6,17 @@ export default async function sendMail(req, res) {
   const { email, subject, message } = req.body;
 
   const transporter = nodemailer.createTransport({
-    host: 'webmail.miketsak.gr',
+    host: 'mailin.psnet.gr',
     port: 465,
     auth: {
-      user: 'your-email@example.com',
-      pass: 'yourpassword'
+      user: 'kepse-site',
+      pass: 'e3s5p6k7i1'
     }
   });
 
   const mailOptions = {
     from: email,
-    to: 'keps@psnet.gr',
+    to: 'mixaniklis@gmail.com',
     subject: subject,
     text: message
   };

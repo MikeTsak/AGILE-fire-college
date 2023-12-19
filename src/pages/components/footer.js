@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import styles from '../../styles/Footer.module.css'; // Update the path as needed
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitter, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
+import Link from 'next/link';
 
 const Footer = () => {
     const { t } = useTranslation();
@@ -23,8 +24,12 @@ const Footer = () => {
         <footer className={styles.footer}>
             <div className={styles.footerContent}>
                 <div className={styles.logoSection}>
+                    <Link href={'https://www.fireservice.gr/el'} target='_blank'>
                     <img src="https://upload.wikimedia.org/wikipedia/el/d/d1/Fireserviccegr.png" alt='FD-LOGO' className={styles.logo} width={105} height={105} />
+                    </Link>
+                    <Link href={'https://www.snf.org/'} target='_blank'>
                     <Image src='/images/niarxos.jpg' alt='Niarxos-Logo' title='SNF' width={250} height={105} />
+                    </Link>
                 </div>
                 <div className={styles.addressSocials}>
                 <address className={styles.address}>
