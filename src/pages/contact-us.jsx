@@ -1,4 +1,4 @@
-/*contact-us page component*/
+/*contact-us page*/
 import Navbar from './components/navbar';
 import Footer from './components/footer';
 import Logo from './components/Logo';

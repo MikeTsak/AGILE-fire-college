@@ -1,21 +1,23 @@
-import React from 'react';
-import Navbar from './components/navbar';
-import Footer from './components/footer';
-import Logo from './components/Logo';
-import ContactUs from './components/ContactUs';
+// Import necessary components and libraries
+import React from 'react'; // Import React
+import Navbar from './components/navbar'; // Importing the Navbar component
+import Footer from './components/footer'; // Importing the Footer component
+import Logo from './components/Logo'; // Importing the Logo component
+import ContactUs from './components/ContactUs'; // Importing the ContactUs component
 
-import styles from '../styles/AboutUs.module.css';
+import styles from '../styles/AboutUs.module.css'; // Importing CSS styles
 
-import { useTranslation } from 'react-i18next';
-import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+import { useTranslation } from 'react-i18next'; // Importing the useTranslation hook for internationalization
+import Image from 'next/image'; // Importing the Image component from Next.js
+import { motion } from 'framer-motion'; // Importing motion for animations
+import { useInView } from 'react-intersection-observer'; // Importing useInView for triggering animations when in view
 
-import Head from 'next/head';
+import Head from 'next/head'; // Importing the Head component from Next.js
 
 const About = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(); // Initializing the translation function
 
+  // Setting up inView hooks to trigger animations when elements are in view
   const [ref1, inView1] = useInView({
     triggerOnce: true,
     threshold: 0.5,
@@ -31,6 +33,7 @@ const About = () => {
     threshold: 0.1,
   });
 
+  // Define animation variants for elements
   const fadeInLeftVariant = {
     hidden: { opacity: 0, x: -100 },
     visible: { opacity: 1, x: 0 },
@@ -48,14 +51,15 @@ const About = () => {
   return (
     <div>
       <Head>
+        {/* Define metadata for the page */}
         <title>{t('AboutHeaderMeta')}</title>
         <meta name="description" content={t('AboutTextP1')} />
         <meta name="keywords" content={'Πυροσβεστικό Σώμα Ελλαδας, Fire Department Training Center, Κέντρο Εκπαίδευσης Πυροσβεστικού Σώματος'} />
         <meta name="author" content={t('collegeName')} />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      <Navbar />
-      <Logo />
+      <Navbar /> {/* Render the Navbar component */}
+      <Logo /> {/* Render the Logo component */}
       {/* TOP */}
       <div className={styles.aboutHeaderContainer}>
         <div className={styles.aboutHeaderContainerForText}>
@@ -162,7 +166,7 @@ const About = () => {
         <br />
         <p className={styles.aboutMainText}>{t('AboutText2P2')}</p>
       </div>
-      {/* About With Image Backgrond */}
+      {/* About With Image Background */}
       <motion.div
       ref={ref3}
       initial="hidden"
@@ -177,8 +181,8 @@ const About = () => {
         </p>
       </div>
     </motion.div>
-      <ContactUs />
-      <Footer />
+      <ContactUs /> {/* Render the ContactUs component */}
+      <Footer /> {/* Render the Footer component */}
     </div>
   );
 }

@@ -16,7 +16,7 @@ export default async function sendMail(req, res) {
 
   const mailOptions = {
     from: email,
-    to: 'mixaniklis@gmail.com',
+    to: 'keps@psnet.gr',
     subject: subject,
     text: message
   };

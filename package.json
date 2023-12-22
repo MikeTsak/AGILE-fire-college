@@ -26,5 +26,14 @@
     "react-i18next": "^13.5.0",
     "react-intersection-observer": "^9.5.3",
     "react-quill": "^2.0.0"
+  },
+  "devDependencies": {
+    "esdoc": "^1.1.0",
+    "esdoc-jsx-plugin": "^1.0.0",
+    "esdoc-react-plugin": "^1.0.1",
+    "esdoc-standard-plugin": "^1.0.0",
+    "jsdoc": "^4.0.2",
+    "react-styleguidist": "^13.1.1",
+    "webpack": "^5.89.0"
   }
 }
