@@ -6,6 +6,9 @@ import ContactUs from './components/ContactUs';
 import Head from 'next/head'
 import { useTranslation } from 'react-i18next';
 
+// IMPORT: Bring in your slideshow styles
+import styles from '../styles/Slideshow.module.css';
+
 const Home = () => {
   const { t } = useTranslation();
   return (
@@ -42,7 +45,20 @@ const Home = () => {
           {/* Render the components */}
           <Navbar />
           <Logo />
-          <Slideshow />
+          {/* <Slideshow /> */}
+
+          <div className={styles.slideshow}>
+            <div
+              className={styles.slide}
+              style={{ 
+                backgroundImage: "url('/images/slide-1.jpg')", 
+                opacity: 1, // Ensures it stays visible without the animation class
+                display: 'block' 
+              }}
+            >
+              <div className={styles.text}>{t('imageText1')}</div>
+            </div>
+          </div>
           <ContactUs />
           <Footer />
       </div>
